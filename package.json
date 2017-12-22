@@ -1,0 +1,25 @@
+{
+  "name": "VAWN",
+  "version": "0.0.1",
+  "description": "A virtual assistant works on Node.js",
+  "license": "MIT",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.2",
+    "mastodon-api": "^1.3.0"
+  },
+  "engines": {
+    "node": "9.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/vawn"
+  },
+  "keywords": [
+    "node",
+    "glitch",
+    "express"
+  ]
+}
