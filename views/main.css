@@ -1,30 +1,4 @@
-html,body{
-	margin:0;
-	padding:0;
-	background-color:navy;
-	width:100vw;
-	height:100vh;
-	font-family: 'Orbitron', sans-serif;
-}
-#top{
-	display:flex;
-}
-#name{
-	width:100%;
-	text-align:center;
-	color:white;
-	font-size:1000%;
-	font-weight:900;
-	margin-bottom:0;
-}
 
-#desc{
-	width:100%;
-	text-align:center;
-	color:silver;
-	font-size:200%;
-	font-weight:700;
-}
 
 /*
 #wrappr{
