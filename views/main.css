@@ -6,7 +6,9 @@ html,body{
 	height:100vh;
 	font-family: 'Orbitron', sans-serif;
 }
-
+#top{
+	display:flex;
+}
 #name{
 	width:100%;
 	text-align:center;
