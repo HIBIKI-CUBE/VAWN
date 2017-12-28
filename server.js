@@ -7,7 +7,7 @@ const settings = require("./settings.js");
 //Set Mastodon API for mstdn.Y-zu.org
 let mstdn = new Mastodon({
 	api_url: "https://vawn.m.to/api/v1/",
-	access_token: "d10236623369775c3027b28237dfb1bb1447c9f456c7f1f7a8e5af0017bda3bf" //This is for only developing.
+	access_token: "58bd8dc1b9703c4e6759492841925e4ee35946d4590386f46c646b7696fc95bd"
 });
 
 let stream = mstdn.stream("streaming/user");
