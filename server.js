@@ -25,7 +25,7 @@ let stream = mstdn.stream("streaming/user");
 			if (result = content.match(/(@.+) に(\d+)YZUを(与える|あげる|渡す|わたす)/)) {
 				console.log(result);
 				//mstdn.post("statuses", { status: `@${from} が` });
-			} else if (result = content.match(/サイコロ(ふって|振って|振れ|ふれ|やって|)/)) {
+			} else if (result = content.match(/(サイコロ|さいころ)(ふって|振って|振れ|ふれ|やって|)/)) {
 				console.log(result);
 				let dice = Math.floor(Math.random()*6)
 				mstdn.post("statuses", { status: `${dice}が出ました。`, visibility: "unlisted", in_reply_to_id: msgId });
