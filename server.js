@@ -27,7 +27,7 @@ let stream = mstdn.stream("streaming/user");
 				//mstdn.post("statuses", { status: `@${from} が` });
 			} else if (result = content.match(/(あなた|きみ|君|おまえ|お前|VAWN|vawn)の(親|父親)は/)) {
 				console.log(result);
-				mstdn.post("statuses", { status: `@${from} 私を作ってくれたのはYづどんのみなさんです！`, visibility: "unlisted", in_reply_to_id: msgId });
+				mstdn.post("statuses", { status: `@${from} 私を作ってくれたのは私を使ってくださったみなさんです！`, visibility: "unlisted", in_reply_to_id: msgId });
 			} else {
 				mstdn.post("statuses", { status: `@${from}からVAWNへのコマンドを確認しました`, visibility: "unlisted", in_reply_to_id: msgId });
 			}
