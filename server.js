@@ -32,7 +32,8 @@ let stream = mstdn.stream("streaming/user");
 				mstdn.post("statuses", { status: [
 				`@${from}`+"からVAWNへのメンションを確認しました。",
 				"コマンドを正しく認識できなかったため処理が行えませんでした。申し訳ありません。",
-				"現在VAWNが対応しているコマンドについては、以下を参照してください。"
+				"現在VAWNが対応しているコマンドについては、以下を参照してください。",
+				"https://vawn.glitch.me/"
 				].join("\r\n"), visibility: "unlisted", in_reply_to_id: msgId });
 			}
 		}
