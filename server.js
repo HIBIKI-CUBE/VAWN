@@ -25,10 +25,11 @@ let stream = mstdn.stream("streaming/user");
 			if (result = content.match(/(@.+) に(\d+)YZUを(与える|あげる|渡す|わたす)/)) {
 				console.log(result);
 				//mstdn.post("statuses", { status: `@${from} が` });
-			} else if (result = content.match(/(あなた|きみ|君|おまえ|お前|VAWN|vawn)の(親|父親)は/)) {
+			} else if (result = content.match(/サイコロ(ふって|振って|振れ|ふれ|やって|)/)) {
 				console.log(result);
-				mstdn.post("statuses", { status: `@${from} 私を作ってくれたのは私を使ってくださったみなさんです！`, visibility: "unlisted", in_reply_to_id: msgId });
-			} else if (result = content.match(/(あなた|きみ|君|おまえ|お前|VAWN|)の(親|父親)(は||)/)) {
+				let dice = Math.floor(Math.random()*6)
+				mstdn.post("statuses", { status: `${dice}が出ました。`, visibility: "unlisted", in_reply_to_id: msgId });
+			} else if (result = content.match(/(あなた|きみ|君|おまえ|お前|VAWN||)の(親|父親)(は||)/)) {
 				console.log(result);
 				mstdn.post("statuses", { status: `@${from} 私を作ってくれたのは私を使ってくださったみなさんです！`, visibility: "unlisted", in_reply_to_id: msgId });
 			} else {
