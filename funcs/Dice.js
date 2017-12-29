@@ -1,5 +1,5 @@
-export default class Dice {
+module.filename = class Dice {
 	constructor () {
-		
+
 	}
 }

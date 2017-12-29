@@ -1,8 +1,8 @@
-import express from "express";
-import Mastodon from "mastodon-api";
+const express = require("express");
+const Mastodon = require("mastodon-api");
 
-import Formatter from "./funcs/Formatter";
-import Dice from "./funcs/Dice";
+const Formatter = require("./funcs/Formatter");
+const Dice = require("./funcs/Dice");
 
 
 

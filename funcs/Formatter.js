@@ -1,6 +1,6 @@
 import htmlToText from "html-to-text";
 
-export default class Formatter {
+module.exports = class Formatter {
 	static getInfoFromToot (toot) {
 		return {
 			tooter: toot.data.account.acct,
