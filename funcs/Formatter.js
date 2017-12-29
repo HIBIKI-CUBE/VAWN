@@ -1,4 +1,4 @@
-import htmlToText from "html-to-text";
+const htmlToText = require("html-to-text");
 
 module.exports = class Formatter {
 	static getInfoFromToot (toot) {
