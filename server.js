@@ -51,7 +51,7 @@ let stream = mstdn.stream("streaming/user");
 
 					break;
 
-				case !!(variables = tootInfo.tootContent.match(/(?:あなた|きみ|君|おまえ|お前|VAWN(?:| ))の(?:親|父親)/)):
+				case !!(variables = tootInfo.tootContent.match(/(?:あなた|きみ|君|おまえ|お前||VAWN(?:| ))の(?:親|父親)/)):
 					mstdn.post("statuses", {
 						status: [
 							`@${tootInfo.tooter}`,
