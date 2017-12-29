@@ -3,7 +3,7 @@ const htmlToText = require("html-to-text");
 const Mastodon = require("mastodon-api");
 
 
-//Set Mastodon API for mstdn.Y-zu.org
+
 let mstdn = new Mastodon({
 	api_url: "https://vawn.m.to/api/v1/",
 	access_token: "58bd8dc1b9703c4e6759492841925e4ee35946d4590386f46c646b7696fc95bd"
@@ -19,7 +19,7 @@ let stream = mstdn.stream("streaming/user");
 		console.log(`${from} … ${content}`);
 		
 		if (content.toUpperCase().match(/@VAWN/g)) {
-			let result = "";
+			let variables = [];
 			
 			switch (true) {
 				default:
@@ -32,26 +32,26 @@ let stream = mstdn.stream("streaming/user");
 							"https://vawn.glitch.me/"
 						].join("\r\n"),
 						
-						visibility: "unlisted",
-						in_reply_to_id: msgId
-					});
-
-					break;
-
-				case !!(result = content.match(/(サイコロ|さいころ)(ふって|振って|振れ|ふれ|やって||)/)):
-					mstdn.post("statuses", {
-						status: [
-							`@${from}`,
-							`${Math.floor(Math.random() * 5 + 1)}が出ました。`
-						].join("\r\n"),
-						
 						visibility: "public",
 						in_reply_to_id: msgId
 					});
 
 					break;
 
-				case !!(result = content.match(/(あなた|きみ|君|おまえ|お前|VAWN||)の(親|父親)(は||)/)):
+				case !!(variables = content.match(/サイコロ|さいころ|ダイス/)):
+					mstdn.post("statuses", {
+						status: [
+							`@${from}`,
+							`${Math.floor(Math.random() * 5 + 1)}が出ました。`
+						].join("\r\n"),
+
+						visibility: "public",
+						in_reply_to_id: msgId
+					});
+
+					break;
+
+				case !!(variables = content.match(/(?:あなた|きみ|君|おまえ|お前|VAWN(?:| ))の(?:親|父親)/)):
 					mstdn.post("statuses", {
 						status: [
 							`@${from}`,
