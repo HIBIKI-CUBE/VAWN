@@ -8,4 +8,8 @@ module.exports = class Formatter {
 			tootContent: htmlToText.fromString(toot.data.content)
 		}
 	}
+
+	static htmlTextToPlainText (htmlText = "") {
+		return htmlText.replace(/ \[(https?|ftp)(:\/\/[-_.!~*¥'()a-zA-Z0-9;¥/?:¥@&=+¥$,%#]+)\]/g, "");
+	}
 }
