@@ -38,11 +38,11 @@ let stream = mstdn.stream("streaming/user");
 
 					break;
 
-				case !!(variables = tootInfo.tootContent.match(/サイコロ|さいころ|ダイス/)):
+				case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/(?:あなた|きみ|君|おまえ|お前|VAWN(?:| ))の(?:親|父親)/)):
 					mstdn.post("statuses", {
 						status: [
 							`@${tootInfo.tooter}`,
-							`${Math.floor(Math.random() * 5 + 1)}が出ました。`
+							"私を作ってくれたのは私を使ってくださったみなさんです！"
 						].join("\r\n"),
 
 						visibility: "public",
@@ -51,11 +51,11 @@ let stream = mstdn.stream("streaming/user");
 
 					break;
 
-				case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/(?:あなた|きみ|君|おまえ|お前|VAWN(?:| ))の(?:親|父親)/)):
+				case !!(variables = tootInfo.tootContent.match(/サイコロ|さいころ|ダイス/)):
 					mstdn.post("statuses", {
 						status: [
 							`@${tootInfo.tooter}`,
-							"私を作ってくれたのは私を使ってくださったみなさんです！"
+							`${Math.floor(Math.random() * 5 + 1)}が出ました。`
 						].join("\r\n"),
 
 						visibility: "public",
