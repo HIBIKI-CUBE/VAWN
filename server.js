@@ -1,6 +1,8 @@
-const express = require("express");
-const htmlToText = require("html-to-text");
-const Mastodon = require("mastodon-api");
+import express from "express";
+import Mastodon from "mastodon-api";
+
+import Formatter from "./funcs/Formatter";
+import Dice from "./funcs/Dice";
 
 
 
@@ -10,22 +12,20 @@ let mstdn = new Mastodon({
 });
 
 let stream = mstdn.stream("streaming/user");
-	stream.on("message", msg => {
-		let from = msg.data.account.acct;
-		let msgId = msg.data.id;
-		let content = htmlToText.fromString(msg.data.content);
+	stream.on("message", toot => {
+		let tootInfo = Formatter.getInfoFromToot(toot);
 		
-		//console.log(msg.data);
-		console.log(`${from} … ${content}`);
+		//console.log(toot.data);
+		console.log(`${tootInfo.tooter} … ${tootInfo.tootContent}`);
 		
-		if (content.toUpperCase().match(/@VAWN/g)) {
+		if (tootInfo.tootContent.toUpperCase().match(/@VAWN/g)) {
 			let variables = [];
 			
 			switch (true) {
 				default:
 					mstdn.post("statuses", {
 						status: [
-							`@${from}からVAWNへのメンションを確認しました。`,
+							`@${tootInfo.tooter}からVAWNへのメンションを確認しました。`,
 							"コマンドを正しく認識できなかったため処理が行えませんでした。申し訳ありません。",
 							"",
 							"現在VAWNが対応しているコマンドについては、以下を参照してください。",
@@ -33,33 +33,33 @@ let stream = mstdn.stream("streaming/user");
 						].join("\r\n"),
 						
 						visibility: "public",
-						in_reply_to_id: msgId
+						in_reply_to_id: tootInfo.tootId
 					});
 
 					break;
 
-				case !!(variables = content.match(/サイコロ|さいころ|ダイス/)):
+				case !!(variables = tootInfo.tootContent.match(/サイコロ|さいころ|ダイス/)):
 					mstdn.post("statuses", {
 						status: [
-							`@${from}`,
+							`@${tootInfo.tooter}`,
 							`${Math.floor(Math.random() * 5 + 1)}が出ました。`
 						].join("\r\n"),
 
 						visibility: "public",
-						in_reply_to_id: msgId
+						in_reply_to_id: tootInfo.tootId
 					});
 
 					break;
 
-				case !!(variables = content.match(/(?:あなた|きみ|君|おまえ|お前|VAWN(?:| ))の(?:親|父親)/)):
+				case !!(variables = tootInfo.tootContent.match(/(?:あなた|きみ|君|おまえ|お前|VAWN(?:| ))の(?:親|父親)/)):
 					mstdn.post("statuses", {
 						status: [
-							`@${from}`,
+							`@${tootInfo.tooter}`,
 							"私を作ってくれたのは私を使ってくださったみなさんです！"
 						].join("\r\n"),
 
 						visibility: "public",
-						in_reply_to_id: msgId
+						in_reply_to_id: tootInfo.tootId
 					});
 
 					break;
