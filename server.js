@@ -21,23 +21,48 @@ let stream = mstdn.stream("streaming/user");
 		if (content.toUpperCase().match(/@VAWN/g)) {
 			let result = "";
 			
-			if (result = content.match(/(@.+) に(\d+)YZUを(与える|あげる|渡す|わたす)/)) {
-				console.log(result);
-				mstdn.post("statuses", { status: `@${from} が` });
-			} else if (result = content.match(/(サイコロ|さいころ)(ふって|振って|振れ|ふれ|やって||)/)) {
-				console.log(result);
-				let dice = Math.floor(Math.random()*5)+1;
-				mstdn.post("statuses", { status: `${dice}が出ました。`, visibility: "unlisted", in_reply_to_id: msgId });
-			} else if (result = content.match(/(あなた|きみ|君|おまえ|お前|VAWN||)の(親|父親)(は||)/)) {
-				console.log(result);
-				mstdn.post("statuses", { status: `@${from} 私を作ってくれたのは私を使ってくださったみなさんです！`, visibility: "unlisted", in_reply_to_id: msgId });
-			} else {
-				mstdn.post("statuses", { status: [
-				`@${from}`+"からVAWNへのメンションを確認しました。",
-				"コマンドを正しく認識できなかったため処理が行えませんでした。申し訳ありません。",
-				"現在VAWNが対応しているコマンドについては、以下を参照してください。",
-				"https://vawn.glitch.me/"
-				].join("\r\n"), visibility: "unlisted", in_reply_to_id: msgId });
+			switch (true) {
+				default:
+					mstdn.post("statuses", {
+						status: [
+							`@${from}からVAWNへのメンションを確認しました。`,
+							"コマンドを正しく認識できなかったため処理が行えませんでした。申し訳ありません。",
+							"",
+							"現在VAWNが対応しているコマンドについては、以下を参照してください。",
+							"https://vawn.glitch.me/"
+						].join("\r\n"),
+						
+						visibility: "unlisted",
+						in_reply_to_id: msgId
+					});
+
+					break;
+
+				case !!(result = content.match(/(サイコロ|さいころ)(ふって|振って|振れ|ふれ|やって||)/)):
+					mstdn.post("statuses", {
+						status: [
+							`@${from}`,
+							`${Math.floor(Math.random() * 5 + 1)}が出ました。`
+						].join("\r\n"),
+						
+						visibility: "public",
+						in_reply_to_id: msgId
+					});
+
+					break;
+
+				case !!(result = content.match(/(あなた|きみ|君|おまえ|お前|VAWN||)の(親|父親)(は||)/)):
+					mstdn.post("statuses", {
+						status: [
+							`@${from}`,
+							"私を作ってくれたのは私を使ってくださったみなさんです！"
+						].join("\r\n"),
+
+						visibility: "public",
+						in_reply_to_id: msgId
+					});
+
+					break;
 			}
 		}
 	});
