@@ -25,9 +25,9 @@ let stream = mstdn.stream("streaming/user");
 			if (result = content.match(/(@.+) に(\d+)YZUを(与える|あげる|渡す|わたす)/)) {
 				console.log(result);
 				//mstdn.post("statuses", { status: `@${from} が` });
-			} else if (result = content.match(/(サイコロ|さいころ)(ふって|振って|振れ|ふれ|やって|)/)) {
+			} else if (result = content.match(/(サイコロ|さいころ)(ふって|振って|振れ|ふれ|やって||)/)) {
 				console.log(result);
-				let dice = Math.floor(Math.random()*6)
+				let dice = Math.floor(Math.random()*5)+1;
 				mstdn.post("statuses", { status: `${dice}が出ました。`, visibility: "unlisted", in_reply_to_id: msgId });
 			} else if (result = content.match(/(あなた|きみ|君|おまえ|お前|VAWN||)の(親|父親)(は||)/)) {
 				console.log(result);
