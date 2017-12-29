@@ -1,7 +1,6 @@
 const express = require("express");
 const htmlToText = require("html-to-text");
 const Mastodon = require("mastodon-api");
-const settings = require("./settings.js");
 
 
 //Set Mastodon API for mstdn.Y-zu.org
@@ -24,7 +23,7 @@ let stream = mstdn.stream("streaming/user");
 			
 			if (result = content.match(/(@.+) に(\d+)YZUを(与える|あげる|渡す|わたす)/)) {
 				console.log(result);
-				//mstdn.post("statuses", { status: `@${from} が` });
+				mstdn.post("statuses", { status: `@${from} が` });
 			} else if (result = content.match(/(サイコロ|さいころ)(ふって|振って|振れ|ふれ|やって||)/)) {
 				console.log(result);
 				let dice = Math.floor(Math.random()*5)+1;
@@ -47,7 +46,7 @@ let app = express();
 	app.use(express.static('views'));
 	
 	app.get("/", (req, res) => {
-		res.sendFile(__dirname + '/views/');
+		res.sendFile(`${__dirname}/views/`);
 	});
 	
 let listener = app.listen(process.env.PORT, function () {
