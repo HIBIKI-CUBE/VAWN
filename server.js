@@ -76,4 +76,11 @@ let app = express();
 	
 let listener = app.listen(process.env.PORT, function () {
 	console.log(`[VAWN] I'm running on port ${listener.address().port}!!`);
+	mstdn.post("statuses", {
+		status: [
+			"VAWNの起動が完了しました。コマンドの処理が可能です。"
+		].join("\r\n"),
+
+		visibility: "public"
+	}
 });
