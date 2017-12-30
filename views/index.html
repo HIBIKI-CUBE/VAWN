@@ -8,16 +8,36 @@
 
 		<link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
 		<link rel="stylesheet" href="main.css">
+
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-		<style>
-		</style>
+		<script src="main.js" defer></script>
 	</head>
 
 	<body>
-	<div id="top">
-		<h1 id="name">VAWN</h1>
-		<h2 id="desc">A virtual assistant works on Node.js</h2>
-	</div>
-		<script src="main.js"></script>
+		<div id="top">
+			<h1 id="name">VAWN</h1>
+			<h2 id="desc">A virtual assistant works on Node.js</h2>
+		</div>
+
+		<div id="command">
+			<div class="func">
+				<div class="f-name">
+					コマンド一覧
+				</div>
+				<div class="f-desc">
+					<p>VAWNが現在対応しているコマンドの一覧です。</p>
+					<p>記載されている以外の言い回しにも対応しています。</p>
+				</div>
+			</div>
+
+			<div class="func">
+				<div class="f-name">
+					サイコロ振って
+				</div>
+				<div class="f-desc">
+					1~6のランダムな数を生成します。
+				</div>
+			</div>
+		</div>
 	</body>
 </html>
