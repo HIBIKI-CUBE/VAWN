@@ -82,5 +82,5 @@ let listener = app.listen(process.env.PORT, function () {
 		].join("\r\n"),
 
 		visibility: "public"
-	}
+	})
 });
