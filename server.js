@@ -63,7 +63,7 @@ let stream = mstdn.stream("streaming/user");
 					});
 
 
-				case !!(variables = tootInfo.tootContent.match(/(じゃんけん｜ジャンケン).*/):
+				case !!(variables = tootInfo.tootContent.match((/じゃんけん｜ジャンケン).*/)):
 					switch(Math.floor(Math.random() * 2))
 						case 0:
 							let janken = "✊グー"
