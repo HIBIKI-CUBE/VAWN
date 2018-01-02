@@ -61,22 +61,24 @@ let stream = mstdn.stream("streaming/user");
 						visibility: "public",
 						in_reply_to_id: tootInfo.tootId
 					});
+					break;
 
 
 				case !!(variables = tootInfo.tootContent.match(/じゃんけん｜ジャンケン/)):
-					switch(Math.floor(Math.random() * 2))
+					switch(Math.floor(Math.random() * 2)){
 						case 0:
 							let janken = "✊グー"
-							
+						break;
+						
 						case 1:
 							let janken = "✌チョキ"
-							
+						break;
+						
 						case 2:
 							let janken = "✋パー"
-							
-					break;
+						break;
+					}
 					
-					case 
 					mstdn.post("statuses", {
 						status: [
 							`@${tootInfo.tooter}`,
