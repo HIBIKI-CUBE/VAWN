@@ -65,8 +65,8 @@ let stream = mstdn.stream("streaming/user");
 
 
 				case !!(variables = tootInfo.tootContent.match(/じゃんけん｜ジャンケン/)):
-					switch(Math.floor(Math.random() * 2)){
 					let janken="";
+					switch(Math.floor(Math.random() * 2)){
 						case 0:
 							janken = "✊グー";
 						break;
@@ -83,7 +83,7 @@ let stream = mstdn.stream("streaming/user");
 					mstdn.post("statuses", {
 						status: [
 							`@${tootInfo.tooter}`,
-							`${janken}!`
+							`${janken}!`,
 							"勝てましたか？"
 						].join("\r\n"),
 
