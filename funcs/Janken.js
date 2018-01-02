@@ -15,6 +15,7 @@ module.exports = class Janken {
 
 		switch (action) {
 			case "グー":
+			case "グ〜":
 			case "ぐー":
 			case "ぐ～":
 				result = 0;
@@ -26,6 +27,7 @@ module.exports = class Janken {
 				break;
 
 			case "パー":
+			case "パ〜":
 			case "ぱー":
 			case "ぱ～":
 				result = 2;
