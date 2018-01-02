@@ -1,10 +1,12 @@
 module.exports = class Janken {
-	static ACTIONS = ["✊グー", "✌チョキ", "✋パー"]
+	static get ACTIONS () {
+		return ["✊グー", "✌チョキ", "✋パー"];
+	}
 
 	static getState (player = 0, enemy = 0) {
 		if (player == enemy) return "あいこ";
 		if (player + 1 % 3 == enemy) return "あなたの勝ち";
-		
+
 		return "あなたの負け";
 	}
 
