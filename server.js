@@ -3,6 +3,7 @@ const Mastodon = require("mastodon-api");
 
 const Formatter = require("./funcs/Formatter");
 const Dice = require("./funcs/Dice");
+const Janken = require("./funcs/Janken");
 
 
 
@@ -64,27 +65,21 @@ let stream = mstdn.stream("streaming/user");
 					break;
 
 
-				case !!(variables = tootInfo.tootContent.match(/じゃんけん|ジャンケン/)):
-					let janken="";
-					switch(Math.floor(Math.random() * 2)){
-						case 0:
-							janken = "✊グー";
-						break;
-						
-						case 1:
-							janken = "✌チョキ";
-						break;
-						
-						case 2:
-							janken = "✋パー";
-						break;
-					}
+				case !!(variables = tootInfo.tootContent.match(/(?:じゃんけん|ジャンケン)(グー|ぐー|ぐ～|チョキ|ちょき|パー|ぱー|ぱ～)/)):
+					let playerAct = variables[1] || "グー";
+
+					let vawnActId = Math.floor(Math.random() * 2);
+					let vawnAct = Janken.ACTIONS[vawnActId];
+
+					let state = Janken.getState(Janken.detectAction(playerAct), vawnActId);
 					
 					mstdn.post("statuses", {
 						status: [
 							`@${tootInfo.tooter}`,
-							`${janken}!`,
-							"勝てましたか？"
+							"",
+							`${vawnAct}！`,
+							`あなたは${playerAct}を出したので、`,
+							`${state}です！！`
 						].join("\r\n"),
 
 						visibility: "public",

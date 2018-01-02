@@ -1,4 +1,4 @@
-module.filename = class Dice {
+module.exports = class Dice {
 	constructor () {
 
 	}
