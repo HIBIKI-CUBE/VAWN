@@ -65,7 +65,7 @@ let stream = mstdn.stream("streaming/user");
 					break;
 
 
-				case !!(variables = tootInfo.tootContent.match(/(?:じゃんけん|ジャンケン)(グー|ぐー|ぐ～|チョキ|ちょき|パー|ぱー|ぱ～)/)):
+				case !!(variables = tootInfo.tootContent.match(/(?:じゃんけん|ジャンケン)(グー|グ〜|ぐー|ぐ～|チョキ|ちょき|パー|パ〜|ぱー|ぱ～)/)):
 					let playerAct = variables[1] || "グー";
 
 					let vawnActId = Math.floor(Math.random() * 2);
