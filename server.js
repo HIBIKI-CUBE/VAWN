@@ -8,8 +8,8 @@ const Janken = require("./funcs/Janken");
 
 
 let mstdn = new Mastodon({
-	api_url: "https://botdon.net/api/v1/",
-	access_token: "824d27faa1d45b4ddbbaa0c27fe6dcc818603b350bfefa13536538e1a3dae22d"
+	api_url: "https://vawn.m.to/api/v1/",
+	access_token: "58bd8dc1b9703c4e6759492841925e4ee35946d4590386f46c646b7696fc95bd"
 });
 
 let stream = mstdn.stream("streaming/user");
