@@ -5,7 +5,7 @@ module.exports = class Janken {
 
 	static getState (player = 0, enemy = 0) {
 		if (player == enemy) return "あいこ";
-		if (player + 1 % 3 == enemy) return "あなたの勝ち";
+		if ((player + 1) % 3 == enemy) return "あなたの勝ち";
 
 		return "あなたの負け";
 	}
