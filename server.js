@@ -5,7 +5,7 @@ const Formatter = require("./funcs/Formatter");
 const Dice = require("./funcs/Dice");
 const Janken = require("./funcs/Janken");
 
-
+let package = JSON.parse(fs.readFileSync('package.json', 'utf8'));
 
 let mstdn = new Mastodon({
 	api_url: "https://vawn.m.to/api/v1/",
@@ -102,7 +102,8 @@ let listener = app.listen(process.env.PORT, function () {
 	console.log(`[VAWN] I'm running on port ${listener.address().port}!!`);
 	mstdn.post("statuses", {
 		status: [
-			"VAWNの起動が完了しました。コマンドの処理が可能です。"
+			`VAWNの起動が完了しました。コマンドの処理が可能です。`,
+			`Version: ${package.version}`
 		].join("\r\n"),
 
 		visibility: "public"
