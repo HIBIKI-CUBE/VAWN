@@ -5,7 +5,7 @@ const Formatter = require("./funcs/Formatter");
 const Dice = require("./funcs/Dice");
 const Janken = require("./funcs/Janken");
 
-let package = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+let package = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 
 let mstdn = new Mastodon({
 	api_url: "https://vawn.m.to/api/v1/",
