@@ -1,5 +1,6 @@
 const express = require("express");
 const Mastodon = require("mastodon-api");
+const fs = require("fs");
 
 const Formatter = require("./funcs/Formatter");
 const Dice = require("./funcs/Dice");
