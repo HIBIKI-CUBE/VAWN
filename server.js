@@ -112,20 +112,12 @@ let stream = mstdn.stream("streaming/user");
 								mstdn.post("statuses", {
 									status: [
 										`@${tootInfo.tooter}`,
-										talk.bad
+										talk.bad,
+										`#VAWN_improvement`
 									].join("\r\n"),
 
 									visibility: "public",
 									in_reply_to_id: tootInfo.tootId
-								});
-								mstdn.post("statuses", {
-									status: [
-										`@hibiki_cube@mstdn.y-zu.org`,
-										`不具合のご報告をいただきました。`
-									].join("\r\n"),
-
-									visibility: "direct",
-									in_reply_to_id: "@hibiki_cube@mstdn.y-zu.org"
 								});
 
 								break;
