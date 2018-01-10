@@ -108,7 +108,6 @@ let stream = mstdn.stream("streaming/user");
 
 					break;
 
-				case !!
 			}
 		}
 	});
