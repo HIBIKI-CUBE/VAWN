@@ -56,6 +56,79 @@ let stream = mstdn.stream("streaming/user");
 
 								break;
 						
+							case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/おやす.*/)):
+								mstdn.post("statuses", {
+									status: [
+										`@${tootInfo.tooter}`,
+										talk.goodnight[Math.floor(Math.random() * 2)]
+									].join("\r\n"),
+
+									visibility: "public",
+									in_reply_to_id: tootInfo.tootId
+								});
+
+								break;
+
+							case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/あり.*/)):
+								mstdn.post("statuses", {
+									status: [
+										`@${tootInfo.tooter}`,
+										talk.thanks[Math.floor(Math.random() * 2)]
+									].join("\r\n"),
+
+									visibility: "public",
+									in_reply_to_id: tootInfo.tootId
+								});
+
+								break;
+								
+							case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/おめ.*/)):
+								mstdn.post("statuses", {
+									status: [
+										`@${tootInfo.tooter}`,
+										talk.congrats[Math.floor(Math.random() * 2)]
+									].join("\r\n"),
+
+									visibility: "public",
+									in_reply_to_id: tootInfo.tootId
+								});
+
+								break;
+								
+							case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/.*誕生日.*/)):
+								mstdn.post("statuses", {
+									status: [
+										`@${tootInfo.tooter}`,
+										talk.birthday[Math.floor(Math.random() * 2)]
+									].join("\r\n"),
+
+									visibility: "public",
+									in_reply_to_id: tootInfo.tootId
+								});
+
+								break;
+								
+							case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/バカ|ばか|馬鹿|アホ|あほ|ダメ|だめ|違う|バグ/)):
+								mstdn.post("statuses", {
+									status: [
+										`@${tootInfo.tooter}`,
+										talk.bad
+									].join("\r\n"),
+
+									visibility: "public",
+									in_reply_to_id: tootInfo.tootId
+								});
+								mstdn.post("statuses", {
+									status: [
+										`@hibiki_cube@mstdn.y-zu.org`,
+										`不具合のご報告をいただきました。`
+									].join("\r\n"),
+
+									visibility: "direct",
+									in_reply_to_id: "@hibiki_cube@mstdn.y-zu.org"
+								});
+
+								break;
 					}
 					break;
 
