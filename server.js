@@ -57,6 +57,7 @@ let stream = mstdn.stream("streaming/user");
 								break;
 						
 					}
+					break;
 
 				case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/(?:あなた|きみ|君|おまえ|お前|VAWN(?:| ))の(?:親|父親)/)):
 					mstdn.post("statuses", {
