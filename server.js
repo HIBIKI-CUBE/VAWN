@@ -7,6 +7,7 @@ const Dice = require("./funcs/Dice");
 const Janken = require("./funcs/Janken");
 
 let package = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
+let package = JSON.parse(fs.readFileSync('./talk.json', 'utf8'));
 
 let mstdn = new Mastodon({
 	api_url: "https://vawn.m.to/api/v1/",
@@ -25,20 +26,37 @@ let stream = mstdn.stream("streaming/user");
 			
 			switch (true) {
 				default:
-					mstdn.post("statuses", {
-						status: [
-							`@${tootInfo.tooter}からVAWNへのメンションを確認しました。`,
-							"コマンドを正しく認識できなかったため処理が行えませんでした。申し訳ありません。",
-							"",
-							"現在VAWNが対応しているコマンドについては、以下を参照してください。",
-							"https://vawn.glitch.me/"
-						].join("\r\n"),
+					switch (true){
+						default:
+							mstdn.post("statuses", {
+								status: [
+									`@${tootInfo.tooter}からVAWNへのメンションを確認しました。`,
+									"コマンドを正しく認識できなかったため処理が行えませんでした。申し訳ありません。",
+									"",
+									"現在VAWNが対応しているコマンドについては、以下を参照してください。",
+									"https://vawn.glitch.me/"
+								].join("\r\n"),
 						
-						visibility: "public",
-						in_reply_to_id: tootInfo.tootId
-					});
+								visibility: "public",
+								in_reply_to_id: tootInfo.tootId
+							});
 
-					break;
+							break;
+
+							case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/おは.*/)):
+								mstdn.post("statuses", {
+									status: [
+										`@${tootInfo.tooter}`,
+										talk.goodmorning[Math.floor(Math.random() * 2)]
+									].join("\r\n"),
+
+									visibility: "public",
+									in_reply_to_id: tootInfo.tootId
+								});
+
+								break;
+						
+					}
 
 				case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/(?:あなた|きみ|君|おまえ|お前|VAWN(?:| ))の(?:親|父親)/)):
 					mstdn.post("statuses", {
@@ -88,6 +106,8 @@ let stream = mstdn.stream("streaming/user");
 					});
 
 					break;
+
+				case !!
 			}
 		}
 	});
