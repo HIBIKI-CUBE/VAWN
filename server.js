@@ -43,7 +43,7 @@ let stream = mstdn.stream("streaming/user");
 
 							break;
 
-							case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/おは.*/)):
+							case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/おは/)):
 								mstdn.post("statuses", {
 									status: [
 										`@${tootInfo.tooter}`,
@@ -56,7 +56,7 @@ let stream = mstdn.stream("streaming/user");
 
 								break;
 						
-							case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/おやす.*/)):
+							case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/おやす/)):
 								mstdn.post("statuses", {
 									status: [
 										`@${tootInfo.tooter}`,
@@ -69,7 +69,7 @@ let stream = mstdn.stream("streaming/user");
 
 								break;
 
-							case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/あり.*/)):
+							case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/あり/)):
 								mstdn.post("statuses", {
 									status: [
 										`@${tootInfo.tooter}`,
@@ -82,7 +82,7 @@ let stream = mstdn.stream("streaming/user");
 
 								break;
 								
-							case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/おめ.*/)):
+							case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/おめ/)):
 								mstdn.post("statuses", {
 									status: [
 										`@${tootInfo.tooter}`,
@@ -95,7 +95,7 @@ let stream = mstdn.stream("streaming/user");
 
 								break;
 								
-							case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/.*誕生日.*/)):
+							case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/誕生日/)):
 								mstdn.post("statuses", {
 									status: [
 										`@${tootInfo.tooter}`,
