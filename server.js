@@ -5,7 +5,7 @@ const fs = require("fs");
 const Formatter = require("./funcs/Formatter");
 const Dice = require("./funcs/Dice");
 const Janken = require("./funcs/Janken");
-const talk-fnc = require("./funcs/talk-fnc");
+const talkFnc = require("./funcs/talk-fnc");
 
 let package = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 let talk = JSON.parse(fs.readFileSync('./data/talk.json', 'utf8'));
@@ -27,7 +27,7 @@ let stream = mstdn.stream("streaming/user");
 			
 			switch (true) {
 				default:
-					talk-fnc.talk-fnc;
+					talkFnc.talFnc;
 					break;
 
 				case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/(?:あなた|きみ|君|おまえ|お前|VAWN(?:| ))の(?:親|父親)/)):

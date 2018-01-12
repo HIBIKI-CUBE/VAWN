@@ -1,4 +1,4 @@
-exports.talk-fnc = function(){
+exports.talkFnc = function(){
 switch (true){
 default:
 	mstdn.post("statuses", {
