@@ -11,8 +11,8 @@ let package = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 let talk = JSON.parse(fs.readFileSync('./data/talk.json', 'utf8'));
 
 let mstdn = new Mastodon({
-	api_url: "https://vawn.m.to/api/v1/",
-	access_token: "58bd8dc1b9703c4e6759492841925e4ee35946d4590386f46c646b7696fc95bd"
+	api_url: "https://happy-oss.y-zu.org/api/v1/",
+	access_token: "013dc0d18135f043436671e2e8fb52573f27a3fb8f97951845633cd9d649aaa1"
 });
 
 let stream = mstdn.stream("streaming/user");
