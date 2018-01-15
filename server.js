@@ -17,68 +17,69 @@ let mstdn = new Mastodon({
 
 let stream = mstdn.stream("streaming/user");
 	stream.on("message", toot => {
-		let tootInfo = Formatter.getInfoFromToot(toot);
-		
-		//console.log(toot.data);
-		console.log(`${tootInfo.tooter} … ${tootInfo.tootContent}`);
-		
-		if (tootInfo.tootContent.toUpperCase().match(/@VAWN/g)) {
-			let variables = [];
+		if (toot.event == "notification" && toot.data.type == "mention") {
+			let tootInfo = Formatter.getInfoFromToot(toot);
 			
-			switch (true) {
-				default:
-					talkFnc.talkFnc();
-					break;
+			console.log(`${tootInfo.tooter} … ${tootInfo.tootContent}`);
+			
+			if (tootInfo.tootContent.toUpperCase().match(/@VAWN/g)) {
+				let variables = [];
+				
+				switch (true) {
+					default:
+						talkFnc.talkFnc();
+						break;
 
-				case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/(?:あなた|きみ|君|おまえ|お前|VAWN(?:| ))の(?:親|父親)/)):
-					mstdn.post("statuses", {
-						status: [
-							`@${tootInfo.tooter}`,
-							"私を作ってくれたのは私を使ってくださったみなさんです！"
-						].join("\r\n"),
+					case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/(?:あなた|きみ|君|おまえ|お前|VAWN(?:| ))の(?:親|父親)/)):
+						mstdn.post("statuses", {
+							status: [
+								`@${tootInfo.tooter}`,
+								"私を作ってくれたのは私を使ってくださったみなさんです！"
+							].join("\r\n"),
 
-						visibility: "public",
-						in_reply_to_id: tootInfo.tootId
-					});
+							visibility: "public",
+							in_reply_to_id: tootInfo.tootId
+						});
 
-					break;
+						break;
 
-				case !!(variables = tootInfo.tootContent.match(/サイコロ|さいころ|ダイス/)):
-					mstdn.post("statuses", {
-						status: [
-							`@${tootInfo.tooter}`,
-							`${Math.floor(Math.random() * 5 + 1)}が出ました。`
-						].join("\r\n"),
+					case !!(variables = tootInfo.tootContent.match(/サイコロ|さいころ|ダイス/)):
+						mstdn.post("statuses", {
+							status: [
+								`@${tootInfo.tooter}`,
+								`${Math.floor(Math.random() * 5 + 1)}が出ました。`
+							].join("\r\n"),
 
-						visibility: "public",
-						in_reply_to_id: tootInfo.tootId
-					});
-					break;
+							visibility: "public",
+							in_reply_to_id: tootInfo.tootId
+						});
+						break;
 
 
-				case !!(variables = tootInfo.tootContent.match(/(?:じゃんけん|ジャンケン)(グー|グ〜|ぐー|ぐ～|チョキ|ちょき|パー|パ〜|ぱー|ぱ～)/)):
-					let playerAct = variables[1] || "グー";
+					case !!(variables = tootInfo.tootContent.match(/(?:じゃんけん|ジャンケン)(グー|グ〜|ぐー|ぐ～|チョキ|ちょき|パー|パ〜|ぱー|ぱ～)/)):
+						let playerAct = variables[1] || "グー";
 
-					let vawnActId = Math.floor(Math.random() * 2);
-					let vawnAct = Janken.ACTIONS[vawnActId];
+						let vawnActId = Math.floor(Math.random() * 2);
+						let vawnAct = Janken.ACTIONS[vawnActId];
 
-					let state = Janken.getState(Janken.detectAction(playerAct), vawnActId);
-					
-					mstdn.post("statuses", {
-						status: [
-							`@${tootInfo.tooter}`,
-							"",
-							`${vawnAct}！`,
-							`あなたは${playerAct}を出したので、`,
-							`${state}です！！`
-						].join("\r\n"),
+						let state = Janken.getState(Janken.detectAction(playerAct), vawnActId);
+						
+						mstdn.post("statuses", {
+							status: [
+								`@${tootInfo.tooter}`,
+								"",
+								`${vawnAct}！`,
+								`あなたは${playerAct}を出したので、`,
+								`${state}です！！`
+							].join("\r\n"),
 
-						visibility: "public",
-						in_reply_to_id: tootInfo.tootId
-					});
+							visibility: "public",
+							in_reply_to_id: tootInfo.tootId
+						});
 
-					break;
+						break;
 
+				}
 			}
 		}
 	});

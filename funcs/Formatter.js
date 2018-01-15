@@ -3,9 +3,9 @@ const htmlToText = require("html-to-text");
 module.exports = class Formatter {
 	static getInfoFromToot (toot) {
 		return {
-			tooter: toot.data.account.acct,
-			tootId: toot.data.id,
-			tootContent: htmlToText.fromString(toot.data.content)
+			tooter: toot.data.status.account.acct,
+			tootId: toot.data.status.id,
+			tootContent: htmlToText.fromString(toot.data.status.content)
 		}
 	}
 
