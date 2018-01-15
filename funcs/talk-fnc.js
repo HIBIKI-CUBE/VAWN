@@ -1,4 +1,7 @@
 const Formatter = require("./Formatter");
+const fs = require("fs");
+
+const talk = JSON.parse(fs.readFileSync('./data/talk.json', 'utf8'));
 
 module.exports = function talkFnc (mstdn, tootInfo) {
 	switch (true) {
@@ -87,7 +90,7 @@ module.exports = function talkFnc (mstdn, tootInfo) {
 			mstdn.post("statuses", {
 				status: [
 					`@${tootInfo.tooter}`,
-					//talk.bad,
+					talk.bad,
 					`#VAWN_improvement`
 				].join("\r\n"),
 
