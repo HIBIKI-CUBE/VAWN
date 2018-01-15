@@ -1,6 +1,6 @@
 const Formatter = require("./Formatter");
 
-module.exports = function talkFnc (tootInfo) {
+module.exports = function talkFnc (mstdn, tootInfo) {
 	switch (true) {
 		default:
 			mstdn.post("statuses", {
@@ -18,7 +18,7 @@ module.exports = function talkFnc (tootInfo) {
 
 			break;
 
-		case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/おは/)):
+		case Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/おは/):
 			mstdn.post("statuses", {
 				status: [
 					`@${tootInfo.tooter}`,
@@ -31,7 +31,7 @@ module.exports = function talkFnc (tootInfo) {
 
 			break;
 
-		case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/おやす/)):
+		case Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/おやす/):
 			mstdn.post("statuses", {
 				status: [
 					`@${tootInfo.tooter}`,
@@ -44,7 +44,7 @@ module.exports = function talkFnc (tootInfo) {
 
 			break;
 
-		case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/あり/)):
+		case Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/あり/):
 			mstdn.post("statuses", {
 				status: [
 					`@${tootInfo.tooter}`,
@@ -57,7 +57,7 @@ module.exports = function talkFnc (tootInfo) {
 
 			break;
 
-		case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/おめ/)):
+		case Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/おめ/):
 			mstdn.post("statuses", {
 				status: [
 					`@${tootInfo.tooter}`,
@@ -70,7 +70,7 @@ module.exports = function talkFnc (tootInfo) {
 
 			break;
 
-		case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/誕生日/)):
+		case Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/誕生日/):
 			mstdn.post("statuses", {
 				status: [
 					`@${tootInfo.tooter}`,
@@ -83,11 +83,11 @@ module.exports = function talkFnc (tootInfo) {
 
 			break;
 
-		case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/バカ|ばか|馬鹿|アホ|あほ|ダメ|だめ|違う|バグ/)):
+		case Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/バカ|ばか|馬鹿|アホ|あほ|ダメ|だめ|違う|バグ/):
 			mstdn.post("statuses", {
 				status: [
 					`@${tootInfo.tooter}`,
-					talk.bad,
+					//talk.bad,
 					`#VAWN_improvement`
 				].join("\r\n"),
 

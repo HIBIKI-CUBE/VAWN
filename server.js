@@ -27,7 +27,7 @@ let stream = mstdn.stream("streaming/user");
 				
 				switch (true) {
 					default:
-						talkFnc(tootInfo);
+						talkFnc(mstdn, tootInfo);
 						break;
 
 					case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/(?:あなた|きみ|君|おまえ|お前|VAWN(?:| ))の(?:親|父親)/)):
