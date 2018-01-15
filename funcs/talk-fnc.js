@@ -12,7 +12,7 @@ module.exports = function talkFnc (mstdn, tootInfo) {
 					"コマンドを正しく認識できなかったため処理が行えませんでした。申し訳ありません。",
 					"",
 					"現在VAWNが対応しているコマンドについては、以下を参照してください。",
-					"https://vawn.glitch.me/"
+					"https://vawn.herokuapp.com/"
 				].join("\r\n"),
 
 				visibility: "public",
