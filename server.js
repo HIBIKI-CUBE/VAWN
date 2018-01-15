@@ -98,6 +98,6 @@ let listener = app.listen(process.env.PORT, function () {
 			`Version: ${packageInfo.version}`
 		].join("\r\n"),
 
-		visibility: "public"
+		visibility: "unlisted"
 	})
 });
