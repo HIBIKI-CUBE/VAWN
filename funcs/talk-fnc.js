@@ -1,98 +1,100 @@
-exports.talkFnc = function(){
-switch (true){
-default:
-	mstdn.post("statuses", {
-		status: [
-			`@${tootInfo.tooter}からVAWNへのメンションを確認しました。`,
-			"コマンドを正しく認識できなかったため処理が行えませんでした。申し訳ありません。",
-			"",
-			"現在VAWNが対応しているコマンドについては、以下を参照してください。",
-			"https://vawn.glitch.me/"
-		].join("\r\n"),
+const Formatter = require("./Formatter");
 
-		visibility: "public",
-		in_reply_to_id: tootInfo.tootId
-	});
+module.exports = function talkFnc (tootInfo) {
+	switch (true) {
+		default:
+			mstdn.post("statuses", {
+				status: [
+					`@${tootInfo.tooter}からVAWNへのメンションを確認しました。`,
+					"コマンドを正しく認識できなかったため処理が行えませんでした。申し訳ありません。",
+					"",
+					"現在VAWNが対応しているコマンドについては、以下を参照してください。",
+					"https://vawn.glitch.me/"
+				].join("\r\n"),
 
-	break;
+				visibility: "public",
+				in_reply_to_id: tootInfo.tootId
+			});
 
-	case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/おは/)):
-		mstdn.post("statuses", {
-			status: [
-				`@${tootInfo.tooter}`,
-				talk.goodmorning[Math.floor(Math.random() * 2)]
-			].join("\r\n"),
+			break;
 
-			visibility: "public",
-			in_reply_to_id: tootInfo.tootId
-		});
+		case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/おは/)):
+			mstdn.post("statuses", {
+				status: [
+					`@${tootInfo.tooter}`,
+					talk.goodmorning[Math.floor(Math.random() * 2)]
+				].join("\r\n"),
 
-		break;
+				visibility: "public",
+				in_reply_to_id: tootInfo.tootId
+			});
 
-	case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/おやす/)):
-		mstdn.post("statuses", {
-			status: [
-				`@${tootInfo.tooter}`,
-				talk.goodnight[Math.floor(Math.random() * 2)]
-			].join("\r\n"),
+			break;
 
-			visibility: "public",
-			in_reply_to_id: tootInfo.tootId
-		});
+		case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/おやす/)):
+			mstdn.post("statuses", {
+				status: [
+					`@${tootInfo.tooter}`,
+					talk.goodnight[Math.floor(Math.random() * 2)]
+				].join("\r\n"),
 
-		break;
+				visibility: "public",
+				in_reply_to_id: tootInfo.tootId
+			});
 
-	case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/あり/)):
-		mstdn.post("statuses", {
-			status: [
-				`@${tootInfo.tooter}`,
-				talk.thanks[Math.floor(Math.random() * 2)]
-			].join("\r\n"),
+			break;
 
-			visibility: "public",
-			in_reply_to_id: tootInfo.tootId
-		});
+		case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/あり/)):
+			mstdn.post("statuses", {
+				status: [
+					`@${tootInfo.tooter}`,
+					talk.thanks[Math.floor(Math.random() * 2)]
+				].join("\r\n"),
 
-		break;
-		
-	case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/おめ/)):
-		mstdn.post("statuses", {
-			status: [
-				`@${tootInfo.tooter}`,
-				talk.congrats[Math.floor(Math.random() * 2)]
-			].join("\r\n"),
+				visibility: "public",
+				in_reply_to_id: tootInfo.tootId
+			});
 
-			visibility: "public",
-			in_reply_to_id: tootInfo.tootId
-		});
+			break;
 
-		break;
-		
-	case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/誕生日/)):
-		mstdn.post("statuses", {
-			status: [
-				`@${tootInfo.tooter}`,
-				talk.birthday[Math.floor(Math.random() * 2)]
-			].join("\r\n"),
+		case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/おめ/)):
+			mstdn.post("statuses", {
+				status: [
+					`@${tootInfo.tooter}`,
+					talk.congrats[Math.floor(Math.random() * 2)]
+				].join("\r\n"),
 
-			visibility: "public",
-			in_reply_to_id: tootInfo.tootId
-		});
+				visibility: "public",
+				in_reply_to_id: tootInfo.tootId
+			});
 
-		break;
-		
-	case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/バカ|ばか|馬鹿|アホ|あほ|ダメ|だめ|違う|バグ/)):
-		mstdn.post("statuses", {
-			status: [
-				`@${tootInfo.tooter}`,
-				talk.bad,
-				`#VAWN_improvement`
-			].join("\r\n"),
+			break;
 
-			visibility: "public",
-			in_reply_to_id: tootInfo.tootId
-		});
+		case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/誕生日/)):
+			mstdn.post("statuses", {
+				status: [
+					`@${tootInfo.tooter}`,
+					talk.birthday[Math.floor(Math.random() * 2)]
+				].join("\r\n"),
 
-		break;
-};
+				visibility: "public",
+				in_reply_to_id: tootInfo.tootId
+			});
+
+			break;
+
+		case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/バカ|ばか|馬鹿|アホ|あほ|ダメ|だめ|違う|バグ/)):
+			mstdn.post("statuses", {
+				status: [
+					`@${tootInfo.tooter}`,
+					talk.bad,
+					`#VAWN_improvement`
+				].join("\r\n"),
+
+				visibility: "public",
+				in_reply_to_id: tootInfo.tootId
+			});
+
+			break;
+	}
 }

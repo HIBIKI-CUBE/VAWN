@@ -1,6 +1,6 @@
 const express = require("express");
-const Mastodon = require("mastodon-api");
 const fs = require("fs");
+const Mastodon = require("mastodon-api");
 
 const Formatter = require("./funcs/Formatter");
 const Dice = require("./funcs/Dice");
@@ -19,7 +19,7 @@ let stream = mstdn.stream("streaming/user");
 	stream.on("message", toot => {
 		if (toot.event == "notification" && toot.data.type == "mention") {
 			let tootInfo = Formatter.getInfoFromToot(toot);
-			
+
 			console.log(`${tootInfo.tooter} … ${tootInfo.tootContent}`);
 			
 			if (tootInfo.tootContent.toUpperCase().match(/@VAWN/g)) {
@@ -27,7 +27,7 @@ let stream = mstdn.stream("streaming/user");
 				
 				switch (true) {
 					default:
-						talkFnc.talkFnc();
+						talkFnc.talkFnc(tootInfo);
 						break;
 
 					case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/(?:あなた|きみ|君|おまえ|お前|VAWN(?:| ))の(?:親|父親)/)):
