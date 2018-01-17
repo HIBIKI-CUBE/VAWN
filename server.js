@@ -30,7 +30,7 @@ let stream = mstdn.stream("streaming/user");
 						talkFnc(mstdn, tootInfo);
 						break;
 
-					case !!(variables = Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/(?:あなた|きみ|君|おまえ|お前|VAWN(?:| ))の(?:親|父親)/)):
+					case !!(Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/(?:あなた|きみ|君|おまえ|お前|VAWN(?:| ))の(?:親|父親)/)):
 						mstdn.post("statuses", {
 							status: [
 								`@${tootInfo.tooter}`,
@@ -43,7 +43,7 @@ let stream = mstdn.stream("streaming/user");
 
 						break;
 
-					case !!(variables = tootInfo.tootContent.match(/サイコロ|さいころ|ダイス/)):
+					case !!(tootInfo.tootContent.match(/サイコロ|さいころ|ダイス/)):
 						mstdn.post("statuses", {
 							status: [
 								`@${tootInfo.tooter}`,
@@ -80,16 +80,14 @@ let stream = mstdn.stream("streaming/user");
 						break;
 
 					case !!(variables = tootInfo.tootContent.match(/(.*) (とは|#とは|って|を検索|をググ|をぐぐ)/)):
-						let question = tootInfo.tootContent.match(/(.*) (とは|#とは|って|を検索|をググ|をぐぐ)/);
-						let paramater = { q: question[1] };
-
-						scrape.fetch('https://search.yahoo.co.jp/search', paramater, (err, result, res) => {
-							let ans = result('#sIn .smr').text();
+						scrape.fetch('https://search.yahoo.co.jp/search', { q: variables[1] }, (err, $) => {
+							let ans = $('#sIn .smr').text();
 							
 							mstdn.post("statuses", {
 								status: [
 									`@${tootInfo.tooter}`,
 									`${ans}`,
+									"",
 									`詳細はこちらのページをご覧下さい。`,
 									`https://search.yahoo.co.jp/search?q=${question[1]}`
 								].join("\r\n"),
