@@ -1,6 +1,7 @@
 const express = require("express");
 const fs = require("fs");
 const Mastodon = require("mastodon-api");
+const scrape = require('cheerio-httpcli');
 
 const Formatter = require("./funcs/Formatter");
 const Dice = require("./funcs/Dice");
@@ -76,6 +77,23 @@ let stream = mstdn.stream("streaming/user");
 							in_reply_to_id: tootInfo.tootId
 						});
 
+						break;
+
+					case !!(variables = tootInfo.tootContent.match(/(.*) ？(とは|#とは|って|を検索|をググ)/)):
+						mstdn.post("statuses", {
+							scrape.fetch('https://search.yahoo.co.jp/search', { q: variables[1] }, function (err, $, res) {
+								let ans = $('#sIn .smr').text();
+							})
+							status: [
+								`@${tootInfo.tooter}`,
+								`{ans}`,
+								`詳細はこちらのページをご覧下さい。`,
+								`https://search.yahoo.co.jp/search?q={variables[1]}`
+							].join("\r\n"),
+
+							visibility: "public",
+							in_reply_to_id: tootInfo.tootId
+						});
 						break;
 
 				}
