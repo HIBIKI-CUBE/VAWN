@@ -81,21 +81,24 @@ let stream = mstdn.stream("streaming/user");
 
 					case !!(variables = tootInfo.tootContent.match(/(.*) (とは|#とは|って|を検索|をググ|をぐぐ)/)):
 						let question = tootInfo.tootContent.match(/(.*) (とは|#とは|って|を検索|をググ|をぐぐ)/);
-						let paramater = { q:question[1]};
-							scrape.fetch('https://search.yahoo.co.jp/search',paramater, function (err,result, res) {
-								let ans = result('#sIn .smr').text();
-						})
-						mstdn.post("statuses", {
-							status: [
-								`@${tootInfo.tooter}`,
-								`${ans}`,
-								`詳細はこちらのページをご覧下さい。`,
-								`https://search.yahoo.co.jp/search?q=${question[1]}`
-							].join("\r\n"),
+						let paramater = { q: question[1] };
 
-							visibility: "public",
-							in_reply_to_id: tootInfo.tootId
+						scrape.fetch('https://search.yahoo.co.jp/search', paramater, (err, result, res) => {
+							let ans = result('#sIn .smr').text();
+							
+							mstdn.post("statuses", {
+								status: [
+									`@${tootInfo.tooter}`,
+									`${ans}`,
+									`詳細はこちらのページをご覧下さい。`,
+									`https://search.yahoo.co.jp/search?q=${question[1]}`
+								].join("\r\n"),
+	
+								visibility: "public",
+								in_reply_to_id: tootInfo.tootId
+							});
 						});
+
 						break;
 
 				}
