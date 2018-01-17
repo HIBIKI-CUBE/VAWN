@@ -79,8 +79,9 @@ let stream = mstdn.stream("streaming/user");
 
 						break;
 
-					case !!(variables = tootInfo.tootContent.match(/Appleとは/)):
-						let paramater = { q:variables[1]};
+					case !!(variables = tootInfo.tootContent.match(/(.*) (とは|#とは|って|を検索|をググ|をぐぐ)/)):
+						let question = tootInfo.tootContent.match(/(.*) (とは|#とは|って|を検索|をググ|をぐぐ)/);
+						let paramater = { q:question[1]};
 							scrape.fetch('https://search.yahoo.co.jp/search',paramater, function (err, $, res) {
 								let ans = $('#sIn .smr').text();
 						わ})
@@ -89,7 +90,7 @@ let stream = mstdn.stream("streaming/user");
 								`@${tootInfo.tooter}`,
 								`${ans}`,
 								`詳細はこちらのページをご覧下さい。`,
-								`https://search.yahoo.co.jp/search?q=${variables[1]}`
+								`https://search.yahoo.co.jp/search?q=${question[1]}`
 							].join("\r\n"),
 
 							visibility: "public",
