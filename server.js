@@ -83,13 +83,13 @@ let stream = mstdn.stream("streaming/user");
 						let paramater = { q:variables[1]};
 							scrape.fetch('https://search.yahoo.co.jp/search',paramater, function (err, $, res) {
 								let ans = $('#sIn .smr').text();
-						})
+						わ})
 						mstdn.post("statuses", {
 							status: [
 								`@${tootInfo.tooter}`,
 								`{ans}`,
 								`詳細はこちらのページをご覧下さい。`,
-								`https://search.yahoo.co.jp/search?q={variables[1]}`
+								`https://search.yahoo.co.jp/search?q=${variables[1]}`
 							].join("\r\n"),
 
 							visibility: "public",
