@@ -89,7 +89,7 @@ let stream = mstdn.stream("streaming/user");
 									`${ans}`,
 									"",
 									`詳細はこちらのページをご覧下さい。`,
-									`https://search.yahoo.co.jp/search?q=${question[1]}`
+									`https://search.yahoo.co.jp/search?q=${variables[1]}`
 								].join("\r\n"),
 	
 								visibility: "public",
