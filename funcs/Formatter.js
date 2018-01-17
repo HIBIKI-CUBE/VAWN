@@ -13,6 +13,6 @@ module.exports = class Formatter {
 		return htmlText.replace(/ \[(https?|ftp)(:\/\/[-_.!~*¥'()a-zA-Z0-9;¥/?:¥@&=+¥$,%#]+)\]/g, "");
 	}
 	static mentionRemove (htmlText = "") {
-		return htmlText.replace("@vawn [https://happy-oss.y-zu.org/@vawn]" , "");
+		return htmlText.replace("@vawn [https://happy-oss.y-zu.org/@vawn] ", "");
 	}
 }
