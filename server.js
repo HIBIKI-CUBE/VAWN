@@ -80,11 +80,11 @@ let stream = mstdn.stream("streaming/user");
 						break;
 
 					case !!(variables = tootInfo.tootContent.match(/(.*) ？(とは|#とは|って|を検索|をググ)/)):
-						mstdn.post("statuses", {
-							let paramater = { q:variables[1]};
+						let paramater = { q:variables[1]};
 							scrape.fetch('https://search.yahoo.co.jp/search',paramater, function (err, $, res) {
 								let ans = $('#sIn .smr').text();
-							})
+						})
+						mstdn.post("statuses", {
 							status: [
 								`@${tootInfo.tooter}`,
 								`{ans}`,
