@@ -79,7 +79,7 @@ let stream = mstdn.stream("streaming/user");
 
 						break;
 
-					case !!(variables = tootInfo.tootContent.match(/(.*) (とは|#とは|って|を検索|をググ|をぐぐ)/)):
+					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) (とは|#とは|って|を検索|をググ|をぐぐ)/)):
 						scrape.fetch('https://search.yahoo.co.jp/search', { p: variables[1] }, (err, $) => {
 							let ans = $('#sIn .smr').text();
 							
@@ -99,7 +99,7 @@ let stream = mstdn.stream("streaming/user");
 
 						break;
 
-					case !!(variables = tootInfo.tootContent.match(/(.*) (計算|解いて|は|の答え||)/)):
+					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) (計算|解いて|は|の答え||)/)):
 						scrape.fetch('https://search.yahoo.co.jp/search', { p: variables[1] }, (err, $) => {
 							let ans = $('#mIn .ist').text();
 							
