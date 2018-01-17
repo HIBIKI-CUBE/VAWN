@@ -2,8 +2,11 @@ const Formatter = require("./Formatter");
 const fs = require("fs");
 
 const talk = JSON.parse(fs.readFileSync('./data/talk.json', 'utf8'));
+const currentTime = new Date();
+let hou = currentTime.getHours();
+let min = currentTime.getMinutes();
 
-module.exports = function talkFnc (mstdn, tootInfo) {
+module.exports = function talkFnc (mstdn, tootInfo,hou,min) {
 	switch (true) {
 		default:
 			mstdn.post("statuses", {
@@ -78,6 +81,45 @@ module.exports = function talkFnc (mstdn, tootInfo) {
 				status: [
 					`@${tootInfo.tooter}`,
 					talk.birthday[Math.floor(Math.random() * 2)]
+				].join("\r\n"),
+
+				visibility: "public",
+				in_reply_to_id: tootInfo.tootId
+			});
+
+			break;
+
+		case !!(Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/(暇|ひま)/)):
+			mstdn.post("statuses", {
+				status: [
+					`@${tootInfo.tooter}`,
+					talk.free[Math.floor(Math.random() * 2)]
+				].join("\r\n"),
+
+				visibility: "public",
+				in_reply_to_id: tootInfo.tootId
+			});
+
+			break;
+
+		case !!(Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/りさ姉|リサ姉|Siri|Cortana|コルタナ|Assistant|アシスタント|Alexa|アレクサ/)):
+			mstdn.post("statuses", {
+				status: [
+					`@${tootInfo.tooter}`,
+					talk. senior[Math.floor(Math.random() * 2)]
+				].join("\r\n"),
+
+				visibility: "public",
+				in_reply_to_id: tootInfo.tootId
+			});
+
+			break;
+
+		case !!(Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/いま|今|現在|げんざい|時間|じかん|時刻|じこく/)):
+			mstdn.post("statuses", {
+				status: [
+					`@${tootInfo.tooter}`,
+					`現在の時刻は${hou}時${min}分です。`
 				].join("\r\n"),
 
 				visibility: "public",
