@@ -82,9 +82,9 @@ let stream = mstdn.stream("streaming/user");
 					case !!(variables = tootInfo.tootContent.match(/(.*) (とは|#とは|って|を検索|をググ|をぐぐ)/)):
 						let question = tootInfo.tootContent.match(/(.*) (とは|#とは|って|を検索|をググ|をぐぐ)/);
 						let paramater = { q:question[1]};
-							scrape.fetch('https://search.yahoo.co.jp/search',paramater, function (err, $, res) {
-								let ans = $('#sIn .smr').text();
-						わ})
+							scrape.fetch('https://search.yahoo.co.jp/search',paramater, function (err, ¥, res) {
+								let ans = ¥('#sIn .smr').text();
+						})
 						mstdn.post("statuses", {
 							status: [
 								`@${tootInfo.tooter}`,
