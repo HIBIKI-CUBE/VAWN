@@ -101,7 +101,7 @@ let stream = mstdn.stream("streaming/user");
 
 					case !!(variables = tootInfo.tootContent.match(/(.*) (計算|解いて|は|の答え||)/)):
 						scrape.fetch('https://search.yahoo.co.jp/search', { p: variables[1] }, (err, $) => {
-							let ans = $('#mIn em').text();
+							let ans = $('#mIn .ist').text();
 							
 							mstdn.post("statuses", {
 								status: [

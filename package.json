@@ -1,6 +1,6 @@
 {
 	"name": "vawn",
-	"version": "1.5.0",
+	"version": "1.5.1",
 	"description": "A virtual assistant works on Node.js",
 	"license": "MIT",
 	"main": "server.js",
