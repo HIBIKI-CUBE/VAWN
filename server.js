@@ -19,6 +19,7 @@ let stream = mstdn.stream("streaming/user");
 	stream.on("message", toot => {
 		if (toot.event == "notification" && toot.data.type == "mention") {
 			let tootInfo = Formatter.getInfoFromToot(toot);
+			let tootVis = toot.status.visibility;
 
 			console.log(`${tootInfo.tooter} … ${tootInfo.tootContent}`);
 			
@@ -37,7 +38,7 @@ let stream = mstdn.stream("streaming/user");
 								"私を作ってくれたのは私を使ってくださったみなさんです！"
 							].join("\r\n"),
 
-							visibility: "public",
+							visibility: tootVis,
 							in_reply_to_id: tootInfo.tootId
 						});
 
@@ -50,7 +51,7 @@ let stream = mstdn.stream("streaming/user");
 								`${Math.floor(Math.random() * 5 + 1)}が出ました。`
 							].join("\r\n"),
 
-							visibility: "public",
+							visibility: tootVis,
 							in_reply_to_id: tootInfo.tootId
 						});
 						break;
@@ -73,7 +74,7 @@ let stream = mstdn.stream("streaming/user");
 								`${state}です！！`
 							].join("\r\n"),
 
-							visibility: "public",
+							visibility: tootVis,
 							in_reply_to_id: tootInfo.tootId
 						});
 
@@ -92,7 +93,7 @@ let stream = mstdn.stream("streaming/user");
 									`https://google.com/search?q=${encodeURIComponent(variables[1]+'とは')}`
 								].join("\r\n"),
 	
-								visibility: "public",
+								visibility: tootVis,
 								in_reply_to_id: tootInfo.tootId
 							});
 						});
@@ -112,7 +113,7 @@ let stream = mstdn.stream("streaming/user");
 									`https://google.com/search?q=${encodeURIComponent(variables[1])}`
 								].join("\r\n"),
 	
-								visibility: "public",
+								visibility: tootVis,
 								in_reply_to_id: tootInfo.tootId
 							});
 						});
@@ -120,14 +121,14 @@ let stream = mstdn.stream("streaming/user");
 						break;
 
 					case !!(Formatter.htmlTextToPlainText(tootInfo.tootContent).match('debug toot')):
-					console.log(JSON.stringify(toot,undefined,1));
+					console.log(JSON.stringify(toot));
 						mstdn.post("statuses", {
 							status: [
 								`@${tootInfo.tooter}`,
 								`${JSON.stringify(toot,undefined,1)}`
 							].join("\r\n"),
 
-							visibility: "public",
+							visibility: tootVis,
 							in_reply_to_id: tootInfo.tootId
 						});
 
