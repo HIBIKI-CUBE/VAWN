@@ -128,6 +128,28 @@ module.exports = function talkFnc (mstdn, tootInfo,hou,min) {
 
 			break;
 
+		case !!(Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/^debug tootInfo$/)):
+			mstdn.post("statuses", {
+				status: [
+					`@${tootInfo.tooter}`,
+					`${tootInfo}。`
+				].join("\r\n"),
+
+				visibility: "public",
+				in_reply_to_id: tootInfo.tootId
+			});
+
+			break;
+
+
+
+
+
+
+
+
+
+
 		case !!(Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/バカ|ばか|馬鹿|アホ|あほ|ダメ|だめ|違う|バグ/)):
 			mstdn.post("statuses", {
 				status: [
