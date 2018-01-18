@@ -118,6 +118,20 @@ let stream = mstdn.stream("streaming/user");
 						});
 
 						break;
+
+					case !!(Formatter.htmlTextToPlainText(tootInfo.tootContent).match('debug toot')):
+						mstdn.post("statuses", {
+							status: [
+								`@${tootInfo.tooter}`,
+								`${JSON.stringify(toot,undefined,1)}`
+							].join("\r\n"),
+
+							visibility: "public",
+							in_reply_to_id: tootInfo.tootId
+						});
+
+					break;
+
 				}
 			}
 		}

@@ -128,18 +128,6 @@ module.exports = function talkFnc (mstdn, tootInfo,hou,min) {
 
 			break;
 
-		case !!(Formatter.htmlTextToPlainText(tootInfo.tootContent).match('debug tootInfo')):
-			mstdn.post("statuses", {
-				status: [
-					`@${tootInfo.tooter}`,
-					`${JSON.stringify(tootInfo,undefined,1)}`
-				].join("\r\n"),
-
-				visibility: "public",
-				in_reply_to_id: tootInfo.tootId
-			});
-
-			break;
 
 
 
