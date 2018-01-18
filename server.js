@@ -89,7 +89,7 @@ let stream = mstdn.stream("streaming/user");
 									`${ans}`,
 									"",
 									`詳細はこちらのページをご覧下さい。`,
-									`https://google.com/search?q=${encodeURIComponent(variables[1])}とは`
+									`https://google.com/search?q=${encodeURIComponent(variables[1]とは)}`
 								].join("\r\n"),
 	
 								visibility: "public",
@@ -99,7 +99,7 @@ let stream = mstdn.stream("streaming/user");
 
 						break;
 
-					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) (計算|解いて|は|の答え||)/)):
+					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) (計算|解いて|は|の答え)/)):
 						scrape.fetch('https://search.yahoo.co.jp/search', { p: variables[1] }, (err, $) => {
 							let ans = $('#mIn .ist').text();
 							
