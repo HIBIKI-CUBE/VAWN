@@ -132,7 +132,7 @@ module.exports = function talkFnc (mstdn, tootInfo,hou,min) {
 			mstdn.post("statuses", {
 				status: [
 					`@${tootInfo.tooter}`,
-					`${tootInfo}`
+					`${JSON.stringify(tootInfo,undefined,1)}`
 				].join("\r\n"),
 
 				visibility: "public",
