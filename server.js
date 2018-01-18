@@ -19,7 +19,7 @@ let stream = mstdn.stream("streaming/user");
 	stream.on("message", toot => {
 		if (toot.event == "notification" && toot.data.type == "mention") {
 			let tootInfo = Formatter.getInfoFromToot(toot);
-			let tootVis = toot.status.visibility;
+			let tootVis = toot.data.status.visibility;
 
 			console.log(`${tootInfo.tooter} … ${tootInfo.tootContent}`);
 			
