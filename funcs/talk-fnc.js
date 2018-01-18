@@ -129,7 +129,7 @@ module.exports = function talkFnc (mstdn,tootInfo,hou,min,tootVis) {
 			break;
 
 		case !!(tootInfo.tootContent.match(/コイン/)):
-			if(Math.floor(Math.random())){
+			if(Math.floor(Math.random())==1){
 				let coin = "おもて";
 			}else{
 				let coin = "うら";
