@@ -6,7 +6,7 @@ const currentTime = new Date();
 let hou = currentTime.getHours();
 let min = currentTime.getMinutes();
 
-module.exports = function talkFnc (mstdn,tootVis,tootInfo,hou,min) {
+module.exports = function talkFnc (mstdn,tootInfo,hou,min,tootVis) {
 	switch (true) {
 		default:
 			mstdn.post("statuses", {
@@ -128,7 +128,22 @@ module.exports = function talkFnc (mstdn,tootVis,tootInfo,hou,min) {
 
 			break;
 
+		case !!(tootInfo.tootContent.match(/コイン/)):
+			if(Math.floor(Math.random())){
+				let coin = "おもて"
+			}else{
+				let coin = "うら"
+			};
+			mstdn.post("statuses", {
+				status: [
+					`@${tootInfo.tooter}`,
+					`${coin}が出ました。`
+				].join("\r\n"),
 
+				visibility: tootVis,
+				in_reply_to_id: tootInfo.tootId
+			});
+			break;
 
 
 
