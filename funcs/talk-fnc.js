@@ -6,7 +6,7 @@ const currentTime = new Date();
 let hou = currentTime.getHours();
 let min = currentTime.getMinutes();
 
-module.exports = function talkFnc (mstdn, tootInfo,hou,min) {
+module.exports = function talkFnc (mstdn,tootVis,tootInfo,hou,min) {
 	switch (true) {
 		default:
 			mstdn.post("statuses", {
@@ -18,7 +18,7 @@ module.exports = function talkFnc (mstdn, tootInfo,hou,min) {
 					"https://vawn.herokuapp.com/"
 				].join("\r\n"),
 
-				visibility: "public",
+				visibility: tootVis,
 				in_reply_to_id: tootInfo.tootId
 			});
 
@@ -31,7 +31,7 @@ module.exports = function talkFnc (mstdn, tootInfo,hou,min) {
 					talk.goodmorning[Math.floor(Math.random() * 2)]
 				].join("\r\n"),
 
-				visibility: "public",
+				visibility: tootVis,
 				in_reply_to_id: tootInfo.tootId
 			});
 
@@ -44,7 +44,7 @@ module.exports = function talkFnc (mstdn, tootInfo,hou,min) {
 					talk.goodnight[Math.floor(Math.random() * 2)]
 				].join("\r\n"),
 
-				visibility: "public",
+				visibility: tootVis,
 				in_reply_to_id: tootInfo.tootId
 			});
 
@@ -57,7 +57,7 @@ module.exports = function talkFnc (mstdn, tootInfo,hou,min) {
 					talk.thanks[Math.floor(Math.random() * 2)]
 				].join("\r\n"),
 
-				visibility: "public",
+				visibility: tootVis,
 				in_reply_to_id: tootInfo.tootId
 			});
 
@@ -70,7 +70,7 @@ module.exports = function talkFnc (mstdn, tootInfo,hou,min) {
 					talk.congrats[Math.floor(Math.random() * 2)]
 				].join("\r\n"),
 
-				visibility: "public",
+				visibility: tootVis,
 				in_reply_to_id: tootInfo.tootId
 			});
 
@@ -83,7 +83,7 @@ module.exports = function talkFnc (mstdn, tootInfo,hou,min) {
 					talk.birthday[Math.floor(Math.random() * 2)]
 				].join("\r\n"),
 
-				visibility: "public",
+				visibility: tootVis,
 				in_reply_to_id: tootInfo.tootId
 			});
 
@@ -96,7 +96,7 @@ module.exports = function talkFnc (mstdn, tootInfo,hou,min) {
 					talk.free[Math.floor(Math.random() * 2)]
 				].join("\r\n"),
 
-				visibility: "public",
+				visibility: tootVis,
 				in_reply_to_id: tootInfo.tootId
 			});
 
@@ -109,7 +109,7 @@ module.exports = function talkFnc (mstdn, tootInfo,hou,min) {
 					talk. senior[Math.floor(Math.random() * 2)]
 				].join("\r\n"),
 
-				visibility: "public",
+				visibility: tootVis,
 				in_reply_to_id: tootInfo.tootId
 			});
 
@@ -122,7 +122,7 @@ module.exports = function talkFnc (mstdn, tootInfo,hou,min) {
 					`現在の時刻は${hou}時${min}分です。`
 				].join("\r\n"),
 
-				visibility: "public",
+				visibility: tootVis,
 				in_reply_to_id: tootInfo.tootId
 			});
 
@@ -146,7 +146,7 @@ module.exports = function talkFnc (mstdn, tootInfo,hou,min) {
 					`#VAWN_improvement`
 				].join("\r\n"),
 
-				visibility: "public",
+				visibility: tootVis,
 				in_reply_to_id: tootInfo.tootId
 			});
 
