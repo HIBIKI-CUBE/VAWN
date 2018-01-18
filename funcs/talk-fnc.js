@@ -2,11 +2,8 @@ const Formatter = require("./Formatter");
 const fs = require("fs");
 
 const talk = JSON.parse(fs.readFileSync('./data/talk.json', 'utf8'));
-const currentTime = new Date();
-let hou = currentTime.getHours();
-let min = currentTime.getMinutes();
 
-module.exports = function talkFnc (mstdn,tootInfo,hou,min,tootVis) {
+module.exports = function talkFnc (mstdn,tootInfo,tootVis) {
 	switch (true) {
 		default:
 			mstdn.post("statuses", {
@@ -119,7 +116,8 @@ module.exports = function talkFnc (mstdn,tootInfo,hou,min,tootVis) {
 			mstdn.post("statuses", {
 				status: [
 					`@${tootInfo.tooter}`,
-					`現在の時刻は${hou}時${min}分です。`
+					`その仕事はまだできません！`,
+					`対応まで、もうしばらくお待ちください。`
 				].join("\r\n"),
 
 				visibility: tootVis,
