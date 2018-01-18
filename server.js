@@ -89,7 +89,7 @@ let stream = mstdn.stream("streaming/user");
 									`${ans}`,
 									"",
 									`詳細はこちらのページをご覧下さい。`,
-									`https://google.com/search?q=${encodeURIComponent(variables[1]とは)}`
+									`https://google.com/search?q=${encodeURIComponent(variables[1]+'とは')}`
 								].join("\r\n"),
 	
 								visibility: "public",
