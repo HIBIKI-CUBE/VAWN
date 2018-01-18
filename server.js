@@ -120,6 +120,7 @@ let stream = mstdn.stream("streaming/user");
 						break;
 
 					case !!(Formatter.htmlTextToPlainText(tootInfo.tootContent).match('debug toot')):
+					console.log(JSON.stringify(toot,undefined,1));
 						mstdn.post("statuses", {
 							status: [
 								`@${tootInfo.tooter}`,
