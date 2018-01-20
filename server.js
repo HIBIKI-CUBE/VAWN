@@ -22,7 +22,7 @@ let stream = mstdn.stream("streaming/user");
 			let tootVis = "public";
 			tootVis = toot.data.status.visibility;
 
-			console.log(`${tootInfo.tooter} … ${tootInfo.tootContent}`);
+			console.log(`${tootInfo.tooter} … ${tootInfo.tootContent},${tootVis}`);
 			
 			if (tootInfo.tootContent.toUpperCase().match(/@VAWN/g)) {
 				let variables = [];
