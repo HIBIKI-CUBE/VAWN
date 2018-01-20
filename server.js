@@ -82,8 +82,8 @@ let stream = mstdn.stream("streaming/user");
 						break;
 
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) (とは|#とは|って|を検索|をググ|をぐぐ)/)):
-						scrape.fetch('https://search.yahoo.co.jp/search', { p: variables[1] }, (err, $) => {
-							let ans = $('#sIn .smr').text();
+						scrape.fetch('https://google.co.jp/search', { q: variables[1] }, (err, $) => {
+							let ans = $('#rso ._OKe .oDd span').text();
 							
 							mstdn.post("statuses", {
 								status: [
@@ -91,7 +91,7 @@ let stream = mstdn.stream("streaming/user");
 									`${ans}`,
 									"",
 									`詳細はこちらのページをご覧下さい。`,
-									`https://google.com/search?q=${encodeURIComponent(variables[1]+'とは')}`
+									`https://google.co.jp/search?q=${encodeURIComponent(variables[1]+'とは')}`
 								].join("\r\n"),
 	
 								visibility: tootVis,
