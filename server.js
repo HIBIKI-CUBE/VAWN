@@ -84,7 +84,7 @@ let stream = mstdn.stream("streaming/user");
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) (とは|#とは|って|を検索|をググ|をぐぐ)/)):
 						scrape.fetch('https://google.co.jp/search', { q: variables[1] }, (err, $) => {
 							let ans = $('#rso ._OKe ._oDd span').text();
-							let ans2 = $('#rhs_block ._OKe ._Gld').text();
+							let ans2 = $('#rhs_block ._OKe ._G1d').text();
 							
 							mstdn.post("statuses", {
 								status: [
