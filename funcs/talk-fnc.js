@@ -144,7 +144,18 @@ module.exports = function talkFnc (mstdn,tootInfo,tootVis) {
 			});
 			break;
 
+		case !!(Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/言うこと/)):
+			mstdn.post("statuses", {
+				status: [
+					`@${tootInfo.tooter}`,
+					talk.guhe
+				].join("\r\n"),
 
+				visibility: tootVis,
+				in_reply_to_id: tootInfo.tootId
+			});
+
+			break;
 
 
 
