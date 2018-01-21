@@ -137,7 +137,7 @@ let stream = mstdn.stream("streaming/user");
 
 					break;
 
-					case !!(variables = tootInfo.tootContent.match(/(＠|[at]|at )(.*)に(.*)(と|って)質問/)):
+					case !!(variables = tootInfo.tootContent.match(/(＠|[at]|at) (.*) に(.*)(と|って)質問/)):
 					let rep_ans = tootInfo.tootId;
 						mstdn.post("statuses", {
 							status: [
