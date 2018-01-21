@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>VAWN</title>
+	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="css/demo.css" />
+	<link rel="stylesheet" type="text/css" href="css/card.css" />
+	<link rel="stylesheet" type="text/css" href="css/pattern.css" />
+	<link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+	<!--[if IE]>
+	  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<script>
+	if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+		var root = document.getElementsByTagName('html')[0];
+		root.setAttribute('class', 'ff');
+	};
+	</script>
+</head>
+
+<body class="demo-3">
+	<div class="container">
+		<header class="codrops-header">
+			<h1>VAWN  <span>A Virtual Assistant Works on Node.js</span></h1>
+		</header>
+		<div class="content">
+			<!-- trianglify pattern container -->
+			<div class="pattern pattern--hidden"></div>
+			<!-- cards -->
+			<div class="wrapper">
+				<div class="card">
+					<div class="card__container card__container--closed">
+						<svg class="card__image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 500" preserveAspectRatio="xMidYMid slice">
+							<defs>
+								<clipPath id="clipPath1">
+									<polygon class="clip" points="0,500 0,0 1920,0 1920,500"></polygon>
+								</clipPath>
+							</defs>
+							<image clip-path="url(#clipPath1)" width="1920" height="500" xlink:href="img/a.png"></image>
+						</svg>
+						<div class="card__content">
+							<div class="card__btn-close fa fa-times">X閉じる</div>
+							<div class="card__caption">
+								<h2 class="card__title">クイック検索</h2>
+								<p class="card__subtitle">〇〇 とは</p>
+							</div>
+							<div class="card__copy">
+								<p>クイック検索を使えば、簡単に知りたいことを調べることができます。</p>
+								<p>例えばガジェット系のMastodonインスタンスでは知らない会社の名前を目にすることも少なくありません。</p>
+								<p>そこで、VAWNのクイック検索の出番です。例えばGoogleについて知りたければ「Google とは」とVAWNにコマンドを出すことでGoogleについての簡単な情報を調べることができます。検索用のリンクもリプライに含まれているので、さらに深く調べたい時も簡単です。</p>
+								<p>こっそり調べたい時も心配はいりません。公開範囲をダイレクトにすれば、そのやりとりがインスタンスのみんなに見られてしまうことはありません。</p>
+								<p>VAWNのクイック検索の検索エンジンにはGoogleを採用しています。</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card__container card__container--closed">
+						<svg class="card__image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 500" preserveAspectRatio="xMidYMid slice">
+							<defs>
+								<clipPath id="clipPath2">
+									<polygon class="clip" points="0,500 0,0 1920,0 1920,500"></polygon>
+								</clipPath>
+							</defs>
+							<image clip-path="url(#clipPath2)" width="1920" height="500" xlink:href="img/b.png"></image>
+						</svg>
+						<div class="card__content">
+							<div class="card__btn-close fa fa-times">X閉じる</div>
+							<div class="card__caption">
+								<h2 class="card__title">サイコロ</h2>
+								<p class="card__subtitle">サイコロ振って</p>
+							</div>
+							<div class="card__copy">
+								<p>ゲームをする時、何かを決めかねている時、ふとした時にサイコロを使いたくなることがあるかも知れません。</p>
+								<p>そんな時はVAWNに「サイコロ振って」と呼びかけてください。即座に出た目をお知らせします。</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card__container card__container--closed">
+						<svg class="card__image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 500" preserveAspectRatio="xMidYMid slice">
+							<defs>
+								<clipPath id="clipPath3">
+									<polygon class="clip" points="0,500 0,0 1920,0 1920,500"></polygon>
+								</clipPath>
+							</defs>
+							<image clip-path="url(#clipPath3)" width="1920" height="500" xlink:href="img/c.png"></image>
+						</svg>
+						<div class="card__content">
+							<div class="card__btn-close fa fa-times">X閉じる</div>
+							<div class="card__caption">
+								<h2 class="card__title">じゃんけん</h2>
+								<p class="card__subtitle">じゃんけんパー！</p>
+							</div>
+							<div class="card__copy">
+								<p>じゃんけんは誰もが知る勝負の一つです。</p>
+								<p>実はじゃんけんは日本生まれの遊びだと知っていましたか？今では世界中の多くの人がじゃんけんを知っています。</p>
+								<p>VAWNはそんなじゃんけんにも対応しています。</p>
+								<p>VAWNにメンションをして、「じゃんけんパー」とトゥートするとVAWNとじゃんけんができます。もちろん、グー・チョキ・パーの好きなものを選べます。</p>
+								<p>VAWNの性質上、後出しのように見えてしまうかも知れませんが、VAWNは完全にランダムにどの手を出すか選んでいるので、ご安心ください。</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card__container card__container--closed">
+						<svg class="card__image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 500" preserveAspectRatio="xMidYMid slice">
+							<defs>
+								<clipPath id="clipPath4">
+									<polygon class="clip" points="0,500 0,0 1920,0 1920,500"></polygon>
+								</clipPath>
+							</defs>
+							<image clip-path="url(#clipPath4)" width="1920" height="500" xlink:href="img/d.png"></image>
+						</svg>
+						<div class="card__content">
+							<div class="card__btn-close fa fa-times">X閉じる</div>
+							<div class="card__caption">
+								<h2 class="card__title">クイック計算</h2>
+								<p class="card__subtitle">24たす2かける3 の答えは</p>
+							</div>
+							<div class="card__copy">
+								<p>会話の中で少し面倒な計算が必要になった時、今まででは計算機を取り出したり、電卓アプリを起動していたかも知れません。</p>
+								<p>これからはその必要はありません。VAWNに計算式を伝えるだけで素早くその式と結果がリプライで送られてきます。</p>
+								<p>現在は整数と少数の四則演算に対応しています。今後さらに多くの計算に対応する予定です。</p>
+								<p>このコマンドの注意点</p>
+								<p>現在、 VAWNのクイック計算は演算記号を用いた入力には対応していません。そのため、式の入力は数字と漢字・ひらがな・カタカナで行なってください。</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card__container card__container--closed">
+						<svg class="card__image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 500" preserveAspectRatio="xMidYMid slice">
+							<defs>
+								<clipPath id="clipPath5">
+									<polygon class="clip" points="0,500 0,0 1920,0 1920,500"></polygon>
+								</clipPath>
+							</defs>
+							<image clip-path="url(#clipPath5)" width="1920" height="500" xlink:href="img/e.png"></image>
+						</svg>
+						<div class="card__content">
+							<div class="card__btn-close fa fa-times">X閉じる</div>
+							<div class="card__caption">
+								<h2 class="card__title">コイントス</h2>
+								<p class="card__subtitle">コイントスして</p>
+							</div>
+							<div class="card__copy">
+								<p>何か二つのうちどちらかに決める時、人はコインを投げてその表裏で決断することがあります。</p>
+								<p> VAWNにコイントスを頼めば即座に表か裏、どちらが出たかを教えてくれます。</p>
+								<p>「コイントスして」の言い方以外にも「コインを投げて」「コインは表？裏？」などでも動作します。</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card__container card__container--closed">
+						<svg class="card__image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 500" preserveAspectRatio="xMidYMid slice">
+							<defs>
+								<clipPath id="clipPath6">
+									<polygon class="clip" points="0,500 0,0 1920,0 1920,500"></polygon>
+								</clipPath>
+							</defs>
+							<image clip-path="url(#clipPath6)" width="1920" height="500" xlink:href="img/f.png"></image>
+						</svg>
+						<div class="card__content">
+							<div class="card__btn-close fa fa-times">X閉じる</div>
+							<div class="card__caption">
+								<h2 class="card__title">不具合報告</h2>
+								<p class="card__subtitle">ダメ！</p>
+							</div>
+							<div class="card__copy">
+								<p>VAWNはまだ生まれたばかりのアシスタントです。まだまだ修行は足りません。</p>
+								<p>できないことは山ほどありますし、うまく動かない時もあるかもしれません。</p>
+								<p>そんな時はどうか「ダメ！」と一言叱ってあげていただけないでしょうか。その経験がVAWNの改善につながります。</p>
+								<p>まだまだ未熟なVAWNですが、どうぞよろしくお願いします。</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /cards -->
+		</div><!-- /content -->
+		<div id="footer">
+			VAWN is open sourse project and developed by VAWN Project.
+		</div>
+	</div>
+	<!-- /container -->
+	<!-- JS -->
+	<script src="js/vendors/trianglify.min.js"></script>
+	<script src="js/vendors/TweenMax.min.js"></script>
+	<script src="js/vendors/ScrollToPlugin.min.js"></script>
+	<script src="js/vendors/cash.min.js"></script>
+	<script src="js/Card-polygon.js"></script>
+	<script src="js/demo-3.js"></script>
+</body>
+
+</html>
