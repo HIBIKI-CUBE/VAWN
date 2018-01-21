@@ -137,13 +137,13 @@ let stream = mstdn.stream("streaming/user");
 
 					break;
 
-					case !!(variables = tootInfo.tootContent.match(/(＠|at )(.*)に(.*)(と|って)質問/)):
+					case !!(variables = tootInfo.tootContent.match(/＠(.*)に(.*)(と|って)質問/)):
 					let rep_ans = tootInfo.tootId;
 						mstdn.post("statuses", {
 							status: [
 								`@${tootInfo.tooter}`,
-								`＠${variables[2]}に`,
-								`${variables[3]}`,
+								`＠${variables[1]}に`,
+								`${variables[2]}`,
 								`と質問しました。`,
 								`この質問は匿名で行われます。`
 							].join("\r\n"),
@@ -154,10 +154,10 @@ let stream = mstdn.stream("streaming/user");
 						
 						mstdn.post("statuses", {
 							status: [
-								`@${variables[2]}`,
+								`@${variables[1]}`,
 								`あなたに質問が届いています。`,
 								``,
-								`${variables[3]}`,
+								`${variables[2]}`,
 								``,
 								`このトゥートに以下のように返信すると直接回答できます。`,
 								`回答 ${rep_ans} (本文内容)`,
@@ -171,7 +171,7 @@ let stream = mstdn.stream("streaming/user");
 						fs.writeFile(`./data/${rep_ans}.json`, JSON.stringify(qna, null, '    '));
 						break;
 
-					case !!(variables = tootInfo.tootContent.match(/回答 (\d) (.*)/)):
+					case !!(variables = tootInfo.tootContent.match(/回答 (\d+) (.*)/)):
 						qna = JSON.parse(fs.readFileSync(`./data/${variables[1]}.json`, 'utf8'));
 						mstdn.post("statuses", {
 							status: [
