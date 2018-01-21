@@ -142,10 +142,10 @@ let stream = mstdn.stream("streaming/user");
 	});
 	
 let app = express();
-	app.use(express.static('views'));
+	app.use(express.static('view'));
 	
 	app.get("/", (req, res) => {
-		res.sendFile(`${__dirname}/views/`);
+		res.sendFile(`${__dirname}/view/`);
 	});
 	
 let listener = app.listen(process.env.PORT, function () {
