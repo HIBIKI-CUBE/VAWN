@@ -161,18 +161,33 @@ let stream = mstdn.stream("streaming/user");
 								``,
 								`このトゥートに以下のように返信すると直接回答できます。`,
 								`回答 ${rep_ans} (本文内容)`,
-								`この質問を不快に感じられた場合はこのトゥートに「通報」と返信して下さい。`
+								`この質問を不快に感じられた場合はこのトゥートに以下のように返信して下さい。`,
+								`通報 ${rep_ans}`
 							].join("\r\n"),
 
 							visibility: "direct"
 						});
 						
-						qna = {origin:tootInfo.tooter,to:variables[2],o_rep:tootInfo.tootId,q:variables[3]};
+						qna = {origin:tootInfo.tooter,to:variables[1],o_rep:tootInfo.tootId,q:variables[2]};
 						fs.writeFile(`./data/${rep_ans}.json`, JSON.stringify(qna, null, '    '));
 						break;
 
 					case !!(variables = tootInfo.tootContent.match(/回答 (\d+) (.*)/)):
 						qna = JSON.parse(fs.readFileSync(`./data/${variables[1]}.json`, 'utf8'));
+						mstdn.post("statuses", {
+							status: [
+								`@${tootInfo.tooter}`,
+								`質問に対して`,
+								`${variables[2]}`,
+								`と回答しました。`,
+								`これ以上やり取りが続くことはありません。`,
+								`ありがとうございました。`
+							].join("\r\n"),
+
+							visibility: "direct",
+							in_reply_to_id: tootInfo.tootId
+						});
+						
 						mstdn.post("statuses", {
 							status: [
 								`@${qna.origin}`,
