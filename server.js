@@ -22,6 +22,7 @@ let stream = mstdn.stream("streaming/user");
 			let tootInfo = Formatter.getInfoFromToot(toot);
 			let tootVis = "public";
 			tootVis = toot.data.status.visibility;
+			let qna = new Object();
 
 			console.log(`${tootInfo.tooter} … ${tootInfo.tootContent},${tootVis}`);
 			
@@ -167,12 +168,12 @@ let stream = mstdn.stream("streaming/user");
 							visibility: "direct"
 						});
 						
-						let qna = {origin:tootInfo.tooter,to:variables[2],o_rep:tootInfo.tootId,q:variables[3]};
+						qna = {origin:tootInfo.tooter,to:variables[2],o_rep:tootInfo.tootId,q:variables[3]};
 						fs.writeFile(`./data/${rep_ans}.json`, JSON.stringify(qna, null, '    '));
 						break;
 
 					case !!(variables = tootInfo.tootContent.match(/回答 (\d) (.*)/)):
-						let qna = JSON.parse(fs.readFileSync(`./test${variables[1]}.json`, 'utf8'));
+						qna = JSON.parse(fs.readFileSync(`./data/${variables[1]}.json`, 'utf8'));
 						mstdn.post("statuses", {
 							status: [
 								`@${qna.origin}`,
