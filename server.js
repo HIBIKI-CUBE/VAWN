@@ -9,6 +9,7 @@ const Janken = require("./funcs/Janken");
 const talkFnc = require("./funcs/talk-fnc");
 
 const packageInfo = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
+const questions = JSON.parse(fs.readFileSync('./data/questions.json', 'utf8'));
 
 let mstdn = new Mastodon({
 	api_url: "https://happy-oss.y-zu.org/api/v1/",
@@ -135,6 +136,58 @@ let stream = mstdn.stream("streaming/user");
 						});
 
 					break;
+
+					case !!(variables = tootInfo.tootContent.match(/(＠|[at]|at )(.*)に(.*)(と|って)質問/)):
+					let rep_ans = tootInfo.tootId;
+						mstdn.post("statuses", {
+							status: [
+								`@${tootInfo.tooter}`,
+								`＠${variables[2]}に`,
+								`${variables[3]}`,
+								`と質問しました。`,
+								`この質問は匿名で行われます。`
+							].join("\r\n"),
+
+							visibility: "direct",
+							in_reply_to_id: tootInfo.tootId
+						});
+						
+						mstdn.post("statuses", {
+							status: [
+								`@${variables[2]}`,
+								`あなたに質問が届いています。`,
+								``,
+								`${variables[3]}`,
+								``,
+								`このトゥートに以下のように返信すると直接回答できます。`,
+								`回答 ${rep_ans} (本文内容)`,
+								`この質問を不快に感じられた場合はこのトゥートに「通報」と返信して下さい。`
+							].join("\r\n"),
+
+							visibility: "direct"
+						});
+						
+						let qna = {origin:tootInfo.tooter,to:variables[2],o_rep:tootInfo.tootId,q:variables[3]};
+						fs.writeFile(`./data/${rep_ans}.json`, JSON.stringify(qna, null, '    '));
+						break;
+
+					case !!(variables = tootInfo.tootContent.match(/回答 (\d) (.*)/)):
+						let qna = JSON.parse(fs.readFileSync(`./test${variables[1]}.json`, 'utf8'));
+						mstdn.post("statuses", {
+							status: [
+								`@${qna.origin}`,
+								`以下の質問に対して回答が届きました。`,
+								``,
+								`${qna.q}`,
+								`${variables[2]}`,
+								`これ以上やり取りを続けることはできません。`,
+								`ご利用ありがとうございました。`
+							].join("\r\n"),
+
+							visibility: "direct",
+							in_reply_to_id: variables[1]
+						});
+						break;
 
 				}
 			}
