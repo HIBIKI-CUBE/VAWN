@@ -123,6 +123,26 @@ let stream = mstdn.stream("streaming/user");
 
 						break;
 
+					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(今日|きょう)は(何|なん|なに)の(日|ひ)/)):
+						scrape.fetch('https://www.benricho.org/G_Gadgets/whatday-anniversary.html', (err, $) => {
+							let ans = $('#anniv .anniversaries-title:first-child').text();
+							
+							mstdn.post("statuses", {
+								status: [
+									`@${tootInfo.tooter}`,
+									`${ans}`,
+									"",
+									`詳細はこちらのページをご覧下さい。`,
+									`https://www.benricho.org/G_Gadgets/whatday-anniversary.html`
+								].join("\r\n"),
+	
+								visibility: tootVis,
+								in_reply_to_id: tootInfo.tootId
+							});
+						});
+
+						break;
+
 					case !!(Formatter.htmlTextToPlainText(tootInfo.tootContent).match('debug toot')):
 					console.log(JSON.stringify(toot));
 						mstdn.post("statuses", {
