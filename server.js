@@ -125,7 +125,7 @@ let stream = mstdn.stream("streaming/user");
 
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(今日|きょう)は(何|なん|なに)の(日|ひ)/)):
 						scrape.fetch('https://www.benricho.org/G_Gadgets/whatday-anniversary.html', (err, $) => {
-							let ans = $('#anniv .anniversaries-title:first-child').text();
+							let ans = $('#anniv .anniversaries-title').text();
 							
 							mstdn.post("statuses", {
 								status: [
