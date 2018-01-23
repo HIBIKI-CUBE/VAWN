@@ -86,7 +86,7 @@ let stream = mstdn.stream("streaming/user");
 						scrape.fetch('https://google.co.jp/search', { q: encodeURIComponent(variables[1]) }, (err, $) => {
 							let ans = $('#rso:first-child ._OKe:last-child ._oDd>span').text();
 							let ans2 = $('#rhs_block ._OKe ._G1d').text();
-							console.log(`${JSON.stringify($("span"),undefined,1)}`)
+							console.log(`${JSON.stringify($("span").text(),undefined,1)}`)
 							mstdn.post("statuses", {
 								status: [
 									`@${tootInfo.tooter}`,
