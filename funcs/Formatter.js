@@ -15,4 +15,9 @@ module.exports = class Formatter {
 	static mentionRemove (htmlText = "") {
 		return htmlText.replace("@vawn [https://happy-oss.y-zu.org/@vawn] ", "");
 	}
+	static googleRemove (htmlText = "") {
+		return htmlText.replace("ウィキペディア", "");
+		return htmlText.replace("免責事項", "");
+		return htmlText.replace("さらに表示", "");
+	}
 }
