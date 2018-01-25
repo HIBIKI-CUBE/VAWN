@@ -124,8 +124,8 @@ let stream = mstdn.stream("streaming/user");
 						break;
 
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(今日|きょう)は(何|なん|なに)の(日|ひ)/)):
-						scrape.fetch('https://www.benricho.org/G_Gadgets/whatday-anniversary.html', (err, $) => {
-							let ans = $('#anniv .anniversaries-title').text();
+						scrape.fetch('https://kids.yahoo.co.jp/today/', (err, $) => {
+							let ans = $('#dateDtl').text();
 							
 							mstdn.post("statuses", {
 								status: [
@@ -133,7 +133,7 @@ let stream = mstdn.stream("streaming/user");
 									`${ans}`,
 									"",
 									`詳細はこちらのページをご覧下さい。`,
-									`https://www.benricho.org/G_Gadgets/whatday-anniversary.html`
+									`https://kids.yahoo.co.jp/today/`
 								].join("\r\n"),
 	
 								visibility: tootVis,
