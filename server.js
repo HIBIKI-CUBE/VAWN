@@ -145,7 +145,7 @@ let stream = mstdn.stream("streaming/user");
 						break;
 
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) のサポート状況/)):
-						const options = {shotOffset:{top:125},quality:10};
+						const options = {shotOffset:{top:125},quality:1};
 						webshot(`https://caniuse.com/#search=${encodeURIComponent(variables[1])}`,`./view/${tootInfo.tootId}.png`,options,(err) => {
 							
 							mstdn.post('media',{ file: fs.createReadStream(`./view/${tootInfo.tootId}.png`)}).then(resp=>{
