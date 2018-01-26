@@ -2,6 +2,7 @@ const express = require("express");
 const fs = require("fs");
 const Mastodon = require("mastodon-api");
 const scrape = require('cheerio-httpcli');
+const webshot = require('webshot');
 
 const Formatter = require("./funcs/Formatter");
 const Dice = require("./funcs/Dice");
@@ -139,6 +140,28 @@ let stream = mstdn.stream("streaming/user");
 								visibility: tootVis,
 								in_reply_to_id: tootInfo.tootId
 							});
+						});
+
+						break;
+
+					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) のサポート状況/)):
+						webshot(`https://caniuse.com/#search=${encodeURIComponent(variables[1])}`,`./view/${tootInfo.tootId}.png`,(err) => {
+							
+							mstdn.post('media',{ file: fs.createReadStream(`./view/${tootInfo.tootId}.png`)}).then(resp=>{
+        			const id = resp.data.id;
+							mstdn.post("statuses", {
+								status: [
+									`@${tootInfo.tooter}`,
+									"",
+									`詳細はこちらのページをご覧下さい。`,
+									`https://caniuse.com/#search=${encodeURIComponent(variables[1])}`
+								].join("\r\n"),
+	
+								visibility: tootVis,
+								media_ids:id,
+								in_reply_to_id: tootInfo.tootId
+							});
+						});
 						});
 
 						break;
