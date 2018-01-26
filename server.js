@@ -85,7 +85,7 @@ let stream = mstdn.stream("streaming/user");
 
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) (とは|#とは|って|を検索|をググ|をぐぐ)/)):
 						scrape.fetch('https://google.co.jp/search', { q: encodeURIComponent(variables[1]),hl:'ja',lr:'lang_ja',num:'1'}, (err, $) => {
-							let ans = Formatter.googleRemove($('#rso:first-child ._OKe:last-child ._oDd>span').text());
+							let ans = Formatter.googleRemove($('#rso ._NId:first-child .lr_container').text());
 							let ans2 = Formatter.googleRemove($('#rhs_block ._OKe ._G1d').text());
 							console.log(`${JSON.stringify($("span").text(),undefined,1)}`)
 							mstdn.post("statuses", {
