@@ -145,7 +145,8 @@ let stream = mstdn.stream("streaming/user");
 						break;
 
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) のサポート状況/)):
-						webshot(`https://caniuse.com/#search=${encodeURIComponent(variables[1])}`,`./view/${tootInfo.tootId}.png`,(err) => {
+						const options = {shotOffset:{top:20}};
+						webshot(`https://caniuse.com/#search=${encodeURIComponent(variables[1])}`,`./view/${tootInfo.tootId}.png`,options,(err) => {
 							
 							mstdn.post('media',{ file: fs.createReadStream(`./view/${tootInfo.tootId}.png`)}).then(resp=>{
         			const id = resp.data.id;
@@ -158,7 +159,7 @@ let stream = mstdn.stream("streaming/user");
 								].join("\r\n"),
 	
 								visibility: tootVis,
-								media_ids:id,
+								media_ids:[id],
 								in_reply_to_id: tootInfo.tootId
 							});
 						});
