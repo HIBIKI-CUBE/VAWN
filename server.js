@@ -148,7 +148,7 @@ let stream = mstdn.stream("streaming/user");
 						const options = {shotOffset:{top:125},quality:25};
 						webshot(`https://caniuse.com/#search=${encodeURIComponent(variables[1])}`,`./view/${tootInfo.tootId}.jpeg`,options,(err) => {
 							
-							mstdn.post('media',{ file: fs.createReadStream(`./view/${tootInfo.tootId}.png`)}).then(resp=>{
+							mstdn.post('media',{ file: fs.createReadStream(`./view/${tootInfo.tootId}.jpeg`)}).then(resp=>{
         			const id = resp.data.id;
 							mstdn.post("statuses", {
 								status: [
