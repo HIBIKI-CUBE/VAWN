@@ -91,7 +91,7 @@ let stream = mstdn.stream("streaming/user");
 							mstdn.post("statuses", {
 								status: [
 									`@${tootInfo.tooter}`,
-									`${ans} ${ans2}`,
+									`${ans}、${ans2}`,
 									"",
 									`詳細はこちらのページをご覧下さい。`,
 									`https://google.co.jp/search?q=${encodeURIComponent(variables[1]+'とは')}`
