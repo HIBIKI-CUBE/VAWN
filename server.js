@@ -28,7 +28,7 @@ let stream = mstdn.stream("streaming/user");
 			
 			if (tootInfo.tootContent.toUpperCase().match(/@VAWN/g)) {
 				let variables = [];
-				
+				scrape.setBrowser('chrome');
 				switch (true) {
 					default:
 						talkFnc(mstdn,tootInfo,tootVis);
