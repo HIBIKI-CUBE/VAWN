@@ -84,7 +84,7 @@ let stream = mstdn.stream("streaming/user");
 						break;
 
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) (とは|#とは|って|を検索|をググ|をぐぐ)/)):
-						scrape.fetch('https://google.co.jp/search', { q: encodeURIComponent(variables[1]),hl:'ja',lr:'lang_ja',num:'1'}, (err, $) => {
+						scrape.fetch('https://google.co.jp/search', { q: encodeURIComponent(variables[1]),hl:'ja',lr:'lang_ja'}, (err, $) => {
 							let ans = Formatter.googleRemove($('#rso ._NId:first-child .lr_container').text());
 							let ans2 = Formatter.googleRemove($('#rhs_block ._OKe ._G1d').text());
 							console.log(`${JSON.stringify(ans,undefined,1)}`);
@@ -93,6 +93,26 @@ let stream = mstdn.stream("streaming/user");
 								status: [
 									`@${tootInfo.tooter}`,
 									`${ans}${ans2}`,
+									"",
+									`詳細はこちらのページをご覧下さい。`,
+									`https://google.co.jp/search?q=${encodeURIComponent(variables[1]+'とは')}`
+								].join("\r\n"),
+	
+								visibility: tootVis,
+								in_reply_to_id: tootInfo.tootId
+							});
+						});
+
+						break;
+
+					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/debug google (.*) (.*)/)):
+						scrape.fetch('https://google.co.jp/search', { q: encodeURIComponent(variables[1]),hl:'ja',lr:'lang_ja'}, (err, $) => {
+							let ans = Formatter.googleRemove($(variables[2]).text());
+							console.log(`${JSON.stringify(ans,undefined,1)}`);
+							mstdn.post("statuses", {
+								status: [
+									`@${tootInfo.tooter}`,
+									`${ans}`,
 									"",
 									`詳細はこちらのページをご覧下さい。`,
 									`https://google.co.jp/search?q=${encodeURIComponent(variables[1]+'とは')}`
