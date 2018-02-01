@@ -74,12 +74,14 @@ let stream = mstdn.stream("streaming/user");
 						scrape.fetch('https://google.co.jp/search', { q: encodeURIComponent(variables[1]),hl:'ja',lr:'lang_ja'}, (err, $) => {
 							let ans = Formatter.googleRemove($('#rso ._NId:first-child .lr_container').text());
 							let ans2 = Formatter.googleRemove($('.mod ._Tgc._s8w').text());
+							let ans3 = Formatter.googleRemove($('#rhs_block ._OKe ._G1d').text());
 							console.log(`${JSON.stringify(ans,undefined,1)}`);
 							console.log(`${JSON.stringify(ans2,undefined,1)}`);
+							console.log(`${JSON.stringify(ans3,undefined,1)}`);
 							mstdn.post("statuses", {
 								status: [
 									`@${tootInfo.tooter}`,
-									`${ans}${ans2}`,
+									`${ans},${ans2},${ans3}`,
 									"",
 									`詳細はこちらのページをご覧下さい。`,
 									`https://google.co.jp/search?q=${encodeURIComponent(variables[1]+'とは')}`
