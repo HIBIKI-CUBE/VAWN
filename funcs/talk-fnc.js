@@ -86,6 +86,19 @@ module.exports = function talkFnc (mstdn,tootInfo,tootVis) {
 
 			break;
 
+		case !!(Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/(あなた|きみ|君|おまえ|お前|VAWN| )の(親|父親)/)):
+			mstdn.post("statuses", {
+				status: [
+					`@${tootInfo.tooter}`,
+					talk.parent[Math.floor(Math.random() * 2)]"
+				].join("\r\n"),
+
+				visibility: tootVis,
+				in_reply_to_id: tootInfo.tootId
+			});
+
+			break;
+
 		case !!(Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/(暇|ひま)/)):
 			mstdn.post("statuses", {
 				status: [

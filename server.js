@@ -34,19 +34,6 @@ let stream = mstdn.stream("streaming/user");
 						talkFnc(mstdn,tootInfo,tootVis);
 						break;
 
-					case !!(Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/(?:あなた|きみ|君|おまえ|お前|VAWN(?:| ))の(?:親|父親)/)):
-						mstdn.post("statuses", {
-							status: [
-								`@${tootInfo.tooter}`,
-								"私を作ってくれたのは私を使ってくださったみなさんです！"
-							].join("\r\n"),
-
-							visibility: tootVis,
-							in_reply_to_id: tootInfo.tootId
-						});
-
-						break;
-
 					case !!(tootInfo.tootContent.match(/サイコロ|さいころ|ダイス/)):
 						mstdn.post("statuses", {
 							status: [
