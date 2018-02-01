@@ -90,7 +90,7 @@ module.exports = function talkFnc (mstdn,tootInfo,tootVis) {
 			mstdn.post("statuses", {
 				status: [
 					`@${tootInfo.tooter}`,
-					talk.parent[Math.floor(Math.random() * 2)]"
+					talk.parent[Math.floor(Math.random() * 2)]
 				].join("\r\n"),
 
 				visibility: tootVis,
