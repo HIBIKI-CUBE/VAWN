@@ -20,18 +20,17 @@ let stream = mstdn.stream("streaming/user");
 	stream.on("message", toot => {
 		if (toot.event == "notification" && toot.data.type == "mention") {
 			let tootInfo = Formatter.getInfoFromToot(toot);
-			let tootVis = "public";
-			tootVis = toot.data.status.visibility;
+			let tootVis = toot.data.status.visibility;
 			let qna = new Object();
 
-			console.log(`${tootInfo.tooter} … ${tootInfo.tootContent},${tootVis}`);
+			console.log(`${tootInfo.tooter} … ${tootInfo.tootContent}, ${tootVis}`);
 			
 			if (tootInfo.tootContent.toUpperCase().match(/@VAWN/g)) {
 				let variables = [];
 				scrape.set('browser','chrome');
 				switch (true) {
 					default:
-						talkFnc(mstdn,tootInfo,tootVis);
+						talkFnc(mstdn, tootInfo, tootVis);
 						break;
 
 					case !!(tootInfo.tootContent.match(/サイコロ|さいころ|ダイス/)):
@@ -44,6 +43,7 @@ let stream = mstdn.stream("streaming/user");
 							visibility: tootVis,
 							in_reply_to_id: tootInfo.tootId
 						});
+
 						break;
 
 
@@ -71,13 +71,15 @@ let stream = mstdn.stream("streaming/user");
 						break;
 
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) (とは|#とは|って|を検索|をググ|をぐぐ)/)):
-						scrape.fetch('https://google.co.jp/search', { q: encodeURIComponent(variables[1]),hl:'ja',lr:'lang_ja'}, (err, $) => {
+						scrape.fetch('https://google.co.jp/search', { q: encodeURIComponent(variables[1]), hl: 'ja', lr: 'lang_ja' }, (err, $) => {
 							let ans = Formatter.googleRemove($('#rso ._NId:first-child .lr_container').text());
 							let ans2 = Formatter.googleRemove($('.mod ._Tgc._s8w').text());
 							let ans3 = Formatter.googleRemove($('#rhs_block ._OKe ._G1d').text());
-							console.log(`${JSON.stringify(ans,undefined,1)}`);
-							console.log(`${JSON.stringify(ans2,undefined,1)}`);
-							console.log(`${JSON.stringify(ans3,undefined,1)}`);
+
+							console.log(JSON.stringify(ans, null, "\t"));
+							console.log(JSON.stringify(ans2, null, "\t"));
+							console.log(JSON.stringify(ans3, null, "\t"));
+
 							mstdn.post("statuses", {
 								status: [
 									`@${tootInfo.tooter}`,
@@ -95,9 +97,10 @@ let stream = mstdn.stream("streaming/user");
 						break;
 
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/debug google (.*) (.*)/)):
-						scrape.fetch('https://google.co.jp/search', { q: encodeURIComponent(variables[1]),hl:'ja',lr:'lang_ja'}, (err, $) => {
+						scrape.fetch('https://google.co.jp/search', { q: encodeURIComponent(variables[1]), hl: 'ja', lr: 'lang_ja' }, (err, $) => {
 							let ans = Formatter.googleRemove($(variables[2]).text());
-							console.log(`${JSON.stringify(ans,undefined,1)}`);
+							console.log(JSON.stringify(ans, null, "\t"));
+
 							mstdn.post("statuses", {
 								status: [
 									`@${tootInfo.tooter}`,
@@ -155,30 +158,32 @@ let stream = mstdn.stream("streaming/user");
 						break;
 
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) のサポート状況/)):
-						const options = {shotOffset:{top:125},quality:25};
-						webshot(`https://caniuse.com/#search=${encodeURIComponent(variables[1])}`,`./view/${tootInfo.tootId}.jpeg`,options,(err) => {
-							
-							mstdn.post('media',{ file: fs.createReadStream(`./view/${tootInfo.tootId}.jpeg`)}).then(resp=>{
-        			const id = resp.data.id;
-							mstdn.post("statuses", {
-								status: [
-									`@${tootInfo.tooter}`,
-									"",
-									`詳細はこちらのページをご覧下さい。`,
-									`https://caniuse.com/#search=${encodeURIComponent(variables[1])}`
-								].join("\r\n"),
-	
-								visibility: tootVis,
-								media_ids:[id],
-								in_reply_to_id: tootInfo.tootId
+						const options = { shotOffset: { top: 125 }, quality: 25 };
+
+						webshot(`https://caniuse.com/#search=${encodeURIComponent(variables[1])}`, `./view/${tootInfo.tootId}.jpeg`, options, err => {
+							mstdn.post('media', { file: fs.createReadStream(`./view/${tootInfo.tootId}.jpeg`)}).then(resp => {
+								const id = resp.data.id;
+
+								mstdn.post("statuses", {
+									status: [
+										`@${tootInfo.tooter}`,
+										"",
+										`詳細はこちらのページをご覧下さい。`,
+										`https://caniuse.com/#search=${encodeURIComponent(variables[1])}`
+									].join("\r\n"),
+									
+									media_ids: [ id ],
+									visibility: tootVis,
+									in_reply_to_id: tootInfo.tootId
+								});
 							});
-						});
 						});
 
 						break;
 
 					case !!(Formatter.htmlTextToPlainText(tootInfo.tootContent).match('debug toot')):
-					console.log(JSON.stringify(toot));
+						console.log(JSON.stringify(toot));
+
 						mstdn.post("statuses", {
 							status: [
 								`@${tootInfo.tooter}`,
@@ -189,10 +194,11 @@ let stream = mstdn.stream("streaming/user");
 							in_reply_to_id: tootInfo.tootId
 						});
 
-					break;
+						break;
 
 					case !!(variables = tootInfo.tootContent.match(/＠(.*)に(.*)(と|って)質問/)):
-					let rep_ans = tootInfo.tootId;
+						let rep_ans = tootInfo.tootId;
+
 						mstdn.post("statuses", {
 							status: [
 								`@${tootInfo.tooter}`,
@@ -222,12 +228,14 @@ let stream = mstdn.stream("streaming/user");
 							visibility: "direct"
 						});
 						
-						qna = {origin:tootInfo.tooter,to:variables[1],o_rep:tootInfo.tootId,q:variables[2]};
-						fs.writeFile(`./data/${rep_ans}.json`, JSON.stringify(qna, null, '    '));
+						qna = { origin: tootInfo.tooter, to: variables[1], o_rep: tootInfo.tootId, q: variables[2] };
+						fs.writeFile(`./data/${rep_ans}.json`, JSON.stringify(qna, null, '\t'));
+
 						break;
 
 					case !!(variables = tootInfo.tootContent.match(/回答 (\d+) (.*)/)):
 						qna = JSON.parse(fs.readFileSync(`./data/${variables[1]}.json`, 'utf8'));
+
 						mstdn.post("statuses", {
 							status: [
 								`@${tootInfo.tooter}`,
@@ -256,8 +264,8 @@ let stream = mstdn.stream("streaming/user");
 							visibility: "direct",
 							in_reply_to_id: variables[1]
 						});
-						break;
 
+						break;
 				}
 			}
 		}
