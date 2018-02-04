@@ -3,6 +3,7 @@ const fs = require("fs");
 const Mastodon = require("mastodon-api");
 const scrape = require('cheerio-httpcli');
 const webshot = require('webshot');
+const fb = require("firebase-admin");
 
 const Formatter = require("./funcs/Formatter");
 const Dice = require("./funcs/Dice");
@@ -74,7 +75,7 @@ let stream = mstdn.stream("streaming/user");
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) (とは|#とは|って|を検索|をググ|をぐぐ)/)):
 						scrape.fetch('https://google.co.jp/search', { q: encodeURIComponent(variables[1]), hl: 'ja', lr: 'lang_ja' }, (err, $) => {
 							let ans = Formatter.googleRemove($('#rso ._NId:first-child .lr_container').text());
-							let ans2 = Formatter.googleRemove($('.mod ._Tgc._s8w').text());
+							let ans2 = Formatter.googleRemove($('#rso ._Tgc._s8w').text());
 							let ans3 = Formatter.googleRemove($('#rhs_block ._OKe ._G1d').text());
 
 							console.log(JSON.stringify(ans, null, "\t"));
