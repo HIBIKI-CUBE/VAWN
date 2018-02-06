@@ -17,6 +17,13 @@ let mstdn = new Mastodon({
 	access_token: "013dc0d18135f043436671e2e8fb52573f27a3fb8f97951845633cd9d649aaa1"
 });
 
+const serviceAccount = process.env.FIREBASE;
+
+fb.initializeApp({
+  credential: fb.credential.cert(serviceAccount),
+  databaseURL: "https://vawn-yzu.firebaseio.com"
+});
+
 let stream = mstdn.stream("streaming/user");
 	stream.on("message", toot => {
 		if (toot.event == "notification" && toot.data.type == "mention") {
