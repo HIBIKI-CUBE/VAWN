@@ -11,6 +11,7 @@ const Janken = require("./funcs/Janken");
 const talkFnc = require("./funcs/talk-fnc");
 
 const packageInfo = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
+const talk = JSON.parse(fs.readFileSync('./data/talk.json', 'utf8'));
 
 let mstdn = new Mastodon({
 	api_url: "https://happy-oss.y-zu.org/api/v1/",
@@ -79,7 +80,7 @@ let stream = mstdn.stream("streaming/user");
 
 						break;
 
-					case !!(variables = tootInfo.tootContent.match(/あ、(.*)！$/)):
+					case !!(variables = tootInfo.tootContent.match(/あっ?、(.*)！?$/)):
 						let content = talk.suumo;
 							content.replace(/\${phrase}/g, variables[1]).replace(/\${phrase_1}/g, variables[1].substr(0, 1)).replace(/\${phrase_2}/g, variables[1].substr(1, 2));
 							
