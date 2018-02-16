@@ -214,20 +214,39 @@ let stream = mstdn.stream("streaming/user");
 							case "toot":
 								console.log(JSON.stringify(toot));
 
+								let contents = Formatter.splitByLength(JSON.stringify(toot), 500);
+									contents.forEach(text => {
+										mstdn.post("statuses", {
+											status: [
+												`@${tootInfo.tooter}`,
+												text
+											].join("\r\n"),
+				
+											visibility: tootVis,
+											in_reply_to_id: tootInfo.tootId
+										});
+									});
+
+								break;
+
+							case "talk":
+								console.log(JSON.stringify(talk));
+								break;
+
+							case "eval":
+								let result = eval(args[1]);
+									console.log(result);
+
 								mstdn.post("statuses", {
 									status: [
 										`@${tootInfo.tooter}`,
-										`${JSON.stringify(toot,undefined,1)}`
+										result
 									].join("\r\n"),
 		
 									visibility: tootVis,
 									in_reply_to_id: tootInfo.tootId
 								});
 
-								break;
-
-							case "talk":
-								console.log(JSON.stringify(talk));
 								break;
 						}
 

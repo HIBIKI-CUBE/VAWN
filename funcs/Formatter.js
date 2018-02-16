@@ -12,10 +12,16 @@ module.exports = class Formatter {
 	static htmlTextToPlainText (htmlText = "") {
 		return htmlText.replace(/ \[(https?|ftp)(:\/\/[-_.!~*¥'()a-zA-Z0-9;¥/?:¥@&=+¥$,%#]+)\]/g, "");
 	}
+
 	static mentionRemove (htmlText = "") {
 		return htmlText.replace("@vawn [https://happy-oss.y-zu.org/@vawn] ", "");
 	}
+
 	static googleRemove (htmlText = "") {
 		return htmlText.replace("ウィキペディア", "").replace("免責事項", "").replace("さらに表示", "");
+	}
+
+	static splitByLength (text = "", length = 500) {
+		return text.match(new RegExp(`.{0,${length}}`, "g"));
 	}
 }
