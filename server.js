@@ -207,18 +207,29 @@ let stream = mstdn.stream("streaming/user");
 
 						break;
 
-					case !!(tootInfo.tootContent.match('debug toot')):
-						console.log(JSON.stringify(toot));
+					case !!(variables = tootInfo.tootContent.match(/debug (.*)/)):
+						let args = variables[1].split(" ");
 
-						mstdn.post("statuses", {
-							status: [
-								`@${tootInfo.tooter}`,
-								`${JSON.stringify(toot,undefined,1)}`
-							].join("\r\n"),
+						switch (args[0]) {
+							case "toot":
+								console.log(JSON.stringify(toot));
 
-							visibility: tootVis,
-							in_reply_to_id: tootInfo.tootId
-						});
+								mstdn.post("statuses", {
+									status: [
+										`@${tootInfo.tooter}`,
+										`${JSON.stringify(toot,undefined,1)}`
+									].join("\r\n"),
+		
+									visibility: tootVis,
+									in_reply_to_id: tootInfo.tootId
+								});
+
+								break;
+
+							case "talk":
+								console.log(JSON.stringify(talk));
+								break;
+						}
 
 						break;
 
