@@ -86,7 +86,7 @@ let stream = mstdn.stream("streaming/user");
 							phrase2 = `${phrase.substr(0, 1)}～～～${phrase.substr(phrase.length - 1, 1)}`;
 
 						let content = talk.suumo;
-							content.replace(/\${phrase}/g, phrase).replace(/\${phrase_1}/g, phrase1).replace(/\${phrase_2}/g, phrase2);
+							content = content.replace(/\${phrase}/g, phrase).replace(/\${phrase_1}/g, phrase1).replace(/\${phrase_2}/g, phrase2);
 							
 						mstdn.post("statuses", {
 							status: [
