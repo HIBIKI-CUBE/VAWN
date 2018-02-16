@@ -22,6 +22,6 @@ module.exports = class Formatter {
 	}
 
 	static splitByLength (text = "", length = 500) {
-		return text.match(new RegExp(`.{0,${length}}`, "g"));
+		return text.match(new RegExp(`.{1,${length}}`, "g"));
 	}
 }

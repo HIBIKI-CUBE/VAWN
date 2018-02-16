@@ -234,7 +234,7 @@ let stream = mstdn.stream("streaming/user");
 								break;
 
 							case "eval":
-								let result = eval(args[1]);
+								let result = eval(args.splice(1).join(" "));
 									console.log(result);
 
 								mstdn.post("statuses", {
