@@ -116,7 +116,7 @@ module.exports = function talkFnc (mstdn,tootInfo,tootVis) {
 			mstdn.post("statuses", {
 				status: [
 					`@${tootInfo.tooter}`,
-					talk. senior[Math.floor(Math.random() * 2)]
+					talk.senior[Math.floor(Math.random() * 2)]
 				].join("\r\n"),
 
 				visibility: tootVis,
@@ -174,7 +174,7 @@ module.exports = function talkFnc (mstdn,tootInfo,tootVis) {
 			mstdn.post("statuses", {
 				status: [
 					`@${tootInfo.tooter}`,
-					talk.suumo
+					talk.suumo[Math.floor(Math.random() * 2)]
 				].join("\r\n"),
 
 				visibility: tootVis,
