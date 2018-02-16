@@ -82,7 +82,7 @@ let stream = mstdn.stream("streaming/user");
 
 					case !!(variables = tootInfo.tootContent.match(/あっ?、(.*)(?=！$)/)):
 						let phrase = variables[1],
-							phrase1 = phrase.substr(0, 2) + phrase.substr(phrase.length - 2, 2),
+							phrase1 = phrase.substr(0, 2),
 							phrase2 = `${phrase.substr(0, 2)}～～～${phrase.substr(phrase.length - 2, 2)}`;
 
 						let content = talk.suumo;
