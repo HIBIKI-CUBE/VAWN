@@ -170,7 +170,18 @@ module.exports = function talkFnc (mstdn,tootInfo,tootVis) {
 
 			break;
 
+		case !!(Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/すーも|スーモ|suumo|SUUMO/)):
+			mstdn.post("statuses", {
+				status: [
+					`@${tootInfo.tooter}`,
+					talk.suumo
+				].join("\r\n"),
 
+				visibility: tootVis,
+				in_reply_to_id: tootInfo.tootId
+			});
+
+			break;
 
 
 
