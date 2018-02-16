@@ -83,8 +83,15 @@ let stream = mstdn.stream("streaming/user");
 					case !!(variables = tootInfo.tootContent.match(/あっ?、(.*)(?=！$)/)):
 						let phrase = variables[1],
 							phrase1 = phrase.substr(0, 2),
-							phrase2 = `${phrase.substr(0, 2)}～～～${phrase.substr(phrase.length - 2, 2)}`;
-
+							phrase2 =
+								phrase.length > 3 ?
+									`${phrase.substr(0, 2)}～～～${phrase.substr(phrase.length - 2, 2)}` :
+								phrase.length == 3 ?
+									`${phrase.substr(0, 1)}～${phrase.substr(1, 1)}～${phrase.substr(2, 1)}` :
+								phrase.length == 2 ?
+									`${phrase.substr(0, 1)}～～～${phrase.substr(1, 1)}` :
+								`${phrase}～～～`;
+								
 						let content = talk.suumo;
 							content = content.replace(/\${phrase}/g, phrase).replace(/\${phrase_1}/g, phrase1).replace(/\${phrase_2}/g, phrase2);
 							
