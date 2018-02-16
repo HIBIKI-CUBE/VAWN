@@ -20,8 +20,8 @@ let mstdn = new Mastodon({
 const serviceAccount = JSON.parse(process.env.FIREBASE);
 
 fb.initializeApp({
-  credential: fb.credential.cert(serviceAccount),
-  databaseURL: "https://vawn-yzu.firebaseio.com"
+	credential: fb.credential.cert(serviceAccount),
+	databaseURL: "https://vawn-yzu.firebaseio.com"
 });
 
 let stream = mstdn.stream("streaming/user");
@@ -71,6 +71,22 @@ let stream = mstdn.stream("streaming/user");
 								`${vawnAct}！`,
 								`あなたは${playerAct}を出したので、`,
 								`${state}です！！`
+							].join("\r\n"),
+
+							visibility: tootVis,
+							in_reply_to_id: tootInfo.tootId
+						});
+
+						break;
+
+					case !!(variables = tootInfo.tootContent.match(/あ、(.*)！$/)):
+						let content = talk.suumo;
+							content.replace(/\${phrase}/g, variables[1]).replace(/\${phrase_1}/g, variables[1].substr(0, 1)).replace(/\${phrase_2}/g, variables[1].substr(1, 2));
+							
+						mstdn.post("statuses", {
+							status: [
+								`@${tootInfo.tooter}`,
+								content
 							].join("\r\n"),
 
 							visibility: tootVis,
@@ -190,7 +206,7 @@ let stream = mstdn.stream("streaming/user");
 
 						break;
 
-					case !!(Formatter.htmlTextToPlainText(tootInfo.tootContent).match('debug toot')):
+					case !!(tootInfo.tootContent.match('debug toot')):
 						console.log(JSON.stringify(toot));
 
 						mstdn.post("statuses", {

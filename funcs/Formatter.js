@@ -5,7 +5,7 @@ module.exports = class Formatter {
 		return {
 			tooter: toot.data.status.account.acct,
 			tootId: toot.data.status.id,
-			tootContent: htmlToText.fromString(toot.data.status.content)
+			tootContent: Formatter.htmlTextToPlainText(htmlToText.fromString(toot.data.status.content))
 		}
 	}
 

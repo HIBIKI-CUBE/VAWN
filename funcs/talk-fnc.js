@@ -21,7 +21,7 @@ module.exports = function talkFnc (mstdn,tootInfo,tootVis) {
 
 			break;
 
-		case !!(Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/おは/)):
+		case !!(tootInfo.tootContent.match(/おは/)):
 			mstdn.post("statuses", {
 				status: [
 					`@${tootInfo.tooter}`,
@@ -34,7 +34,7 @@ module.exports = function talkFnc (mstdn,tootInfo,tootVis) {
 
 			break;
 
-		case !!(Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/おやす/)):
+		case !!(tootInfo.tootContent.match(/おやす/)):
 			mstdn.post("statuses", {
 				status: [
 					`@${tootInfo.tooter}`,
@@ -47,7 +47,7 @@ module.exports = function talkFnc (mstdn,tootInfo,tootVis) {
 
 			break;
 
-		case !!(Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/あり/)):
+		case !!(tootInfo.tootContent.match(/あり/)):
 			mstdn.post("statuses", {
 				status: [
 					`@${tootInfo.tooter}`,
@@ -60,7 +60,7 @@ module.exports = function talkFnc (mstdn,tootInfo,tootVis) {
 
 			break;
 
-		case !!(Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/おめ/)):
+		case !!(tootInfo.tootContent.match(/おめ/)):
 			mstdn.post("statuses", {
 				status: [
 					`@${tootInfo.tooter}`,
@@ -73,7 +73,7 @@ module.exports = function talkFnc (mstdn,tootInfo,tootVis) {
 
 			break;
 
-		case !!(Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/誕生日/)):
+		case !!(tootInfo.tootContent.match(/誕生日/)):
 			mstdn.post("statuses", {
 				status: [
 					`@${tootInfo.tooter}`,
@@ -86,7 +86,7 @@ module.exports = function talkFnc (mstdn,tootInfo,tootVis) {
 
 			break;
 
-		case !!(Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/(あなた|きみ|君|おまえ|お前|VAWN| )の(親|父親)/)):
+		case !!(tootInfo.tootContent.match(/(あなた|きみ|君|おまえ|お前|VAWN| )の(親|父親)/)):
 			mstdn.post("statuses", {
 				status: [
 					`@${tootInfo.tooter}`,
@@ -99,7 +99,7 @@ module.exports = function talkFnc (mstdn,tootInfo,tootVis) {
 
 			break;
 
-		case !!(Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/(暇|ひま)/)):
+		case !!(tootInfo.tootContent.match(/(暇|ひま)/)):
 			mstdn.post("statuses", {
 				status: [
 					`@${tootInfo.tooter}`,
@@ -112,7 +112,7 @@ module.exports = function talkFnc (mstdn,tootInfo,tootVis) {
 
 			break;
 
-		case !!(Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/りさ姉|リサ姉|Siri|Cortana|コルタナ|Assistant|アシスタント|Alexa|アレクサ/)):
+		case !!(tootInfo.tootContent.match(/りさ姉|リサ姉|Siri|Cortana|コルタナ|Assistant|アシスタント|Alexa|アレクサ/)):
 			mstdn.post("statuses", {
 				status: [
 					`@${tootInfo.tooter}`,
@@ -125,7 +125,7 @@ module.exports = function talkFnc (mstdn,tootInfo,tootVis) {
 
 			break;
 
-		case !!(Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/いま|今|現在|げんざい|時間|じかん|時刻|じこく/)):
+		case !!(tootInfo.tootContent.match(/いま|今|現在|げんざい|時間|じかん|時刻|じこく/)):
 			mstdn.post("statuses", {
 				status: [
 					`@${tootInfo.tooter}`,
@@ -157,7 +157,7 @@ module.exports = function talkFnc (mstdn,tootInfo,tootVis) {
 			});
 			break;
 
-		case !!(Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/言うこと/)):
+		case !!(tootInfo.tootContent.match(/言うこと/)):
 			mstdn.post("statuses", {
 				status: [
 					`@${tootInfo.tooter}`,
@@ -170,24 +170,11 @@ module.exports = function talkFnc (mstdn,tootInfo,tootVis) {
 
 			break;
 
-		case !!(Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/すーも|スーモ|suumo|SUUMO/)):
-			mstdn.post("statuses", {
-				status: [
-					`@${tootInfo.tooter}`,
-					talk.suumo[Math.floor(Math.random() * 2)]
-				].join("\r\n"),
-
-				visibility: tootVis,
-				in_reply_to_id: tootInfo.tootId
-			});
-
-			break;
 
 
 
 
-
-		case !!(Formatter.htmlTextToPlainText(tootInfo.tootContent).match(/バカ|ばか|馬鹿|アホ|あほ|ダメ|だめ|違う|バグ/)):
+		case !!(tootInfo.tootContent.match(/バカ|ばか|馬鹿|アホ|あほ|ダメ|だめ|違う|バグ/)):
 			mstdn.post("statuses", {
 				status: [
 					`@${tootInfo.tooter}`,
