@@ -81,8 +81,12 @@ let stream = mstdn.stream("streaming/user");
 						break;
 
 					case !!(variables = tootInfo.tootContent.match(/あっ?、(.*)！?$/)):
+						let phrase = variables[1],
+							phrase1 = phrase.substr(0, 1) + phrase.substr(phrase.length - 1, 1),
+							phrase2 = `${phrase.substr(0, 1)}～～～${phrase.substr(phrase.length - 1, 1)}`;
+
 						let content = talk.suumo;
-							content.replace(/\${phrase}/g, variables[1]).replace(/\${phrase_1}/g, variables[1].substr(0, 1)).replace(/\${phrase_2}/g, variables[1].substr(1, 2));
+							content.replace(/\$\{phrase\}/g, phrase).replace(/\$\{phrase_1\}/g, phrase1).replace(/\$\{phrase_2\}/g, phrase2);
 							
 						mstdn.post("statuses", {
 							status: [
