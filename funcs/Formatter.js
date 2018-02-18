@@ -24,7 +24,7 @@ module.exports = class Formatter {
 							`${phrase.substr(0, 1)}～～～${phrase.substr(1, 1)}` :
 						`${phrase}～～～`;
 
-				let generated = this.defaultPhrase.generated.replace(/\${phrase}/g, phrase).replace(/\${phrase_1}/g, phrase1).replace(/\${phrase_2}/g, phrase2);
+				let generated = this.defaultPhrase.replace(/\${phrase}/g, phrase).replace(/\${phrase_1}/g, phrase1).replace(/\${phrase_2}/g, phrase2);
 
 				return generated;
 			}
