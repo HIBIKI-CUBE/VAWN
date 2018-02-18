@@ -8,7 +8,7 @@ module.exports = class Formatter {
 			static get defaultPhrase () { return talk.suumo }
 
 			static generate (phrase = "") {
-				let phraseParts = phrase.match(/^(.{1,3})[ー～]+(.{1,3})$/);
+				let phraseParts = phrase.match(/^([^ー～]{1,3})[ー～]+(.{1,3})$/);
 
 				let phrase1 =
 						phraseParts ?
@@ -19,13 +19,13 @@ module.exports = class Formatter {
 						phrase.length > 3 ?
 							`${phrase.substr(0, 2)}～～～${phrase.substr(phrase.length - 2, 2)}` :
 						phrase.length == 3 ?
-							`${phrase.substr(0, 1)}～${phrase.substr(1, 1)}～${phrase.substr(2, 1)}` :
+							`${phrase.substr(0, 1)}～${phrase.substr(1, 1).replace(/[ー]/g, "～")}～${phrase.substr(2, 1)}` :
 						phrase.length == 2 ?
 							`${phrase.substr(0, 1)}～～～${phrase.substr(1, 1)}` :
 						`${phrase}～～～`;
 
-				let generated = this.defaultPhrase.replace(/\${phrase}/g, phrase).replace(/\${phrase_1}/g, phrase1).replace(/\${phrase_2}/g, phrase2);
-				
+				let generated = this.defaultPhrase.generated.replace(/\${phrase}/g, phrase).replace(/\${phrase_1}/g, phrase1).replace(/\${phrase_2}/g, phrase2);
+
 				return generated;
 			}
 		}
