@@ -1,6 +1,36 @@
 const htmlToText = require("html-to-text");
+const talk = JSON.parse(fs.readFileSync("./data/talk.json", "UTF-8"));
 
 module.exports = class Formatter {
+	static get Suumo () {
+		return class Suumo {
+			static get defaultPhrase () { return talk.suumo }
+
+			static generate (phrase = "") {
+				let phraseParts = phrase.match(/^(.{1,3})[ー～]+(.{1,3})$/);
+
+				let phrase1 =
+						phraseParts ?
+							phraseParts[1] + phraseParts[2] :
+						phrase.substr(0, 2),
+
+					phrase2 =
+						phrase.length > 3 ?
+							`${phrase.substr(0, 2)}～～～${phrase.substr(phrase.length - 2, 2)}` :
+						phrase.length == 3 ?
+							`${phrase.substr(0, 1)}～${phrase.substr(1, 1)}～${phrase.substr(2, 1)}` :
+						phrase.length == 2 ?
+							`${phrase.substr(0, 1)}～～～${phrase.substr(1, 1)}` :
+						`${phrase}～～～`;
+
+				let generated = this.defaultPhrase;
+					generated.replace(/\${phrase}/g, phrase).replace(/\${phrase_1}/g, phrase1).replace(/\${phrase_2}/g, phrase2);
+
+				return generated;
+			}
+		}
+	}
+
 	static getInfoFromToot (toot) {
 		return {
 			tooter: toot.data.status.account.acct,
