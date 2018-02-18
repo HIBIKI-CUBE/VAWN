@@ -11,7 +11,6 @@ const Janken = require("./funcs/Janken");
 const talkFnc = require("./funcs/talk-fnc");
 
 const packageInfo = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
-const talk = JSON.parse(fs.readFileSync('./data/talk.json', 'utf8'));
 
 let mstdn = new Mastodon({
 	api_url: "https://happy-oss.y-zu.org/api/v1/",
@@ -226,10 +225,6 @@ let stream = mstdn.stream("streaming/user");
 										});
 									});
 
-								break;
-
-							case "talk":
-								console.log(JSON.stringify(talk));
 								break;
 
 							case "eval":

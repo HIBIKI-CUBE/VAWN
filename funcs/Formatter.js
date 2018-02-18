@@ -1,3 +1,4 @@
+const fs = require("fs");
 const htmlToText = require("html-to-text");
 const talk = JSON.parse(fs.readFileSync("./data/talk.json", "UTF-8"));
 
