@@ -16,6 +16,8 @@ module.exports = class Formatter {
 						phrase.substr(0, 2),
 
 					phrase2 =
+						phraseParts ?
+							`${phraseParts[1]}～～～${phraseParts[2]}` :
 						phrase.length > 3 ?
 							`${phrase.substr(0, 2)}～～～${phrase.substr(phrase.length - 2, 2)}` :
 						phrase.length == 3 ?
