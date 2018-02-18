@@ -3,7 +3,7 @@ const fs = require("fs");
 
 const talk = JSON.parse(fs.readFileSync('./data/talk.json', 'utf8'));
 
-module.exports = function talkFnc (mstdn,tootInfo,tootVis) {
+module.exports = function talkFnc (mstdn, tootInfo, tootVis) {
 	switch (true) {
 		default:
 			mstdn.post("statuses", {

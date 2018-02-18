@@ -28,7 +28,7 @@ let stream = mstdn.stream("streaming/user");
 	stream.on("message", toot => {
 		if (toot.event == "notification" && toot.data.type == "mention") {
 			let tootInfo = Formatter.getInfoFromToot(toot);
-			let tootVis = toot.data.status.visibility;
+			let tootVis = tootInfo.tootVisibility;
 			let qna = new Object();
 
 			console.log(`${tootInfo.tooter} … ${tootInfo.tootContent}, ${tootVis}`);
@@ -46,6 +46,8 @@ let stream = mstdn.stream("streaming/user");
 						mstdn.post("statuses", {
 							status: [
 								`@${tootInfo.tooter}`,
+								Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
+
 								`${Math.floor(Math.random() * 5 + 1)}が出ました。`
 							].join("\r\n"),
 
@@ -67,6 +69,7 @@ let stream = mstdn.stream("streaming/user");
 						mstdn.post("statuses", {
 							status: [
 								`@${tootInfo.tooter}`,
+								Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
 								"",
 								`${vawnAct}！`,
 								`あなたは${playerAct}を出したので、`,
@@ -85,6 +88,8 @@ let stream = mstdn.stream("streaming/user");
 						mstdn.post("statuses", {
 							status: [
 								`@${tootInfo.tooter}`,
+								Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
+
 								content
 							].join("\r\n"),
 
@@ -107,6 +112,8 @@ let stream = mstdn.stream("streaming/user");
 							mstdn.post("statuses", {
 								status: [
 									`@${tootInfo.tooter}`,
+									Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
+
 									`${ans},${ans2},${ans3}`,
 									"",
 									`詳細はこちらのページをご覧下さい。`,
@@ -128,6 +135,8 @@ let stream = mstdn.stream("streaming/user");
 							mstdn.post("statuses", {
 								status: [
 									`@${tootInfo.tooter}`,
+									Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
+
 									`${ans}`,
 									"",
 									`詳細はこちらのページをご覧下さい。`,
@@ -148,6 +157,8 @@ let stream = mstdn.stream("streaming/user");
 							mstdn.post("statuses", {
 								status: [
 									`@${tootInfo.tooter}`,
+									Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
+
 									`${ans}`,
 									"",
 									`詳細はこちらのページをご覧下さい。`,
@@ -168,6 +179,8 @@ let stream = mstdn.stream("streaming/user");
 							mstdn.post("statuses", {
 								status: [
 									`@${tootInfo.tooter}`,
+									Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
+
 									`${ans}`,
 									"",
 									`詳細はこちらのページをご覧下さい。`,
@@ -191,6 +204,7 @@ let stream = mstdn.stream("streaming/user");
 								mstdn.post("statuses", {
 									status: [
 										`@${tootInfo.tooter}`,
+										Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
 										"",
 										`詳細はこちらのページをご覧下さい。`,
 										`https://caniuse.com/#search=${encodeURIComponent(variables[1])}`
@@ -210,13 +224,15 @@ let stream = mstdn.stream("streaming/user");
 
 						switch (args[0]) {
 							case "toot":
-								console.log(JSON.stringify(toot));
+								console.log(toot);
 
 								let contents = Formatter.splitByLength(JSON.stringify(toot), 500);
 									contents.forEach(text => {
 										mstdn.post("statuses", {
 											status: [
 												`@${tootInfo.tooter}`,
+												Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
+
 												text
 											].join("\r\n"),
 				
@@ -234,6 +250,8 @@ let stream = mstdn.stream("streaming/user");
 								mstdn.post("statuses", {
 									status: [
 										`@${tootInfo.tooter}`,
+										Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
+
 										result
 									].join("\r\n"),
 		
@@ -253,7 +271,7 @@ let stream = mstdn.stream("streaming/user");
 							status: [
 								`@${tootInfo.tooter}`,
 								`＠${variables[1]}に`,
-								`${variables[2]}`,
+								variables[2],
 								`と質問しました。`,
 								`この質問は匿名で行われます。`
 							].join("\r\n"),
@@ -267,7 +285,7 @@ let stream = mstdn.stream("streaming/user");
 								`@${variables[1]}`,
 								`あなたに質問が届いています。`,
 								``,
-								`${variables[2]}`,
+								variables[2],
 								``,
 								`このトゥートに以下のように返信すると直接回答できます。`,
 								`回答 ${rep_ans} (本文内容)`,
@@ -330,6 +348,7 @@ let app = express();
 	
 let listener = app.listen(process.env.PORT, function () {
 	console.log(`[VAWN] I'm running on port ${listener.address().port}!!`);
+	
 	mstdn.post("statuses", {
 		status: [
 			`VAWNの起動が完了しました。コマンドの処理が可能です。`,

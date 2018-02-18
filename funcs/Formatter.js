@@ -36,9 +36,23 @@ module.exports = class Formatter {
 	static getInfoFromToot (toot) {
 		return {
 			tooter: toot.data.status.account.acct,
+			mentions: toot.data.status.mentions,
+
 			tootId: toot.data.status.id,
+			tootVisibility: toot.data.status.visibility,
 			tootContent: Formatter.htmlTextToPlainText(htmlToText.fromString(toot.data.status.content))
 		}
+	}
+
+	static getIdsFromTootMentions (mentions = [], joinChar = "") {
+		let ids = [];
+			mentions.forEach(mention => mention.acct == "vawn" || ids.push(mention.acct));
+
+		if (joinChar) {
+			return ids.join(joinChar);
+		}
+
+		return ids;
 	}
 
 	static htmlTextToPlainText (htmlText = "") {
