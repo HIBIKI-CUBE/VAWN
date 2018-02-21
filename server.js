@@ -194,6 +194,31 @@ let stream = mstdn.stream("streaming/user");
 
 						break;
 
+					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) の(サポート|対応)状況/)):
+						const options = { shotOffset: { top: 125 }, quality: 25 };
+
+						webshot(`https://caniuse.com/#search=${encodeURIComponent(variables[1])}`, `./view/${tootInfo.tootId}.jpeg`, options, err => {
+							mstdn.post('media', { file: fs.createReadStream(`./view/${tootInfo.tootId}.jpeg`)}).then(resp => {
+								const id = resp.data.id;
+
+								mstdn.post("statuses", {
+									status: [
+										`@${tootInfo.tooter}`,
+										Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
+										"",
+										`詳細はこちらのページをご覧下さい。`,
+										`https://caniuse.com/#search=${encodeURIComponent(variables[1])}`
+									].join("\r\n"),
+									
+									media_ids: [ id ],
+									visibility: tootVis,
+									in_reply_to_id: tootInfo.tootId
+								});
+							});
+						});
+
+						break;
+						
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) のサポート状況/)):
 						const options = { shotOffset: { top: 125 }, quality: 25 };
 
@@ -218,6 +243,8 @@ let stream = mstdn.stream("streaming/user");
 						});
 
 						break;
+						
+						s_ptc=0.000%5E%5E0.000%5E%5E0.000%5E%5E0.000%5E%5E0.312%5E%5E0.153%5E%5E0.483%5E%5E0.036%5E%5E0.898; MalltagRoute=0ea60%2C%2C%2C%2C1519196823599; gpv_v59=%5Bksearch%5D%E3%82%B0%E3%83%AD%E3%83%BC%E3%83%90%E3%83%AB%E6%A4%9C%E7%B4%A2%E7%B5%90%E6%9E%9C; s_cc=true; s_fid=2894C5BE6B89CED2-0D17167F8D0F7C1A; s_nr=1519196823603-New; s_royal=kakaku%3A801-2538947%3A1; s_sq=%5B%5BB%5D%5D; ASPSESSIONIDQCCCCQAT=CJDJHJGCGKJPJJDCCHIOGIKG; ASPSESSIONIDSADBCQBT=NPNMPIPBBMDIOHIHACABBLGD; ASPSESSIONIDSCABBTBT=LJEJIJMBFBIMOIFLDEAOKHDD; OX_plg=pm; OX_sd=2; kakakuusr=ps77uu6IcBO_1519196819629; ASPSESSIONIDAQTCCTBT=MINPENGCPDPNBOCIKJNIOGIJ; ASPSESSIONIDSCADCRBS=DCJNEJHCKIAJDNCCOOCBIPJD; pcpriority=1; ASPSESSIONIDQASCBQAR=PJKOCPLBHMEFBLCCGHOLLIDC; attentionBadge=0; s_vi=[CS]v1|2D468D410503409B-6000118A20007205[CE]; __gads=ID=47aff5be95668efe:T=1519196803:S=ALNI_MbH7oGOmMntLAKxju6lFtQtW6dmrQ; bd=bd7da0ff463345e58af308f147e651f8e
 
 					case !!(variables = tootInfo.tootContent.match(/debug (.*)/)):
 						let args = variables[1].split(" ");
