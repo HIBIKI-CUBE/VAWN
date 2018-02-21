@@ -60,7 +60,7 @@ module.exports = class Formatter {
 	}
 
 	static mentionRemove (htmlText = "") {
-		return htmlText.replace("@vawn [https://happy-oss.y-zu.org/@vawn] ", "");
+		return htmlText.replace("@vawn", "").replace(/ \[([-_.!~*¥'()a-zA-Z0-9;¥/?:¥@&=+¥$,%#]+)\]/g, "");
 	}
 
 	static googleRemove (htmlText = "") {
