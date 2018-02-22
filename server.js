@@ -17,12 +17,12 @@ let mstdn = new Mastodon({
 	access_token: "013dc0d18135f043436671e2e8fb52573f27a3fb8f97951845633cd9d649aaa1"
 });
 
-const serviceAccount = JSON.parse(process.env.FIREBASE);
+/*const serviceAccount = JSON.parse(process.env.FIREBASE);
 
 fb.initializeApp({
 	credential: fb.credential.cert(serviceAccount),
 	databaseURL: "https://vawn-yzu.firebaseio.com"
-});
+});*/
 
 let stream = mstdn.stream("streaming/user");
 	stream.on("message", toot => {
@@ -146,6 +146,46 @@ let stream = mstdn.stream("streaming/user");
 								visibility: tootVis,
 								in_reply_to_id: tootInfo.tootId
 							});
+						});
+
+						break;
+
+					case !!(variables = tootInfo.tootContent.match(/TPDランキング/)):
+						scrape.fetch("http://vinayaka.distsn.org/cgi-bin/vinayaka-user-speed-api.cgi", { 1000: "" }, (err, $) => {
+							let list = JSON.parse($.text());
+
+							let rank = 0,
+								me = list.find((user, index) => {
+									if (`${user.username}@${user.host}` == tootInfo.tooter) {
+										rank = index + 1;
+										return true;
+									}
+								});
+
+							if (me) {
+								mstdn.post("statuses", {
+									status: [
+										`@${tootInfo.tooter}`,
+										Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
+
+										`あなたは${rank}位です。`
+									].join("\r\n"),
+		
+									visibility: tootVis,
+									in_reply_to_id: tootInfo.tootId
+								});
+							} else {
+								mstdn.post("statuses", {
+									status: [
+										`@${tootInfo.tooter}`,
+										Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
+										"1000位以内に見つかりませんでした。"
+									].join("\r\n"),
+		
+									visibility: tootVis,
+									in_reply_to_id: tootInfo.tootId
+								});
+							}
 						});
 
 						break;
