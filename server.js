@@ -13,8 +13,8 @@ const talkFnc = require("./funcs/talk-fnc");
 const packageInfo = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 
 let mstdn = new Mastodon({
-	api_url: "https://happy-oss.y-zu.org/api/v1/",
-	access_token: "013dc0d18135f043436671e2e8fb52573f27a3fb8f97951845633cd9d649aaa1"
+	api_url: "https://mstdn.y-zu.org/api/v1/",
+	access_token: "d10236623369775c3027b28237dfb1bb1447c9f456c7f1f7a8e5af0017bda3bf"
 });
 
 /*const serviceAccount = JSON.parse(process.env.FIREBASE);
