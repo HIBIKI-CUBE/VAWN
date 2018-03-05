@@ -5,7 +5,7 @@ const talk = JSON.parse(fs.readFileSync('./data/talk.json', 'utf8'));
 
 module.exports = function talkFnc (mstdn, tootInfo, tootVis) {
 
-for(let i=0;i<=talk.noti.length;i++){
+for(let i=0;i<talk.noti.length;i++){
 	switch (true) {
 		default:
 			mstdn.post("statuses", {
