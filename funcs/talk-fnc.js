@@ -228,7 +228,7 @@ for(let i=0;i<=talk.noti.length;i++){
 			mstdn.post("statuses", {
 				status: [
 					`@${tootInfo.tooter}`,
-					talk.bad,
+					"申し訳ありません。もっとお役に立てるよう改善に努めます。",
 					`#VAWN_improvement`
 				].join("\r\n"),
 
