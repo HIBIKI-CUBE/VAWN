@@ -219,7 +219,7 @@ for(let i=0;i<=talk.noti.length;i++){
 				in_reply_to_id: tootInfo.tootId
 			});
 			break;
-}
+
 
 
 
