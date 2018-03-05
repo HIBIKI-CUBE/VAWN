@@ -7,22 +7,7 @@ module.exports = function talkFnc (mstdn, tootInfo, tootVis) {
 
 for(let i=0;i<talk.noti.length;i++){
 	switch (true) {
-		default:
-			mstdn.post("statuses", {
-				status: [
-					`@${tootInfo.tooter}からVAWNへのメンションを確認しました。`,
-					"コマンドを正しく認識できなかったため処理が行えませんでした。申し訳ありません。",
-					"",
-					"現在VAWNが対応しているコマンドについては、以下を参照してください。",
-					"https://vawn.herokuapp.com/"
-				].join("\r\n"),
-
-				visibility: tootVis,
-				in_reply_to_id: tootInfo.tootId
-			});
-
-			break;
-			
+		
 		case !!(tootInfo.tootContent.match(talk.noti[i])):
 			mstdn.post("statuses", {
 				status: [
@@ -74,6 +59,22 @@ for(let i=0;i<talk.noti.length;i++){
 					`@${tootInfo.tooter}`,
 					"申し訳ありません。もっとお役に立てるよう改善に努めます。",
 					`#VAWN_improvement`
+				].join("\r\n"),
+
+				visibility: tootVis,
+				in_reply_to_id: tootInfo.tootId
+			});
+
+			break;
+			
+		default:
+			mstdn.post("statuses", {
+				status: [
+					`@${tootInfo.tooter}からVAWNへのメンションを確認しました。`,
+					"コマンドを正しく認識できなかったため処理が行えませんでした。申し訳ありません。",
+					"",
+					"現在VAWNが対応しているコマンドについては、以下を参照してください。",
+					"https://vawn.herokuapp.com/"
 				].join("\r\n"),
 
 				visibility: tootVis,
