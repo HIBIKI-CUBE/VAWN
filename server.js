@@ -12,6 +12,7 @@ const talkFnc = require("./funcs/talk-fnc");
 
 const packageInfo = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 
+const dt    = new Date();
 let mstdn = new Mastodon({
 	api_url: "https://mstdn.y-zu.org/api/v1/",
 	access_token: process.env.YZU
@@ -102,12 +103,24 @@ let stream = mstdn.stream("streaming/user");
 
 						break;
 
-					case !!(tootInfo.tootContent.match(/いま|今|現在|げんざい|時間|じかん|時刻|じこく/)):
+					case !!(tootInfo.tootContent.match(/いまの|今|現在|げんざい|時間|じかん|時刻|じこく/)):
+						dt.setTime(dt.getTime() + 32400000);
+						let hour  = dt.getHours();
+						let min   = dt.getMinutes()
+
+						if (hour   < 10) {
+							hour  = '0' + hour;
+						}
+						if (min   < 10) {
+							min   = '0' + min;
+						}
+
 						mstdn.post("statuses", {
 							status: [
 								`@${tootInfo.tooter}`,
-								`その仕事はまだできません！`,
-								`対応まで、もうしばらくお待ちください。`
+								`現在の時刻は`,
+								`${hour+':'+min}`,
+								`です。`
 							].join("\r\n"),
 		
 							visibility: tootVis,
