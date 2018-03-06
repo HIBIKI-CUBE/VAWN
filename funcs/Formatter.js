@@ -46,7 +46,7 @@ module.exports = class Formatter {
 
 	static getIdsFromTootMentions (mentions = [], joinChar = "") {
 		let ids = [];
-			mentions.forEach(mention => mention.acct == "vawn" || ids.push(`@${mention.acct}`));
+			mentions.forEach(mention => mention.acct == "VAWN" || ids.push(`@${mention.acct}`));
 
 		if (joinChar) {
 			return ids.join(joinChar);

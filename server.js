@@ -39,7 +39,7 @@ let stream = mstdn.stream("streaming/user");
 				
 				switch (true) {
 					default:
-						//talkFnc(mstdn, tootInfo, tootVis);
+						talkFnc(mstdn, tootInfo, tootVis);
 						
 						mstdn.post("statuses", {
 							status: [
@@ -70,7 +70,27 @@ let stream = mstdn.stream("streaming/user");
 						});
 
 						break;
-
+		
+					case !!(tootInfo.tootContent.match(/コイン/)):
+						let coin = "";
+		
+						if (Math.round(Math.random())) {
+							coin = "おもて";
+						} else {
+							coin = "うら";
+						}
+		
+						mstdn.post("statuses", {
+							status: [
+								`@${tootInfo.tooter}`,
+								`${coin}が出ました。`
+							].join("\r\n"),
+		
+							visibility: tootVis,
+							in_reply_to_id: tootInfo.tootId
+						});
+		
+						break;
 
 					case !!(variables = tootInfo.tootContent.match(/(?:じゃんけん|ジャンケン)(グー|グ〜|ぐー|ぐ～|チョキ|ちょき|パー|パ〜|ぱー|ぱ～)/)):
 						let playerAct = variables[1] || "グー";
@@ -94,6 +114,20 @@ let stream = mstdn.stream("streaming/user");
 							in_reply_to_id: tootInfo.tootId
 						});
 
+						break;
+
+					case !!(tootInfo.tootContent.match(/いま|今|現在|げんざい|時間|じかん|時刻|じこく/)):
+						mstdn.post("statuses", {
+							status: [
+								`@${tootInfo.tooter}`,
+								`その仕事はまだできません！`,
+								`対応まで、もうしばらくお待ちください。`
+							].join("\r\n"),
+		
+							visibility: tootVis,
+							in_reply_to_id: tootInfo.tootId
+						});
+		
 						break;
 
 					case !!(variables = tootInfo.tootContent.match(/あっ?、(.*)(?=！$)/)):
