@@ -103,7 +103,7 @@ let stream = mstdn.stream("streaming/user");
 
 						break;
 
-					case !!(tootInfo.tootContent.match(/いまの|今|現在|げんざい|時間|じかん|時刻|じこく/)):
+					case !!(tootInfo.tootContent.match(/時/)):
 						dt.setTime(dt.getTime() + 32400000);
 						let hour  = dt.getHours();
 						let min   = dt.getMinutes()
