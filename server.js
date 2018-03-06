@@ -14,7 +14,7 @@ const packageInfo = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 
 let mstdn = new Mastodon({
 	api_url: "https://mstdn.y-zu.org/api/v1/",
-	access_token: "d10236623369775c3027b28237dfb1bb1447c9f456c7f1f7a8e5af0017bda3bf"
+	access_token: process.env.YZU
 });
 
 /*const serviceAccount = JSON.parse(process.env.FIREBASE);
