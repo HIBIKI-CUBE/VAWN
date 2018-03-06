@@ -40,20 +40,6 @@ let stream = mstdn.stream("streaming/user");
 				switch (true) {
 					default:
 						talkFnc(mstdn, tootInfo, tootVis);
-						
-						mstdn.post("statuses", {
-							status: [
-								`@${tootInfo.tooter}からVAWNへのメンションを確認しました。`,
-								"コマンドを正しく認識できなかったため処理が行えませんでした。申し訳ありません。",
-								"",
-								"現在VAWNが対応しているコマンドについては、以下を参照してください。",
-								"https://vawn.herokuapp.com/"
-							].join("\r\n"),
-
-							visibility: tootVis,
-							in_reply_to_id: tootInfo.tootId
-						});
-
 						break;
 
 					case !!(tootInfo.tootContent.match(/サイコロ|さいころ|ダイス/)):
