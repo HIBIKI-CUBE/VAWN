@@ -146,11 +146,11 @@ let stream = mstdn.stream("streaming/user");
 
 						break;
 
-					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) (とは|#とは|って|を検索|をググ|をぐぐ)/)):
+					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) (とは|#とは|って|を検索|をググ)/)):
 						scrape.fetch('https://google.co.jp/search', { q: encodeURIComponent(variables[1]), hl: 'ja', lr: 'lang_ja' }, (err, $) => {
 							let ans = Formatter.googleRemove($('#rso ._NId:first-child .lr_container').text());
 							let ans2 = Formatter.googleRemove($('#rso ._Tgc._s8w').text());
-							let ans3 = Formatter.googleRemove($('#rhs_block').text());
+							let ans3 = Formatter.googleRemove($('#rso>.kno-result').text());
 
 							console.log(JSON.stringify(ans, null, "\t"));
 							console.log(JSON.stringify(ans2, null, "\t"));
