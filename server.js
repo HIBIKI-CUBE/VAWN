@@ -36,7 +36,7 @@ let stream = mstdn.stream("streaming/user");
 			
 			if (tootInfo.tootContent.toUpperCase().match(/@VAWN/g)) {
 				let variables = [];
-				scrape.set('browser','chrome');
+				scrape.set('browser','iphone');
 				
 				switch (true) {
 					default:
