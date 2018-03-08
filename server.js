@@ -14,7 +14,7 @@ const packageInfo = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 
 const dt    = new Date();
 let mstdn = new Mastodon({
-	api_url: "https://mstdn.y-zu.org/api/v1/",
+	api_url: "https://happy-oss.y-zu.org/api/v1/",
 	access_token: process.env.YZU
 });
 
