@@ -463,7 +463,7 @@ let listener = app.listen(process.env.PORT, function () {
 	
 	mstdn.post("statuses", {
 		status: [
-			`VAWNの起動が完了しました。コマンドの処理が可能です。`,
+			`VAWN Next is ready.`,
 			`Version: ${packageInfo.version}`
 		].join("\r\n"),
 
