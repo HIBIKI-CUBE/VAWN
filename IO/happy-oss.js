@@ -22,13 +22,26 @@ module.exports = class IO {
 			}
 		});
 	}
+		
+	static reply (content = [],tooter,vis = "public",rep = undefined){
+		mstdn.post("statuses", {
+			status: [
+				`@${tooter}`
+			].push(...content).join("\r\n"),
+
+			visibility: vis,
+			in_reply_to_id: rep
+		});
+		return true;
+	}
 	
-	static answer (content = [],vis = "public",rep = undefined){
+	static post (content = [],vis = "public",rep = undefined){
 		mstdn.post("statuses", {
 			status: content.join("\r\n"),
 
 			visibility: vis,
 			in_reply_to_id: rep
 		});
+		return true;
 	}
 }
