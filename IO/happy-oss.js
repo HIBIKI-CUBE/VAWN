@@ -5,18 +5,30 @@ let mstdn = new Mastodon({
 	access_token: process.env.YZU
 });
 
-module.export = class IO {
-	let stream = mstdn.stream("streaming/user");
-	stream.on("message", toot => {
-		if (toot.event == "notification" && toot.data.type == "mention") {
-			let tootInfo = Formatter.getInfoFromToot(toot);
-			let tootVis = tootInfo.tootVisibility;
-			let qna = new Object();
+module.exports = class IO {
+	static receve (){
+		let stream = mstdn.stream("streaming/user");
+		stream.on("message", toot => {
+			if (toot.event == "notification" && toot.data.type == "mention") {
+				let tootInfo = Formatter.getInfoFromToot(toot);
+				let tootVis = tootInfo.tootVisibility;
+				let qna = new Object();
 
-			console.log(`${tootInfo.tooter} … ${tootInfo.tootContent}, ${tootVis}`);
-			
-			if (tootInfo.tootContent.toUpperCase().match(/@VAWN/g)) {
+				console.log(`${tootInfo.tooter} … ${tootInfo.tootContent}, ${tootVis}`);
+
+				if (tootInfo.tootContent.toUpperCase().match(/@VAWN/g)) {
+					return tootInfo;
+				}
 			}
-		}
-	})
+		});
+	}
+	
+	static answer (content = [],vis = "public",rep = undefined){
+		mstdn.post("statuses", {
+			status: content.join("\r\n"),
+
+			visibility: vis,
+			in_reply_to_id: rep
+		});
+	}
 }
