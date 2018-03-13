@@ -148,10 +148,10 @@ let stream = mstdn.stream("streaming/user");
 
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) (とは|#とは|って|を検索|をググ)/)):
 						scrape.set('browser','iphone');
-						scrape.fetch('https://google.co.jp/search', { q: encodeURIComponent(variables[1]), hl: 'ja', lr: 'lang_ja' }, (err, $) => {
+						scrape.fetchSync('https://google.co.jp/search', { q: encodeURIComponent(variables[1]), hl: 'ja', lr: 'lang_ja' }, (err, $) => {
 							let ans = Formatter.googleRemove($('#rso ._NId:first-child .lr_container').text());
 							let ans2 = Formatter.googleRemove($('#rso ._Tgc._s8w').text());
-							let ans3 = Formatter.googleRemove($('div._G1d._wle._xle').text());
+							let ans3 = Formatter.googleRemove($('div.kp-body>div._G1d._wle._xle').text());
 
 							console.log(JSON.stringify(ans, null, "\t"));
 							console.log(JSON.stringify(ans2, null, "\t"));
