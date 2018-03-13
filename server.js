@@ -181,7 +181,7 @@ let stream = mstdn.stream("streaming/user");
 						let result = scrape.fetchSync('https://google.co.jp/search', { q: encodeURIComponent(variables[1]), hl: 'ja', lr: 'lang_ja' } )
 							let ans3 = result.$('div.kp-body>div._G1d._wle._xle');
 
-							console.log(JSON.stringify(ans3, null, "\t"));
+							console.log(ans3);
 
 							mstdn.post("statuses", {
 								status: [
