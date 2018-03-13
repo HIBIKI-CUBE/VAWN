@@ -19,12 +19,14 @@ let mstdn = new Mastodon({
 
 let stream = mstdn.stream("streaming/user");
 	stream.on("message", res => {
-		let streaming = new Streaming(res),
-			status = streaming.data.status;
+		let streaming = new Streaming(res).data,
+			notification = streaming.notification;
 
-		console.log(status);
+			console.log(streaming);
 
-		if (status && status.isMention) {
+		if (streaming.type == Streaming.TYPE.NOTIFICATION && notification.isMention) {
+			let status = notification.status;
+
 			console.log([
 				`<${status.actor}>`,
 				status.content,
@@ -32,7 +34,7 @@ let stream = mstdn.stream("streaming/user");
 			].join("\r\n"));
 
 			if (status.content.match(/\$debug eval (.*)/)) {
-				eval(console.log(status.content.match(/\$debug eval (.*)/)[1]));
+				console.log(eval(status.content.match(/\$debug eval (.*)/)[1]));
 			}
 		}
 	});
