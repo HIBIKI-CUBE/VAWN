@@ -177,24 +177,17 @@ let stream = mstdn.stream("streaming/user");
 						*/
 
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) (とは|#とは|って|を検索|をググ)/)):
-							scrape.set('browser', 'iphone');
-						let result = scrape.fetchSync('https://google.co.jp/search', {
-							q: encodeURIComponent(variables[1]),
-							hl: 'ja',
-							lr: 'lang_ja'
-						})
-						let ans3 = result.$('div.kp-body>div._G1d._wle._xle');
-
-						console.log(ans3);
 
 						mstdn.post("statuses", {
 							status: [
 								`@${tootInfo.tooter}`,
 								Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
 
-								`${ans3}`,
+								"クイック検索は現在次期バージョンを開発しています。",
+								"リリースまで今しばらくお待ちください。",
+								"ご迷惑をおかけし、申し訳ありません。",
 								"",
-								`詳細はこちらのページをご覧下さい。`,
+								"よろしければこちらのリンクをご利用ください。",
 								`https://google.co.jp/search?q=${encodeURIComponent(variables[1]+'とは')}`
 							].join("\r\n"),
 
