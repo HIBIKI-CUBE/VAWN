@@ -5,7 +5,6 @@ const scrape = require('cheerio-httpcli');
 const webshot = require('webshot');
 const fb = require("firebase-admin");
 
-const mstdn = require("./IO/happy-oss");
 const Formatter = require("./funcs/Formatter");
 const Dice = require("./funcs/Dice");
 const Janken = require("./funcs/Janken");
@@ -13,9 +12,18 @@ const talkFnc = require("./funcs/talk-fnc");
 
 const packageInfo = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 
-	let tootInfo = mstdn.IO.receve
-if (mstdn.IO.receve() != undefined) {
+const dt    = new Date();
+let mstdn = new Mastodon({
+	api_url: "https://happy-oss.y-zu.org/api/v1/",
+	access_token: process.env.YZU
+});
 
+/*const serviceAccount = JSON.parse(process.env.FIREBASE);
+
+fb.initializeApp({
+	credential: fb.credential.cert(serviceAccount),
+	databaseURL: "https://vawn-yzu.firebaseio.com"
+});*/
 
 let stream = mstdn.stream("streaming/user");
 	stream.on("message", toot => {

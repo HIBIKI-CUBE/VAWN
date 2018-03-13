@@ -18,7 +18,7 @@ module.exports = class IO {
 
 				if (tootInfo.tootContent.toUpperCase().match(/@VAWN/g)) {
 					return tootInfo;
-				}
+				}else{ return undefined; }
 			}
 		});
 	}
