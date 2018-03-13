@@ -5,8 +5,6 @@ const scrape = require('cheerio-httpcli');
 const webshot = require('webshot');
 const firebase = require("firebase-admin");
 
-const Status = require("./lib/Entities/Status");
-const Notification = require("./lib/Entities/Notification");
 const Streaming = require("./lib/Entities/Streaming");
 const Formatter = require("./lib/Formatter");
 
@@ -32,10 +30,6 @@ let stream = mstdn.stream("streaming/user");
 				status.content,
 				`(Visibility: ${status.visibility})`
 			].join("\r\n"));
-
-			if (status.content.match(/\$debug eval (.*)/)) {
-				console.log(eval(status.content.match(/\$debug eval (.*)/)[1]));
-			}
 		}
 	});
 
