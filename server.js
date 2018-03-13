@@ -197,7 +197,6 @@ let stream = mstdn.stream("streaming/user");
 								visibility: tootVis,
 								in_reply_to_id: tootInfo.tootId
 							});
-						});
 						scrape.set('browser','chrome');
 						break;
 
