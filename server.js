@@ -19,6 +19,7 @@ let mstdn = new Mastodon({
 	access_token: process.env.NODE_YZU
 });
 
+let news = new Array(50);
 /*const serviceAccount = JSON.parse(process.env.NODE_FIREBASE);
 
 fb.initializeApp({
@@ -292,10 +293,10 @@ let stream = mstdn.stream("streaming/user");
 
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/ニュース/)):
 						scrape.fetch('https://news.yahoo.co.jp/list/', {}, (err, $) => {
-						let ans = new Array(50);
+						news = new Array(50);
 						$('div.backnumber ul.list dl.title>dt').each(function (idx) {
 							//console.log(idx+'.'+$(this).text());
-							ans[Number(idx)] = `${idx} ${$(this).text()}`
+							news[Number(idx)] = `${idx} ${$(this).text()}`
 						});
 
 							mstdn.post("statuses", {
@@ -304,16 +305,16 @@ let stream = mstdn.stream("streaming/user");
 									Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
 									"現在のトップニュースです。",
 									"",
-									`1.${ans[0]}`,
-									`2.${ans[1]}`,
-									`3.${ans[2]}`,
-									`4.${ans[3]}`,
-									`5.${ans[4]}`,
-									`6.${ans[5]}`,
-									`7.${ans[6]}`,
-									`8.${ans[7]}`,
-									`9.${ans[8]}`,
-									`10.${ans[9]}`,
+									`1.${news[0]}`,
+									`2.${news[1]}`,
+									`3.${news[2]}`,
+									`4.${news[3]}`,
+									`5.${news[4]}`,
+									`6.${news[5]}`,
+									`7.${news[6]}`,
+									`8.${news[7]}`,
+									`9.${news[8]}`,
+									`10.${news[9]}`,
 									"",
 									`詳細はこちらのページをご覧下さい。`,
 									"https://news.yahoo.co.jp/"
