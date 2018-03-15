@@ -293,9 +293,8 @@ let stream = mstdn.stream("streaming/user");
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/ニュース/)):
 						scrape.set('browser','iphone');
 						scrape.fetch('https://news.google.com', {}, (err, $) => {
-						let ans = $('a.Mb-mb.Qb-Ec-mb-Mb').each(function (idx) {
-							let res = $(this).text();
-							return res;
+						$('a.Mb-mb.Qb-Ec-mb-Mb').each(function (idx) {
+							console.log($(this).text());
 						});
 
 							mstdn.post("statuses", {
@@ -303,7 +302,7 @@ let stream = mstdn.stream("streaming/user");
 									`@${tootInfo.tooter}`,
 									Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
 
-									`${ans}`,
+									`${$('a.Mb-mb.Qb-Ec-mb-Mb').text()}`,
 									"",
 									`詳細はこちらのページをご覧下さい。`,
 									"https://news.google.com"
