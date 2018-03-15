@@ -152,7 +152,7 @@ let stream = mstdn.stream("streaming/user");
 												scrape.set('browser','iphone');
 												scrape.fetch('https://google.co.jp/search', { q: encodeURIComponent(variables[1]), hl: 'ja', lr: 'lang_ja' }, (err, $) => {
 													g_res = new Array(0);
-													$('#uid_0 div.kp-body div.kno-fb-ctx').each(function () {
+													$('#uid_0 div.kp-body div[class~="kno-fb-ctx"]').each(function () {
 														g_res.unshift(`${$(this).text()}`);
 													});
 
