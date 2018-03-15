@@ -150,7 +150,7 @@ let stream = mstdn.stream("streaming/user");
 											case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) (とは|#とは|って|を検索|をググ)/)):
 												scrape.set('browser','iphone');
 												scrape.fetch('https://google.co.jp/search', { q: encodeURIComponent(variables[1]), hl: 'ja', lr: 'lang_ja' }, (err, $) => {
-													let ans = Formatter.googleRemove($('#uid_0 div.kp-body>div.SALvLe.farUxc.mJ2Mod').text());
+													let ans = Formatter.googleRemove($('#uid_0 div.kp-body>div:first').text());
 
 													console.log(JSON.stringify(ans, null, "\t"));
 
