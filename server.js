@@ -292,16 +292,28 @@ let stream = mstdn.stream("streaming/user");
 
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/ニュース/)):
 						scrape.fetch('https://news.google.com/news/', {ned:'jp',gl:'JP',hl:'ja'}, (err, $) => {
+						let ans;
 						$('a.nuEeue.hzdq5d.ME7ew').each(function (idx) {
-							console.log(idx+'.'+$(this).text());
+							//console.log(idx+'.'+$(this).text());
+							ans[idx] = $(this).text();
 						});
 
 							mstdn.post("statuses", {
 								status: [
 									`@${tootInfo.tooter}`,
 									Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
-
-									`${$('a.nuEeue.hzdq5d.ME7ew').text()}`,
+									"現在のトップニュースです。",
+									"",
+									`1.${ans[0]}`,
+									`2.${ans[10]}`,
+									`3.${ans[20]}`,
+									`4.${ans[30]}`,
+									`5.${ans[40]}`,
+									`6.${ans[50]}`,
+									`7.${ans[60]}`,
+									`8.${ans[70]}`,
+									`9.${ans[80]}`,
+									`10.${ans[90]}`
 									"",
 									`詳細はこちらのページをご覧下さい。`,
 									"https://news.google.com"
