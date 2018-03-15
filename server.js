@@ -295,7 +295,7 @@ let stream = mstdn.stream("streaming/user");
 						let ans;
 						$('a.nuEeue.hzdq5d.ME7ew').each(function (idx) {
 							//console.log(idx+'.'+$(this).text());
-							ans[idx] = $(this).text();
+							ans[Number(idx)] = $(this).text();
 						});
 
 							mstdn.post("statuses", {
