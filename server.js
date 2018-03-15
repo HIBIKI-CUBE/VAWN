@@ -293,9 +293,8 @@ let stream = mstdn.stream("streaming/user");
 
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/ニュース/)):
 						scrape.fetch('https://news.yahoo.co.jp/list/', {}, (err, $) => {
-						news = new Array(0);
+						news = new Array();
 						$('div.backnumber ul.list dl.title>dt').each(function () {
-							//console.log(idx+'.'+$(this).text());
 							news.unshift(`${$(this).text()}`);
 						});
 
@@ -324,7 +323,7 @@ let stream = mstdn.stream("streaming/user");
 								in_reply_to_id: tootInfo.tootId
 							});
 						});
-						scrape.set('browser','iphone');
+						scrape.set('browser','chrome');
 
 						break;
 
