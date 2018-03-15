@@ -19,7 +19,7 @@ let mstdn = new Mastodon({
 	access_token: process.env.NODE_YZU
 });
 
-let news = [];
+let news = new Array(0);
 /*const serviceAccount = JSON.parse(process.env.NODE_FIREBASE);
 
 fb.initializeApp({
@@ -293,7 +293,7 @@ let stream = mstdn.stream("streaming/user");
 
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/ニュース/)):
 						scrape.fetch('https://news.yahoo.co.jp/list/', {}, (err, $) => {
-						news = [];
+						news = new Array(0);
 						$('div.backnumber ul.list dl.title>dt').each(function (idx) {
 							//console.log(idx+'.'+$(this).text());
 							news.unshift(`${idx} ${$(this).text()}`);
