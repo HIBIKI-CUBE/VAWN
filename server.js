@@ -291,8 +291,12 @@ let stream = mstdn.stream("streaming/user");
 						break;
 
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/ニュース/)):
-							scrape.fetch('https://news.google.com', {}, (err, $) => {
-							let ans = $('a.Mb-mb.Qb-Ec-mb-Mb').text();
+						scrape.set('browser','iphone');
+						scrape.fetch('https://news.google.com', {}, (err, $) => {
+						let ans = $('a.Mb-mb.Qb-Ec-mb-Mb').each(function (idx) {
+							let ans[idx] = $(this).text();
+							return ans[Math.floor(Math.random*10)]
+						});
 
 							mstdn.post("statuses", {
 								status: [
@@ -309,6 +313,7 @@ let stream = mstdn.stream("streaming/user");
 								in_reply_to_id: tootInfo.tootId
 							});
 						});
+						scrape.set('browser','iphone');
 
 						break;
 
