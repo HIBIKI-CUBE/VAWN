@@ -294,8 +294,8 @@ let stream = mstdn.stream("streaming/user");
 						scrape.set('browser','iphone');
 						scrape.fetch('https://news.google.com', {}, (err, $) => {
 						let ans = $('a.Mb-mb.Qb-Ec-mb-Mb').each(function (idx) {
-							let ans[idx] = $(this).text();
-							return ans[Math.floor(Math.random*10)]
+							let res = $(this).text();
+							return res;
 						});
 
 							mstdn.post("statuses", {
