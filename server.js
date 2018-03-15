@@ -172,7 +172,7 @@ let stream = mstdn.stream("streaming/user");
 												scrape.set('browser','chrome');
 												break;
 						
-
+/*
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) (とは|#とは|って|を検索|をググ)/)):
 
 						mstdn.post("statuses", {
@@ -193,7 +193,7 @@ let stream = mstdn.stream("streaming/user");
 						});
 						scrape.set('browser', 'chrome');
 						break;
-
+*/
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/debug google (.*) (.*)/)):
 							scrape.fetch('https://google.co.jp/search', {
 							q: encodeURIComponent(variables[1]),
