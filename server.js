@@ -292,7 +292,7 @@ let stream = mstdn.stream("streaming/user");
 
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/ニュース/)):
 						scrape.fetch('https://news.google.com/news/', {ned:'jp',gl:'JP',hl:'ja'}, (err, $) => {
-						let ans;
+						let ans = new Array(150);
 						$('a.nuEeue.hzdq5d.ME7ew').each(function (idx) {
 							//console.log(idx+'.'+$(this).text());
 							ans[Number(idx)] = $(this).text();
