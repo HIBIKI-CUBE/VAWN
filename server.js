@@ -313,7 +313,7 @@ let stream = mstdn.stream("streaming/user");
 									`7.${ans[60]}`,
 									`8.${ans[70]}`,
 									`9.${ans[80]}`,
-									`10.${ans[90]}`
+									`10.${ans[90]}`,
 									"",
 									`詳細はこちらのページをご覧下さい。`,
 									"https://news.google.com"
