@@ -290,6 +290,28 @@ let stream = mstdn.stream("streaming/user");
 
 						break;
 
+					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/ニュース/)):
+							scrape.fetch('https://news.google.com', {}, (err, $) => {
+							let ans = $('a.Mb-mb.Qb-Ec-mb-Mb').text();
+
+							mstdn.post("statuses", {
+								status: [
+									`@${tootInfo.tooter}`,
+									Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
+
+									`${ans}`,
+									"",
+									`詳細はこちらのページをご覧下さい。`,
+									"https://news.google.com"
+								].join("\r\n"),
+
+								visibility: tootVis,
+								in_reply_to_id: tootInfo.tootId
+							});
+						});
+
+						break;
+
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(今日|きょう)は(何|なん|なに)の(日|ひ)/)):
 							scrape.fetch('https://kids.yahoo.co.jp/today/', (err, $) => {
 							let ans = $('#dateDtl').text();
