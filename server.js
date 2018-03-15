@@ -294,9 +294,9 @@ let stream = mstdn.stream("streaming/user");
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/ニュース/)):
 						scrape.fetch('https://news.yahoo.co.jp/list/', {}, (err, $) => {
 						news = new Array(0);
-						$('div.backnumber ul.list dl.title>dt').each(function (idx) {
+						$('div.backnumber ul.list dl.title>dt').each(function () {
 							//console.log(idx+'.'+$(this).text());
-							news.unshift(`${idx} ${$(this).text()}`);
+							news.unshift(`${$(this).text()}`);
 						});
 
 							mstdn.post("statuses", {
