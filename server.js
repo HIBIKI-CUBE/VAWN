@@ -20,6 +20,7 @@ let mstdn = new Mastodon({
 });
 
 let news = new Array(0);
+let g_res = new Array(0);
 /*const serviceAccount = JSON.parse(process.env.NODE_FIREBASE);
 
 fb.initializeApp({
@@ -150,16 +151,20 @@ let stream = mstdn.stream("streaming/user");
 											case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) (とは|#とは|って|を検索|をググ)/)):
 												scrape.set('browser','iphone');
 												scrape.fetch('https://google.co.jp/search', { q: encodeURIComponent(variables[1]), hl: 'ja', lr: 'lang_ja' }, (err, $) => {
-													let ans = Formatter.googleRemove($('#uid_0 div.kp-body>div:first-child').text());
+													g_res = new Array(0);
+													$('#uid_0 div.kp-body').each(function () {
+														g_res.unshift(`${$(this).text()}`);
+													});
 
-													console.log(JSON.stringify(ans, null, "\t"));
+													console.log(JSON.stringify(g-res, null, "\t"));
 
 													mstdn.post("statuses", {
 														status: [
 															`@${tootInfo.tooter}`,
 															Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
 
-															`${ans}`,
+															`${g_res[0]}`,
+															`${g_res[1]}`,
 															"",
 															`詳細はこちらのページをご覧下さい。`,
 															`https://google.co.jp/search?q=${encodeURIComponent(variables[1]+'とは')}`
