@@ -293,7 +293,7 @@ let stream = mstdn.stream("streaming/user");
 
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/ニュース/)):
 						scrape.fetch('https://news.yahoo.co.jp/list/', {}, (err, $) => {
-						news = new Array();
+						news = new Array(0);
 						$('div.backnumber ul.list dl.title>dt').each(function () {
 							news.unshift(`${$(this).text()}`);
 						});
