@@ -291,9 +291,9 @@ let stream = mstdn.stream("streaming/user");
 						break;
 
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/ニュース/)):
-						scrape.fetch('https://news.google.com/news/', {ned:'jp',gl:'JP',hl:'ja'}, (err, $) => {
-						let ans = new Array(150);
-						$('a.nuEeue.hzdq5d.ME7ew').each(function (idx) {
+						scrape.fetch('https://news.yahoo.co.jp/list/', {}, (err, $) => {
+						let ans = new Array(50);
+						$('div.backnumber ul.list dl.title>dt').each(function (idx) {
 							//console.log(idx+'.'+$(this).text());
 							ans[Number(idx)] = $(this).text();
 						});
@@ -305,18 +305,18 @@ let stream = mstdn.stream("streaming/user");
 									"現在のトップニュースです。",
 									"",
 									`1.${ans[0]}`,
-									`2.${ans[10]}`,
-									`3.${ans[20]}`,
-									`4.${ans[30]}`,
-									`5.${ans[40]}`,
-									`6.${ans[50]}`,
-									`7.${ans[60]}`,
-									`8.${ans[70]}`,
-									`9.${ans[80]}`,
-									`10.${ans[90]}`,
+									`2.${ans[1]}`,
+									`3.${ans[2]}`,
+									`4.${ans[3]}`,
+									`5.${ans[4]}`,
+									`6.${ans[5]}`,
+									`7.${ans[6]}`,
+									`8.${ans[7]}`,
+									`9.${ans[8]}`,
+									`10.${ans[9]}`,
 									"",
 									`詳細はこちらのページをご覧下さい。`,
-									"https://news.google.com"
+									"https://news.yahoo.co.jp/"
 								].join("\r\n"),
 
 								visibility: tootVis,
