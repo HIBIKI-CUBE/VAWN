@@ -291,7 +291,7 @@ let stream = mstdn.stream("streaming/user");
 						break;
 
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/ニュース/)):
-						scrape.fetch('https://news.google.com/news/', {}, (err, $) => {
+						scrape.fetch('https://news.google.com/news/', {ned:'jp',gl:'JP',hl:'ja'}, (err, $) => {
 						$('a.nuEeue.hzdq5d.ME7ew').each(function (idx) {
 							console.log($(this).text());
 						});
