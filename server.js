@@ -291,9 +291,8 @@ let stream = mstdn.stream("streaming/user");
 						break;
 
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/ニュース/)):
-						scrape.set('browser','iphone');
-						scrape.fetch('https://news.google.com', {}, (err, $) => {
-						$('a.Mb-mb.Qb-Ec-mb-Mb').each(function (idx) {
+						scrape.fetch('https://news.google.com/news/', {}, (err, $) => {
+						$('a.nuEeue.hzdq5d.ME7ew').each(function (idx) {
 							console.log($(this).text());
 						});
 
@@ -302,7 +301,7 @@ let stream = mstdn.stream("streaming/user");
 									`@${tootInfo.tooter}`,
 									Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
 
-									`${$('a.Mb-mb.Qb-Ec-mb-Mb').text()}`,
+									`${$('a.nuEeue.hzdq5d.ME7ew').text()}`,
 									"",
 									`詳細はこちらのページをご覧下さい。`,
 									"https://news.google.com"
