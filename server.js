@@ -156,7 +156,7 @@ let stream = mstdn.stream("streaming/user");
 														g_res.unshift(`${$(this).text()}`);
 													});
 
-													console.log(JSON.stringify(g-res, null, "\t"));
+													console.log(JSON.stringify(g_res[0], null, "\t"));
 
 													mstdn.post("statuses", {
 														status: [
