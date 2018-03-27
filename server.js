@@ -329,16 +329,18 @@ let stream = mstdn.stream("streaming/user");
 						*/
 						case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*)?( の)?ニュース/)):
 							if(variables[2]==" の"){
-								scrape.fetch('https://news.yahoo.co.jp/search/', {p:variables[1]}, (err, $) => {
-								news = new Array(0);
-								$('#NSm>h2>a').each(function () {
-									news.unshift(`${$(this).text()}`);
+								scrape.fetch('https://news.yahoo.co.jp/search/', {p:encodeURIComponent(variables[1])}, (err, $) => {
+									news = new Array(0);
+									$('#NSm>h2>a').each(function () {
+										news.unshift(`${$(this).text()}`);
+									});
 								});
 							}else{
 								scrape.fetch('https://news.yahoo.co.jp/list/', {}, (err, $) => {
-								news = new Array(0);
-								$('div.backnumber ul.list dl.title>dt').each(function () {
-									news.unshift(`${$(this).text()}`);
+									news = new Array(0);
+									$('div.backnumber ul.list dl.title>dt').each(function () {
+										news.unshift(`${$(this).text()}`);
+									});
 								});
 							}
 
@@ -366,7 +368,6 @@ let stream = mstdn.stream("streaming/user");
 								visibility: tootVis,
 								in_reply_to_id: tootInfo.tootId
 							});
-						});
 						scrape.set('browser','chrome');
 
 						break;
