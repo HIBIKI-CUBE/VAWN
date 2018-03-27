@@ -331,7 +331,7 @@ let stream = mstdn.stream("streaming/user");
 							if(variables[2]==" の"){
 								scrape.fetch('https://news.yahoo.co.jp/search/', {p:encodeURIComponent(variables[1])}, (err, $) => {
 									news = new Array(0);
-									$('#NSm>h2>a').each(function () {
+									$('#NSm h2>a').each(function () {
 										news.unshift(`${$(this).text()}`);
 									});
 								});
