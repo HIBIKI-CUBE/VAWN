@@ -326,6 +326,42 @@ let stream = mstdn.stream("streaming/user");
 						scrape.set('browser','chrome');
 
 						break;
+						
+						case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) のニュース/)):
+						scrape.fetch('https://news.yahoo.co.jp/search/', { p:variables[1]}, (err, $) => {
+						news = new Array(0);
+						$('#NSm>h2>a').each(function () {
+							news.unshift(`${$(this).text()}`);
+						});
+
+							mstdn.post("statuses", {
+								status: [
+									`@${tootInfo.tooter}`,
+									Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
+									`${variables[1]}に関するニュースです。`,
+									"",
+									`1.${news[0]}`,
+									`2.${news[1]}`,
+									`3.${news[2]}`,
+									`4.${news[3]}`,
+									`5.${news[4]}`,
+									`6.${news[5]}`,
+									`7.${news[6]}`,
+									`8.${news[7]}`,
+									`9.${news[8]}`,
+									`10.${news[9]}`,
+									"",
+									`詳細はこちらのページをご覧下さい。`,
+									`https://news.yahoo.co.jp/search/?p=${encodeURIComponent(variables[1])}`
+								].join("\r\n"),
+
+								visibility: tootVis,
+								in_reply_to_id: tootInfo.tootId
+							});
+						});
+						scrape.set('browser','chrome');
+
+						break;
 
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(今日|きょう)は(何|なん|なに)の(日|ひ)/)):
 							scrape.fetch('https://kids.yahoo.co.jp/today/', (err, $) => {
