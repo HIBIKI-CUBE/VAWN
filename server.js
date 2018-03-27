@@ -290,7 +290,7 @@ let stream = mstdn.stream("streaming/user");
 						});
 
 						break;
-
+/*
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/ニュース/)):
 						scrape.fetch('https://news.yahoo.co.jp/list/', {}, (err, $) => {
 						news = new Array(0);
@@ -326,19 +326,27 @@ let stream = mstdn.stream("streaming/user");
 						scrape.set('browser','chrome');
 
 						break;
-						
-						case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) のニュース/)):
-						scrape.fetch('https://news.yahoo.co.jp/search/', { p:variables[1]}, (err, $) => {
-						news = new Array(0);
-						$('#NSm>h2>a').each(function () {
-							news.unshift(`${$(this).text()}`);
-						});
+						*/
+						case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*)?( の)?ニュース/)):
+							if(variables[2]==" の"){
+								scrape.fetch('https://news.yahoo.co.jp/search/', {p:variables[1]}, (err, $) => {
+								news = new Array(0);
+								$('#NSm>h2>a').each(function () {
+									news.unshift(`${$(this).text()}`);
+								});
+							}else{
+								scrape.fetch('https://news.yahoo.co.jp/list/', {}, (err, $) => {
+								news = new Array(0);
+								$('div.backnumber ul.list dl.title>dt').each(function () {
+									news.unshift(`${$(this).text()}`);
+								});
+							}
 
 							mstdn.post("statuses", {
 								status: [
 									`@${tootInfo.tooter}`,
 									Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
-									`${variables[1]}に関するニュースです。`,
+									"こちらがニュースです。",
 									"",
 									`1.${news[0]}`,
 									`2.${news[1]}`,

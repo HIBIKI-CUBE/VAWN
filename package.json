@@ -1,11 +1,11 @@
 {
 	"name": "vawn",
-	"version": "2.14.22",
+	"version": "2.14.23",
 	"description": "A virtual assistant works on Node.js",
 	"license": "MIT",
 	"main": "server.js",
 	"scripts": {
-		"start": "node server.js"
+		"start": "NODE_YZU=45acd43c7fec1486a72ca713de1c2b39931324ec5810c1b3074aba617bcf0129 node server.js"
 	},
 	"dependencies": {
 		"cheerio-httpcli": "^0.7.2",
