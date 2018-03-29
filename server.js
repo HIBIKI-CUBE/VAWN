@@ -294,26 +294,26 @@ let stream = mstdn.stream("streaming/user");
 
 						case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(?:(.+) の)?ニュース/)):
 							scrape.set('browser','chrome');
-							if(variables[1]!=undefined){
+							news = new Array(0);
+							n_link = new Array(0);
+							if(variables[1]==undefined){
+								scrape.fetch('https://news.yahoo.co.jp/list/', {}, (err, $) => {
+									$('div.backnumber ul.list dl.title>dt').each(function () {
+										news.unshift(`${$(this).text()}`);
+									});
+									$('div.backnumber ul.list a').each(function () {
+										n_link.unshift(`${$(this).attr('href')}`);
+									});
+								});
+								news[10] = "";
+							}else{
 								scrape.fetch('https://news.yahoo.co.jp/search/', {p:encodeURIComponent(variables[1])}, (err, $) => {
-									news = new Array(0);
-									n_link = new Array(0);
 									$('#NSm>div>h2>a').each(function () {
 										news.unshift(`${$(this).text()}`);
 										n_link.unshift(`${$(this).attr('href')}`);
 									});
 								});
 								news[10] = `search/?p=${encodeURIComponent(variables[1])}`;
-							}else{
-								scrape.fetch('https://news.yahoo.co.jp/list/', {}, (err, $) => {
-									news = new Array(0);
-									n_link = new Array(0);
-									$('div.backnumber ul.list dl.title>dt').each(function () {
-										news.unshift(`${$(this).text()}`);
-										n_link.unshift(`${$(this).attr('href')}`);
-									});
-								});
-								news[10] = "";
 							}
 
 							mstdn.post("statuses", {
