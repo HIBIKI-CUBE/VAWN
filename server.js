@@ -20,6 +20,7 @@ let mstdn = new Mastodon({
 });
 
 let news = new Array(0);
+let n_link = new Array(0);
 /*const serviceAccount = JSON.parse(process.env.NODE_FIREBASE);
 
 fb.initializeApp({
@@ -38,7 +39,7 @@ let stream = mstdn.stream("streaming/user");
 
 			if (tootInfo.tootContent.toUpperCase().match(/@VAWN/g)) {
 				let variables = [];
-				//scrape.set('browser','chrome');
+				scrape.set('browser','chrome');
 
 				switch (true) {
 					default: talkFnc(mstdn, tootInfo, tootVis);
@@ -290,57 +291,25 @@ let stream = mstdn.stream("streaming/user");
 						});
 
 						break;
-/*
-					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/ニュース/)):
-						scrape.fetch('https://news.yahoo.co.jp/list/', {}, (err, $) => {
-						news = new Array(0);
-						$('div.backnumber ul.list dl.title>dt').each(function () {
-							news.unshift(`${$(this).text()}`);
-						});
 
-							mstdn.post("statuses", {
-								status: [
-									`@${tootInfo.tooter}`,
-									Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
-									"現在のトップニュースです。",
-									"",
-									`1.${news[0]}`,
-									`2.${news[1]}`,
-									`3.${news[2]}`,
-									`4.${news[3]}`,
-									`5.${news[4]}`,
-									`6.${news[5]}`,
-									`7.${news[6]}`,
-									`8.${news[7]}`,
-									`9.${news[8]}`,
-									`10.${news[9]}`,
-									"",
-									`詳細はこちらのページをご覧下さい。`,
-									"https://news.yahoo.co.jp/"
-								].join("\r\n"),
-
-								visibility: tootVis,
-								in_reply_to_id: tootInfo.tootId
-							});
-						});
-						scrape.set('browser','chrome');
-
-						break;
-						*/
 						case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(?:(.+) の)?ニュース/)):
-							if(variables[1]!=undefined){
+							if(variables[1]==undefined){
 								scrape.fetch('https://news.yahoo.co.jp/search/', {p:encodeURIComponent(variables[1])}, (err, $) => {
 									news = new Array(0);
+									n_link = new Array(0);
 									$('#NSm>div>h2>a').each(function () {
 										news.unshift(`${$(this).text()}`);
+										n_link.unshift(`${$(this).attr('href')}`);
 									});
 								});
 								news[10] = `search/?p=${encodeURIComponent(variables[1])}`;
 							}else{
 								scrape.fetch('https://news.yahoo.co.jp/list/', {}, (err, $) => {
 									news = new Array(0);
+									n_link = new Array(0);
 									$('div.backnumber ul.list dl.title>dt').each(function () {
 										news.unshift(`${$(this).text()}`);
+										n_link.unshift(`${$(this).attr('href')}`);
 									});
 								});
 								news[10] = "";
@@ -362,6 +331,29 @@ let stream = mstdn.stream("streaming/user");
 									`8.${news[7]}`,
 									`9.${news[8]}`,
 									`10.${news[9]}`,
+									"",
+									"各記事へのリンクの一覧が続きます。"
+								].join("\r\n"),
+
+								visibility: tootVis,
+								in_reply_to_id: tootInfo.tootId
+							});
+							mstdn.post("statuses", {
+								status: [
+									`@${tootInfo.tooter}`,
+									Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
+									"こちらが記事へのリンクです。",
+									"",
+									`1.${n_link[0]}`,
+									`2.${n_link[1]}`,
+									`3.${n_link[2]}`,
+									`4.${n_link[3]}`,
+									`5.${n_link[4]}`,
+									`6.${n_link[5]}`,
+									`7.${n_link[6]}`,
+									`8.${n_link[7]}`,
+									`9.${n_link[8]}`,
+									`10.${n_link[9]}`,
 									"",
 									`詳細はこちらのページをご覧下さい。`,
 									`https://news.yahoo.co.jp/${news[10]}`
