@@ -293,7 +293,8 @@ let stream = mstdn.stream("streaming/user");
 						break;
 
 						case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(?:(.+) の)?ニュース/)):
-							if(variables[1]==undefined){
+							scrape.set('browser','chrome');
+							if(variables[1]!=undefined){
 								scrape.fetch('https://news.yahoo.co.jp/search/', {p:encodeURIComponent(variables[1])}, (err, $) => {
 									news = new Array(0);
 									n_link = new Array(0);
@@ -362,7 +363,7 @@ let stream = mstdn.stream("streaming/user");
 								visibility: tootVis,
 								in_reply_to_id: tootInfo.tootId
 							});
-						scrape.set('browser','chrome');
+							scrape.set('browser','chrome');
 
 						break;
 
