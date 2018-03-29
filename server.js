@@ -327,14 +327,15 @@ let stream = mstdn.stream("streaming/user");
 
 						break;
 						*/
-						case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/((.+) の)?ニュース/)):
-							if(variables[1]!=" の"){
-								scrape.fetch('https://news.yahoo.co.jp/search/', {p:encodeURIComponent(variables[2])}, (err, $) => {
+						case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(?:(.+) の)?ニュース/)):
+							if(variables[1]!=undefined){
+								scrape.fetch('https://news.yahoo.co.jp/search/', {p:encodeURIComponent(variables[1])}, (err, $) => {
 									news = new Array(0);
-									$('#NSm>div.ch>h2.t>a').each(function () {
+									$('#NSm>div>h2>a').each(function () {
 										news.unshift(`${$(this).text()}`);
 									});
 								});
+								news[10] = `search/?p=${encodeURIComponent(variables[1])}`;
 							}else{
 								scrape.fetch('https://news.yahoo.co.jp/list/', {}, (err, $) => {
 									news = new Array(0);
@@ -342,6 +343,7 @@ let stream = mstdn.stream("streaming/user");
 										news.unshift(`${$(this).text()}`);
 									});
 								});
+								news[10] = "";
 							}
 
 							mstdn.post("statuses", {
@@ -362,7 +364,7 @@ let stream = mstdn.stream("streaming/user");
 									`10.${news[9]}`,
 									"",
 									`詳細はこちらのページをご覧下さい。`,
-									`https://news.yahoo.co.jp/search/?p=${encodeURIComponent(variables[2])}`
+									`https://news.yahoo.co.jp/${news[10]}`
 								].join("\r\n"),
 
 								visibility: tootVis,
