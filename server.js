@@ -152,23 +152,27 @@ let stream = mstdn.stream("streaming/user");
 												scrape.set('browser','iphone');
 												scrape.fetch('https://google.co.jp/search', { q: encodeURIComponent(variables[1]), hl: 'ja', lr: 'lang_ja' }, (err, $) => {
 													g_res = new Array(0);
-													$('#uid_0 div.kp-body div[class~="kno-fb-ctx"]').each(function () {
-														g_res.unshift(`${$(this).text()}`);
+													$('#uid_0 div.kp-body span').each(function () {
+														g_res.push(`${$(this).text()}`);
 													});
 
 													console.log(JSON.stringify(g_res[0], null, "\t"));
+													
+													let g_status = [
+														`@${tootInfo.tooter}`,
+														Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
+													];
+													for (const i of g_res) {
+														g_status.push(g_res);
+													}
+													g_status.push(
+														"",
+														`詳細はこちらのページをご覧下さい。`,
+														`https://google.co.jp/search?q=${encodeURIComponent(variables[1]+'とは')}`
+													);
 
 													mstdn.post("statuses", {
-														status: [
-															`@${tootInfo.tooter}`,
-															Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
-
-															`${g_res[0]}`,
-															`${g_res[1]}`,
-															"",
-															`詳細はこちらのページをご覧下さい。`,
-															`https://google.co.jp/search?q=${encodeURIComponent(variables[1]+'とは')}`
-														].join("\r\n"),
+														status: g_status.join("\r\n"),
 							
 														visibility: tootVis,
 														in_reply_to_id: tootInfo.tootId
