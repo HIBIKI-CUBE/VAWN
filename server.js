@@ -19,8 +19,6 @@ let mstdn = new Mastodon({
 	access_token: process.env.NODE_YZU
 });
 
-let news = new Array(0);
-let n_link = new Array(0);
 /*const serviceAccount = JSON.parse(process.env.NODE_FIREBASE);
 
 fb.initializeApp({
@@ -39,6 +37,8 @@ let stream = mstdn.stream("streaming/user");
 
 			if (tootInfo.tootContent.toUpperCase().match(/@VAWN/g)) {
 				let variables = [];
+				let news = [];
+				let n_link = [];
 				scrape.set('browser','chrome');
 
 				switch (true) {
