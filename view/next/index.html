@@ -13,6 +13,8 @@
 		}
 		html,body{
 			background-color:black;
+			width:100%;
+			height:100%;
 		}
 		.card{
 			color:white;
@@ -40,17 +42,28 @@
 			position:absolute;
 			top:35vw;
 		}
-		
 		</style>
 	</head>
 	<body id="body">
 		<img id="logo_img" alt="logo" src="img/logo.png">
 		<div id="tab" class="z-depth-5">
 			<ul class="tabs grey darken-2">
-				<li class="tab col s3"><a id="a" style="font-size:0.85em" href="#about" class="white-text waves-effect waves-yellow">About</a></li>
-				<li class="tab col s3"><a id="f" style="font-size:0.85em" href="#features" class="white-text waves-effect waves-yellow">Features</a></li>
-				<li class="tab col s3"><a id="c" style="font-size:0.85em" href="#commands" class="white-text waves-effect waves-yellow">Commands</a></li>
-				<li class="tab col s3"><a id="d" style="font-size:0.85em" href="#developer" class="white-text waves-effect waves-yellow">Developer</a></li>
+				<li class="tab col s3">
+					<a id="a" style="font-size:0.85em" href="#about" class="white-text waves-effect waves-yellow">
+					About</a>
+				</li>
+				<li class="tab col s3">
+					<a id="f" style="font-size:0.85em" href="#features" class="white-text waves-effect waves-yellow">
+					Features</a>
+				</li>
+				<li class="tab col s3">
+					<a id="c" style="font-size:0.85em" href="#commands" class="white-text waves-effect waves-yellow">
+					Commands</a>
+				</li>
+				<li class="tab col s3">
+					<a id="d" style="font-size:0.85em" href="#developer" class="white-text waves-effect waves-yellow">
+					Developer</a>
+				</li>
 			</ul>
 		</div>
 		
@@ -60,11 +73,19 @@
 			</div>
 			<div class="container">
 				<div class="row">
-					<div class="col s12">
+					<div class="col s12 m6 l6">
 						<div class="card z-depth-3 grey darken-3 white-text waves-effect waves-yellow">
 							<div class="card-content">
 								<span class="card-title">VAWNとは</span>
 								<p>VAWNは様々なSNSから利用できるバーチャルアシスタントです。その名は "a Virtual Assistant Works on Node.js" に由来します。VAWNは多くの開発者によって日々改善が施されています。</p>
+							</div>
+						</div>
+					</div>
+					<div class="col s12 m6 l6">
+						<div class="card z-depth-3 grey darken-3 white-text waves-effect waves-yellow">
+							<div class="card-content">
+								<span class="card-title">VAWNと話すには</span>
+								<p>現在VAWNは主にMastodonからご利用いただいています。お好みのインスタンスに登録・ログインし、@VAWN@mstdn.y-zu.orgにメンションしてご利用ください。</p>
 							</div>
 						</div>
 					</div>
@@ -126,6 +147,141 @@
 					</div>
 				</div>
 			</div>
+			
+			<div id="commands" class="card-panel">
+				<h3 class="card-title">Commands</h3>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col s12 m6 l4">
+						<div class="card z-depth-3 grey darken-3 white-text waves-effect waves-yellow">
+							<div class="card-content">
+								<span class="card-title">ニュース</span>
+								<p>Yahooニュースより、最新のニュースを10個お伝えします。キーワードを指定することも可能です。</p>
+							</div>
+						</div>
+					</div>
+					<div class="col s12 m6 l4">
+						<div class="card z-depth-3 grey darken-3 white-text waves-effect waves-yellow">
+							<div class="card-content">
+								<span class="card-title">じゃんけん</span>
+								<p>みなさんご存知のじゃんけんができます。「ジャンケンぐー」のように言ってください。</p>
+							</div>
+						</div>
+					</div>
+					<div class="col s12 m6 l4">
+						<div class="card z-depth-3 grey darken-3 white-text waves-effect waves-yellow">
+							<div class="card-content">
+								<span class="card-title">今日はなんの日</span>
+								<p>「今日はなんの日？」と聞くと今日がなんの日かお教えします。リンクからはその他のものも確認できます。</p>
+							</div>
+						</div>
+					</div>
+					<div class="col s12 m6 l4">
+						<div class="card z-depth-3 grey darken-3 white-text waves-effect waves-yellow">
+							<div class="card-content">
+								<span class="card-title">価格サーチ</span>
+								<p>「〇〇 の値段」と言うことで<a href="http://kakaku.com"> kakaku.com</a>を利用して様々な商品の値段を調べます。</p>
+							</div>
+						</div>
+					</div>
+					<div class="col s12 m6 l4">
+						<div class="card z-depth-3 grey darken-3 white-text waves-effect waves-yellow">
+							<div class="card-content">
+								<span class="card-title">クイック検索</span>
+								<p>「〇〇 を検索」と言うだけで簡単に検索ができます。</p>
+							</div>
+						</div>
+					</div>
+					<div class="col s12 m6 l4">
+						<div class="card z-depth-3 grey darken-3 white-text waves-effect waves-yellow">
+							<div class="card-content">
+								<span class="card-title">サイコロ</span>
+								<p>「サイコロ振って」と言うと1〜6のうちひとつ数字が返信されます。</p>
+							</div>
+						</div>
+					</div>
+					<div class="col s12 m6 l4">
+						<div class="card z-depth-3 grey darken-3 white-text waves-effect waves-yellow">
+							<div class="card-content">
+								<span class="card-title"> Web開発サーチ</span>
+								<p>「〇〇 の対応状況」と言うことで<a href="http://caniuse.com">caniuse.com</a>を利用してWeb関連の技術の対応状況を調べます。</p>
+							</div>
+						</div>
+					</div>
+					<div class="col s12 m6 l4">
+						<div class="card z-depth-3 grey darken-3 white-text waves-effect waves-yellow">
+							<div class="card-content">
+								<span class="card-title">計算</span>
+								<p>数字と日本語で数式を書き、「〇〇 の答えは」と言うと計算結果が返信されます。一般的な演算子にも対応予定です。</p>
+							</div>
+						</div>
+					</div>
+					<div class="col s12 m6 l4">
+						<div class="card z-depth-3 grey darken-3 white-text waves-effect waves-yellow">
+							<div class="card-content">
+								<span class="card-title">スーモジェネレーター</span>
+								<p>お馴染みのスーモのCMに合わせて「あ、〇〇！」と言うとあのフレーズを生成します。</p>
+							</div>
+						</div>
+					</div>
+					<div class="col s12 m6 l4">
+						<div class="card z-depth-3 grey darken-3 white-text waves-effect waves-yellow">
+							<div class="card-content">
+								<span class="card-title">TPDランキング</span>
+								<p> Mastodon版のVAWNでは1日あたりのトゥート数を基にした自分のランキングを調べられます。</p>
+							</div>
+						</div>
+					</div>
+					<div class="col s12 m6 l4">
+						<div class="card z-depth-3 grey darken-3 white-text waves-effect waves-yellow">
+							<div class="card-content">
+								<span class="card-title">おしゃべり</span>
+								<p>挨拶など、簡単な会話ができます。</p>
+							</div>
+						</div>
+					</div>
+					<div class="col s12 m6 l4">
+						<div class="card z-depth-3 grey darken-3 white-text waves-effect waves-yellow">
+							<div class="card-content">
+								<span class="card-title">コイントス</span>
+								<p>簡単にコイントスができます。</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div id="developer" class="card-panel">
+				<h3 class="card-title">Developer</h3>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col s12 m6 l6">
+						<div class="card z-depth-3 grey darken-3 white-text waves-effect waves-yellow">
+							<div class="card-content">
+								<span class="card-title">VAWNのはオープンソースです</span>
+								<p>VAWNは<a href="https://github.com/HIBIKI-CUBE/VAWN">GitHub</a>にてMITライセンスで公開しています。ライセンスの範囲内で自由にご活用いただけます。</p>
+							</div>
+						</div>
+					</div>
+					<div class="col s12 m6 l6">
+						<div class="card z-depth-3 grey darken-3 white-text waves-effect waves-yellow">
+							<div class="card-content">
+								<span class="card-title">クレジット</span>
+								<p>VAWN Project</p>
+								<p><a href="https://mstdn.y-zu.org/@hibiki_cube">HIBIKI CUBE</a>：</p><p>コーディング サイト制作 他</p>
+								<p><a href="https://mstdn.y-zu.org/@ProgrammerGenboo">🎶どっかの玄ちゃん。🎶</a>：</p><p>コーディング デバッグ 他</p>
+								<p><a href="https://mstdn.y-zu.org/@BeWing">森林🌳エミールっぽい人</a>：</p><p>コーディング サーバー保守 他</p>
+								<br>
+								<p>Supported by <a href="https://mstdn.y-zu.org">Yづドン</a></p>
+								<br>
+								<p>&copy;2018 VAWN Project</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 
 
@@ -133,7 +289,6 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.4/js/materialize.min.js"></script>
 		<script>
 		document.addEventListener('DOMContentLoaded', function() {
-
 			let logo = document.getElementById("logo_img");
 			let tab = document.getElementById("tab");
 			let body = document.getElementById("body");
@@ -151,13 +306,15 @@
 				tab_mt = parseInt(getComputedStyle(tab , "").marginTop);
 				tab_ml = parseInt(getComputedStyle(tab , "").marginLeft);
 				main_t = parseInt(getComputedStyle(document.getElementById("main") , "").top);
+				logo.style.marginTop = `${(tab_h+body_w * 0.02-logo_h/3)/2}px`
+				console.log("サイズ取得完了");
 			}
-			position();
-			document.onscroll = function(){
+			let anim = function(){
 				sc = pageYOffset;
 				if(sc <= 100){
 					logo.style.width = `${body_w *(60 - 0.4 * sc)/100}px`;
 					logo.style.marginLeft = `${body_w *(20 - 0.15 * sc)/100}px`;
+					//logo.style.marginTop = `${body_w * (5 - 0.02 * sc)/100}px`;
 					tab.style.width = `${body_w *(90 - 0.2 * sc)/100}px`;
 					tab.style.marginLeft = `${body_w *(5 + 0.225 * sc)/100}px`;
 					tab.style.marginTop = `${body_w * (24 - 0.22 * sc)/100}px`;
@@ -175,8 +332,12 @@
 					}
 				}
 			}
+			position();
+			addEventListener('resize' , position);
+			addEventListener('resize' , anim);
+			addEventListener('resize' , M.Tabs.init(document.getElementsByClassName("tabs")));
+			document.onscroll = anim;
 			M.Tabs.init(document.getElementsByClassName("tabs"));
-			setTimeout("scrollTo(0,1)", 100);
 		
 			(function(){
 				const top = "#top"; // ページトップ用のリンク
@@ -191,10 +352,9 @@
 					const dest = href == top ? document.body : document.getElementById(href.slice(1)); // 移動先
 					if (!dest) return;
 					const start = pageYOffset; // 初期スクロール位置
-					let head = tab_h;
 					const offsetTop = (function(e){ return e.getBoundingClientRect().top + pageYOffset })(dest); // 移動先の、最上位要素からのY座標
 					let t = 0; // 現在時刻
-					const c = offsetTop - start - head*1.5; // 終了値
+					const c = offsetTop - start - parseInt(getComputedStyle(logo , "").height) - 20; // 終了値
 					const startTime = new Date().getTime();
 					const id = setInterval(function(){
 						t = new Date().getTime() - startTime;
