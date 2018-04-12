@@ -15,6 +15,7 @@
 			background-color:black;
 			width:100%;
 			height:100%;
+			perspective: 500px;
 		}
 		.card{
 			color:white;
@@ -40,11 +41,25 @@
 		}
 		#main{
 			position:absolute;
-			top:35vw;
+			margin-top:40%;
+		}
+		.bg-1{
+			display:block;
+			position:absolute;
+			top:500px;
+			left:-532px;
+			width:100%;
+			height:500%;
+			background-color:rgba(163,190,255,0.3);
 		}
 		</style>
 	</head>
 	<body id="body">
+		<div class="bg-1 rellax" style="transform:rotate(-20deg)">aaa</div>
+		<div class="bg-2 rellax"></div>
+		<div class="bg-3 rellax"></div>
+		<div class="bg-4 rellax"></div>
+		<div class="bg-5 rellax"></div>
 		<img id="logo_img" alt="logo" src="img/logo.png">
 		<div id="tab" class="z-depth-5">
 			<ul class="tabs grey darken-2">
@@ -287,8 +302,10 @@
 
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.4/js/materialize.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/rellax/1.0.0/rellax.min.js"></script>
 		<script>
 		document.addEventListener('DOMContentLoaded', function() {
+			let rellax = new Rellax('.rellax');
 			let logo = document.getElementById("logo_img");
 			let tab = document.getElementById("tab");
 			let body = document.getElementById("body");
@@ -306,7 +323,8 @@
 				tab_mt = parseInt(getComputedStyle(tab , "").marginTop);
 				tab_ml = parseInt(getComputedStyle(tab , "").marginLeft);
 				main_t = parseInt(getComputedStyle(document.getElementById("main") , "").top);
-				logo.style.marginTop = `${(tab_h+body_w * 0.02-logo_h/3)/2}px`
+				logo.style.marginTop = `${(tab_h+body_w * 0.02-logo_h/3)/2}px`;
+				document.getElementById("main").style.marginTop = `${tab_h + logo_h + logo_mt*2}px`;
 				console.log("サイズ取得完了");
 			}
 			let anim = function(){
