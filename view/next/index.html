@@ -326,6 +326,15 @@
 			let tab_a = document.querySelectorAll(".tab>a");
 			let body_w , logo_h , logo_w , logo_mt , logo_mb , logo_mr , logo_ml , tab_h , tab_w , tab_mt , tab_mb , tab_mr , tab_ml , main_t ,sc;
 			sc = pageYOffset;
+			let init = function(){
+				body_w = parseInt(getComputedStyle(body , "").width);
+				logo_h = parseInt(getComputedStyle(logo , "").height);
+				tab_h = parseInt(getComputedStyle(tab , "").height);				logo.style.marginTop = `${(tab_h+body_w * 0.02-logo_h/3)/2}px`;
+				logo.style.transform = `translateX(${body_w *(20 - 0.175 * sc)/100}px)`
+				tab.style.transform = `translate(${body_w *(5 + 0.225 * sc)/100}px,${body_w * 0.06 + logo_h}px)`;
+				document.getElementById("main").style.marginTop = `${tab_h + logo_h + body_w * 0.1}px`;
+				console.log("init");
+			}
 			let position = function(){
 				body_w = parseInt(getComputedStyle(body , "").width);
 				logo_h = parseInt(getComputedStyle(logo , "").height);
@@ -337,10 +346,6 @@
 				tab_mt = parseInt(getComputedStyle(tab , "").marginTop);
 				tab_ml = parseInt(getComputedStyle(tab , "").marginLeft);
 				main_t = parseInt(getComputedStyle(document.getElementById("main") , "").top);
-				logo.style.marginTop = `${(tab_h+body_w * 0.02-logo_h/3)/2}px`;
-				logo.style.transform = `translateX(${body_w *(20 - 0.175 * sc)/100}px)`
-				tab.style.transform = `translate(${body_w *(5 + 0.225 * sc)/100}px,${body_w * (24 - 0.22 * sc)/100}px)`;
-				document.getElementById("main").style.marginTop = `${tab_h + logo_h + (tab_h+body_w * 0.02-logo_h/3) + 20}px`;
 				console.log("position");
 			}
 			let anim = function(){
@@ -365,7 +370,7 @@
 					console.log("else");
 				}
 			}
-			position();
+			init();
 			addEventListener('resize' , position);
 			addEventListener('resize' , anim);
 			addEventListener('resize' , M.Tabs.init(document.getElementsByClassName("tabs")));
