@@ -48,15 +48,43 @@
 		}
 		#main{
 			position:absolute;
-			margin-top:40%;
+			top:40%;
 		}
 		.bg-1{
-			display:block;
-			position:absolute;
+			top:50%;
+			width:100%;
+			height:100%;
+			background-color:rgba(0,160,255,0.3);
+		}
+		.bg-2{
+			top:5%;
+			left:60%;
+			width:40%;
+			height:10%;
+			background-color:rgba(0,160,255,0.3);
+		}
+		.bg-3{
+			top:10%;
+			left:0;
+			width:40%;
+			height:10%;
+			background-color:rgba(0,160,255,0.3);
+		}
+		.bg-4{
 			top:100%;
 			width:100%;
 			height:200%;
-			background-color:rgba(163,190,255,0.3);
+			background-color:rgba(0,160,255,0.3);
+		}
+		.bg-5{
+			top:7.50%;
+			width:20%;
+			height:10%;
+			background-color:rgba(145,255,0,0.3);
+		}
+		.bg{
+			display:block;
+			position:absolute;
 		}
 		.z-depth-5{
 			box-shadow:5px 10px 3px rgba(255,255,255,0.14)
@@ -67,11 +95,11 @@
 		</style>
 	</head>
 	<body id="body">
-		<div class="bg-1 bg rellax" style="transform:skewY(-20deg)" data-rellax-speed="-10" style="transform:skewY(-20deg)" data-rellax-speed="-10"></div>
-		<div class="bg-2 bg rellax" style="transform:skewY(-20deg)" data-rellax-speed="-10"></div>
-		<div class="bg-3 bg rellax" style="transform:skewY(-20deg)" data-rellax-speed="-10"></div>
-		<div class="bg-4 bg rellax" style="transform:skewY(-20deg)" data-rellax-speed="-10"></div>
-		<div class="bg-5 bg rellax" style="transform:skewY(-20deg)" data-rellax-speed="-10"></div>
+		<div class="bg-1 bg rellax" style="transform:skewY(-10deg)" data-rellax-speed="-6"></div>
+		<div class="bg-2 bg rellax" style="transform:skewY(-10deg)" data-rellax-speed="-4"></div>
+		<div class="bg-3 bg rellax" style="transform:skewY(-10deg)" data-rellax-speed="-4"></div>
+		<div class="bg-4 bg rellax" style="transform:skewY(-10deg)" data-rellax-speed="-2"></div>
+		<div class="bg-5 bg rellax" style="transform:skewY(-10deg)" data-rellax-speed="-2"></div>
 		<img id="logo_img" alt="logo" src="img/logo.png">
 		<div id="tab" class="row z-depth-5">
 			<div class="col s12">
@@ -332,7 +360,7 @@
 				tab_h = parseInt(getComputedStyle(tab , "").height);				logo.style.marginTop = `${(tab_h+body_w * 0.02-logo_h/3)/2}px`;
 				logo.style.transform = `translateX(${body_w *(20 - 0.175 * sc)/100}px)`
 				tab.style.transform = `translate(${body_w *(5 + 0.225 * sc)/100}px,${body_w * 0.06 + logo_h}px)`;
-				document.getElementById("main").style.marginTop = `${tab_h + logo_h + body_w * 0.1}px`;
+				document.getElementById("main").style.top = `${tab_h + logo_h + body_w*0.06}px`;
 				console.log("init");
 			}
 			let position = function(){
@@ -354,7 +382,7 @@
 					logo.style.width = `${body_w *(60 - 0.4 * sc)/100}px`;
 					logo.style.transform = `translateX(${body_w *(20 - 0.175 * sc)/100}px)`;
 					tab.style.width = `${body_w *(90 - 0.2 * sc)/100}px`;
-					tab.style.transform = `translate(${body_w *(5 + 0.225 * sc)/100}px,${body_w * (24 - 0.22 * sc)/100}px)`;
+					tab.style.transform = `translate(${body_w *(5 + 0.225 * sc)/100}px,${body_w * 0.02 + (body_w * 0.04 + parseInt(getComputedStyle(logo , "").height))*(100-sc)/100}px)`;
 					for(let i=0; i<tab_a.length; i++){
 						tab_a[i].style.fontSize = `${1.2 - 0.0025 * sc}em`;
 					}
