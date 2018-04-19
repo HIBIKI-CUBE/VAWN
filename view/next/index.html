@@ -20,6 +20,10 @@
 		.card{
 			color:white;
 		}
+		.card div,.card p{
+			width:100%;
+			height:100%;
+		}
 		.card-panel{
 			padding:0 5%;
 			background: linear-gradient(176deg,#00A0FF, rgba(0,0,0,0)); 
@@ -28,6 +32,7 @@
 		#logo_img{
 			position:fixed;
 			margin:0;
+			top:0;
 			width:60%;
 			height:auto;
 			background-color:transparent;
@@ -48,12 +53,12 @@
 		}
 		#main{
 			position:absolute;
-			top:40%;
+			top:50%;
 		}
 		.bg-1{
-			top:50%;
+			top:100%;
 			width:100%;
-			height:100%;
+			height:80%;
 			background-color:rgba(0,160,255,0.3);
 		}
 		.bg-2{
@@ -76,12 +81,6 @@
 			height:200%;
 			background-color:rgba(0,160,255,0.3);
 		}
-		.bg-5{
-			top:7.50%;
-			width:20%;
-			height:10%;
-			background-color:rgba(145,255,0,0.3);
-		}
 		.bg{
 			display:block;
 			position:absolute;
@@ -95,12 +94,11 @@
 		</style>
 	</head>
 	<body id="body">
-		<div class="bg-1 bg rellax" style="transform:skewY(-10deg)" data-rellax-speed="-6"></div>
+		<div class="bg-1 bg rellax" style="transform:skewY(-10deg)" data-rellax-speed="-8"></div>
 		<div class="bg-2 bg rellax" style="transform:skewY(-10deg)" data-rellax-speed="-4"></div>
 		<div class="bg-3 bg rellax" style="transform:skewY(-10deg)" data-rellax-speed="-4"></div>
 		<div class="bg-4 bg rellax" style="transform:skewY(-10deg)" data-rellax-speed="-2"></div>
-		<div class="bg-5 bg rellax" style="transform:skewY(-10deg)" data-rellax-speed="-2"></div>
-		<img id="logo_img" alt="logo" src="img/logo.png">
+		<img id="logo_img" width="768" height="189" alt="logo" src="img/logo.png">
 		<div id="tab" class="row z-depth-5">
 			<div class="col s12">
 				<ul class="tabs grey darken-2">
@@ -131,7 +129,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col s12 m6 l6">
-						<div class="card z-depth-3 grey darken-3 white-text waves-effect waves-yellow">
+						<div class="card z-depth-3 grey darken-3 white-text waves-effect waves-yellow" id="test">
 							<div class="card-content">
 								<span class="card-title">VAWNとは</span>
 								<p>VAWNは様々なSNSから利用できるバーチャルアシスタントです。その名は "a Virtual Assistant Works on Node.js" に由来します。VAWNは多くの開発者によって日々改善が施されています。</p>
@@ -346,21 +344,32 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.4/js/materialize.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/rellax/1.0.0/rellax.min.js"></script>
 		<script>
-		document.addEventListener('DOMContentLoaded', function() {
+		document.addEventListener('DOMContentLoaded', 
+		function(){setTimeout(
+		function() {
 			let rellax = new Rellax('.rellax');
 			let logo = document.getElementById("logo_img");
 			let tab = document.getElementById("tab");
 			let body = document.getElementById("body");
 			let tab_a = document.querySelectorAll(".tab>a");
-			let body_w , logo_h , logo_w , logo_mt , logo_mb , logo_mr , logo_ml , tab_h , tab_w , tab_mt , tab_mb , tab_mr , tab_ml , main_t ,sc;
+			let card = document.getElementsByClassName("card");
+			let body_w , logo_h , logo_w , logo_mt , logo_mb , logo_mr , logo_ml , tab_h , tab_h2 , tab_w , tab_mt , tab_mb , tab_mr , tab_ml , main_t ,sc;
 			sc = pageYOffset;
 			let init = function(){
 				body_w = parseInt(getComputedStyle(body , "").width);
 				logo_h = parseInt(getComputedStyle(logo , "").height);
-				tab_h = parseInt(getComputedStyle(tab , "").height);				logo.style.marginTop = `${(tab_h+body_w * 0.02-logo_h/3)/2}px`;
-				logo.style.transform = `translateX(${body_w *(20 - 0.175 * sc)/100}px)`
-				tab.style.transform = `translate(${body_w *(5 + 0.225 * sc)/100}px,${body_w * 0.06 + logo_h}px)`;
-				document.getElementById("main").style.top = `${tab_h + logo_h + body_w*0.06}px`;
+				tab_h = parseInt(getComputedStyle(tab , "").height);
+				logo.style.transform = `translate(${body_w *(20 - 0.175 * sc)/100}px,${(tab_h+body_w * 0.02-logo_h/3)/2}px)`
+				tab.style.transform = `translate(${body_w *(5 + 0.225 * sc)/100}px,${body_w * 0.02 + (body_w * 0.04 + parseInt(getComputedStyle(logo , "").height))*(100-sc)/100}px)`;
+				if(window.innerHeight < window.innerWidthtab_h){
+					tab_h2 = tab_h*4;
+					for(let i=0; i<card.length; i++){
+						card[i].style.height = `${parseInt(getComputedStyle(card[i] , "").width)}px`;
+					}
+				}else{
+					tab_h2 = tab_h;
+				}
+				document.getElementById("main").style.top = `${tab_h2 + logo_h + body_w*0.06}px`;
 				console.log("init");
 			}
 			let position = function(){
@@ -380,7 +389,7 @@
 				sc = pageYOffset;
 				if(sc <= 100){
 					logo.style.width = `${body_w *(60 - 0.4 * sc)/100}px`;
-					logo.style.transform = `translateX(${body_w *(20 - 0.175 * sc)/100}px)`;
+					logo.style.transform = `translate(${body_w *(20 - 0.175 * sc)/100}px,${(tab_h+body_w * 0.02-logo_h/3)/2}px)`;
 					tab.style.width = `${body_w *(90 - 0.2 * sc)/100}px`;
 					tab.style.transform = `translate(${body_w *(5 + 0.225 * sc)/100}px,${body_w * 0.02 + (body_w * 0.04 + parseInt(getComputedStyle(logo , "").height))*(100-sc)/100}px)`;
 					for(let i=0; i<tab_a.length; i++){
@@ -389,7 +398,7 @@
 					console.log("anim");
 				}else{
 					logo.style.width = `${body_w * 0.2}px`;
-					logo.style.transform = `translateX(${body_w * 0.025}px)`;
+					logo.style.transform = `translate(${body_w * 0.025}px,${(tab_h+body_w * 0.02-logo_h/3)/2}px)`;
 					tab.style.width = `${body_w * 0.7}px`;
 					tab.style.transform = `translate(${body_w * 0.275}px,${body_w * 0.02}px)`;
 					for(let i=0; i<tab_a.length; i++){
@@ -399,6 +408,7 @@
 				}
 			}
 			init();
+			position();
 			addEventListener('resize' , position);
 			addEventListener('resize' , anim);
 			addEventListener('resize' , M.Tabs.init(document.getElementsByClassName("tabs")));
@@ -431,7 +441,9 @@
 					e.preventDefault();
 				});
 			})();
-		});
+			
+			},80);//setTimeout closer
+		});//DOM onload closer
 
 		</script>
 	</body>
