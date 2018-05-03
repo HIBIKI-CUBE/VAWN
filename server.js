@@ -37,8 +37,8 @@ let stream = mstdn.stream("streaming/user");
 
 			if (tootInfo.tootContent.toUpperCase().match(/@VAWN/g)) {
 				let variables = [];
-				let news = [];
-				let n_link = [];
+				news = [];
+				n_link = [];
 				scrape.set('browser','chrome');
 
 				switch (true) {
@@ -295,7 +295,7 @@ let stream = mstdn.stream("streaming/user");
 						case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(?:(.+) の)?ニュース/)):
 							scrape.set('browser','iphone');
 							if(variables[1]==undefined){
-								scrape.fetch('https://news.yahoo.co.jp/list/', {}, (err, $) => {
+								scrape.fetch('https://news.yahoo.co.jp/list/', (err, $) => {
 									news = [];
 									n_link = [];
 									$('#wrapper>article.listArea ul.topicsList dt').each(function () {
