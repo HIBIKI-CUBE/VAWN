@@ -296,23 +296,23 @@ let stream = mstdn.stream("streaming/user");
 							scrape.set('browser','chrome');
 							if(variables[1]==undefined){
 								scrape.fetch('https://news.yahoo.co.jp/list/', {}, (err, $) => {
-									news = new Array(0);
-									n_link = new Array(0);
+									news = [];
+									n_link = [];
 									$('div.backnumber ul.list dl.title>dt').each(function () {
-										news.unshift($(this).text());
+										news.unshift(`${$(this).text()}`);
 									});
 									$('div.backnumber ul.list a').each(function () {
-										n_link.unshift($(this).attr('href'));
+										n_link.unshift(`${$(this).attr('href')}`);
 									});
 								});
-								news[10] = "";
+								news[10] = "https://news.yahoo.co.jp/";
 							}else{
 								scrape.fetch('https://news.yahoo.co.jp/search/', {p:encodeURIComponent(variables[1])}, (err, $) => {
 									news = new Array(0);
 									n_link = new Array(0);
 									$('#NSm>div>h2>a').each(function () {
-										news.unshift($(this).text());
-										n_link.unshift($(this).attr('href'));
+										news.unshift(`${$(this).text()}`);
+										n_link.unshift(`${$(this).attr('href')}`);
 									});
 								});
 								news[10] = `search/?p=${encodeURIComponent(variables[1])}`;
