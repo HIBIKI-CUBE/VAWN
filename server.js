@@ -40,6 +40,7 @@ let stream = mstdn.stream("streaming/user");
 				news = [];
 				n_link = [];
 				scrape.set('browser','chrome');
+				scrape.set('debug','true');
 
 				switch (true) {
 					default: talkFnc(mstdn, tootInfo, tootVis);
