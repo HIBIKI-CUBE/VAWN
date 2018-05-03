@@ -293,19 +293,19 @@ let stream = mstdn.stream("streaming/user");
 						break;
 
 						case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(?:(.+) の)?ニュース/)):
-							scrape.set('browser','chrome');
+							scrape.set('browser','iphone');
 							if(variables[1]==undefined){
 								scrape.fetch('https://news.yahoo.co.jp/list/', {}, (err, $) => {
 									news = [];
 									n_link = [];
-									$('div.backnumber ul.list dl.title>dt').each(function () {
+									$('#wrapper>article.listArea ul.topicsList dt').each(function () {
 										news.unshift(`${$(this).text()}`);
 									});
-									$('div.backnumber ul.list a').each(function () {
+									$('#wrapper>article.listArea ul.topicsList a').each(function () {
 										n_link.unshift(`${$(this).attr('href')}`);
 									});
 								});
-								news[10] = "https://news.yahoo.co.jp/";
+								news[10] = "";
 							}else{
 								scrape.fetch('https://news.yahoo.co.jp/search/', {p:encodeURIComponent(variables[1])}, (err, $) => {
 									news = new Array(0);
