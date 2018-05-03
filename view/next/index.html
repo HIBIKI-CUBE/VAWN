@@ -352,7 +352,6 @@
 			let tab = document.getElementById("tab");
 			let body = document.getElementById("body");
 			let tab_a = document.querySelectorAll(".tab>a");
-			let card = document.getElementsByClassName("card");
 			let body_w , logo_h , logo_w , logo_mt , logo_mb , logo_mr , logo_ml , tab_h , tab_h2 , tab_w , tab_mt , tab_mb , tab_mr , tab_ml , main_t ,sc;
 			sc = pageYOffset;
 			let init = function(){
@@ -363,9 +362,6 @@
 				tab.style.transform = `translate(${body_w *(5 + 0.225 * sc)/100}px,${body_w * 0.02 + (body_w * 0.04 + parseInt(getComputedStyle(logo , "").height))*(100-sc)/100}px)`;
 				if(window.innerHeight < window.innerWidthtab_h){
 					tab_h2 = tab_h*4;
-					for(let i=0; i<card.length; i++){
-						card[i].style.height = `${parseInt(getComputedStyle(card[i] , "").width)}px`;
-					}
 				}else{
 					tab_h2 = tab_h;
 				}
