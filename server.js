@@ -294,7 +294,7 @@ let stream = mstdn.stream("streaming/user");
 						break;
 
 						case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(?:(.+) の)?ニュース/)):
-							scrape.set('headers',{'User-Agent':Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1});
+							scrape.set('headers',{'User-Agent':"Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1"});
 							if(variables[1]==undefined){
 								scrape.fetch('https://news.yahoo.co.jp/list/', (err, $) => {
 									news = [];
