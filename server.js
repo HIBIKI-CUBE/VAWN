@@ -361,7 +361,7 @@ let stream = mstdn.stream("streaming/user");
 											return headings.join("\r\n");
 										})(AMOUNT),
 										"",
-										`詳細はこちらのページをご覧下さい。`,
+										"詳細はこちらのページをご覧下さい。",
 										`https://news.yahoo.co.jp/${articles[AMOUNT]}`
 									].join("\r\n"),
 	
