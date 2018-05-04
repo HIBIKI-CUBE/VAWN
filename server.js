@@ -37,17 +37,16 @@ let stream = mstdn.stream("streaming/user");
 
 			if (tootInfo.tootContent.toUpperCase().match(/@VAWN/g)) {
 				let variables = [];
-				news = [];
-				n_link = [];
-				scrape.set('browser','chrome');
-				scrape.set('debug',true);
+
+				scrape.set('browser', 'chrome');
+				scrape.set('debug', true);
 
 				switch (true) {
 					default: talkFnc(mstdn, tootInfo, tootVis);
 					break;
 
 					case !!(tootInfo.tootContent.match(/サイコロ|さいころ|ダイス/)):
-							mstdn.post("statuses", {
+						mstdn.post("statuses", {
 							status: [
 								`@${tootInfo.tooter}`,
 								Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
@@ -83,7 +82,7 @@ let stream = mstdn.stream("streaming/user");
 						break;
 
 					case !!(variables = tootInfo.tootContent.match(/(?:じゃんけん|ジャンケン)(グー|グ〜|ぐー|ぐ～|チョキ|ちょき|パー|パ〜|ぱー|ぱ～)/)):
-							let playerAct = variables[1] || "グー";
+						let playerAct = variables[1] || "グー";
 
 						let vawnActId = Math.floor(Math.random() * 2);
 						let vawnAct = Janken.ACTIONS[vawnActId];
@@ -107,9 +106,10 @@ let stream = mstdn.stream("streaming/user");
 						break;
 
 					case !!(tootInfo.tootContent.match(/時/)):
-							dt.setTime(dt.getTime() + 32400000);
+						dt.setTime(dt.getTime() + 32400000);
+
 						let hour = dt.getHours();
-						let min = dt.getMinutes()
+						let min = dt.getMinutes();
 
 						if (hour < 10) {
 							hour = '0' + hour;
@@ -133,7 +133,7 @@ let stream = mstdn.stream("streaming/user");
 						break;
 
 					case !!(variables = tootInfo.tootContent.match(/あっ?、(.*)(?=！$)/)):
-							let content = Formatter.Suumo.generate(variables[1]);
+						let content = Formatter.Suumo.generate(variables[1]);
 
 						mstdn.post("statuses", {
 							status: [
@@ -148,39 +148,39 @@ let stream = mstdn.stream("streaming/user");
 						});
 
 						break;
-						/*
-											case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) (とは|#とは|って|を検索|をググ)/)):
-												scrape.set('browser','iphone');
-												scrape.fetch('https://google.co.jp/search', { q: encodeURIComponent(variables[1]), hl: 'ja', lr: 'lang_ja' }, (err, $) => {
-													let ans = Formatter.googleRemove($('#rso ._NId:first-child .lr_container').text());
-													let ans2 = Formatter.googleRemove($('#rso ._Tgc._s8w').text());
-													let ans3 = Formatter.googleRemove($('div.kp-body>div._G1d._wle._xle').text());
-
-													console.log(JSON.stringify(ans, null, "\t"));
-													console.log(JSON.stringify(ans2, null, "\t"));
-													console.log(JSON.stringify(ans3, null, "\t"));
-
-													mstdn.post("statuses", {
-														status: [
-															`@${tootInfo.tooter}`,
-															Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
-
-															`${ans},${ans2},${ans3}`,
-															"",
-															`詳細はこちらのページをご覧下さい。`,
-															`https://google.co.jp/search?q=${encodeURIComponent(variables[1]+'とは')}`
-														].join("\r\n"),
-							
-														visibility: tootVis,
-														in_reply_to_id: tootInfo.tootId
-													});
-												});
-												scrape.set('browser','chrome');
-												break;
-						*/
 
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) (とは|#とは|って|を検索|をググ)/)):
+						/*
+						scrape.set('browser','iphone');
+						scrape.fetch('https://google.co.jp/search', { q: encodeURIComponent(variables[1]), hl: 'ja', lr: 'lang_ja' }, (err, $) => {
+							let ans = Formatter.googleRemove($('#rso ._NId:first-child .lr_container').text());
+							let ans2 = Formatter.googleRemove($('#rso ._Tgc._s8w').text());
+							let ans3 = Formatter.googleRemove($('div.kp-body>div._G1d._wle._xle').text());
 
+							console.log(JSON.stringify(ans, null, "\t"));
+							console.log(JSON.stringify(ans2, null, "\t"));
+							console.log(JSON.stringify(ans3, null, "\t"));
+
+							mstdn.post("statuses", {
+								status: [
+									`@${tootInfo.tooter}`,
+									Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
+
+									`${ans},${ans2},${ans3}`,
+									"",
+									`詳細はこちらのページをご覧下さい。`,
+									`https://google.co.jp/search?q=${encodeURIComponent(variables[1]+'とは')}`
+								].join("\r\n"),
+
+								visibility: tootVis,
+								in_reply_to_id: tootInfo.tootId
+							});
+						});
+						scrape.set('browser','chrome');*/
+
+						break;
+
+					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) (とは|#とは|って|を検索|をググ)/)):
 						mstdn.post("statuses", {
 							status: [
 								`@${tootInfo.tooter}`,
@@ -197,11 +197,12 @@ let stream = mstdn.stream("streaming/user");
 							visibility: tootVis,
 							in_reply_to_id: tootInfo.tootId
 						});
+
 						scrape.set('browser', 'chrome');
 						break;
 
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/debug google (.*) (.*)/)):
-							scrape.fetch('https://google.co.jp/search', {
+						scrape.fetch('https://google.co.jp/search', {
 							q: encodeURIComponent(variables[1]),
 							hl: 'ja',
 							lr: 'lang_ja'
@@ -228,7 +229,7 @@ let stream = mstdn.stream("streaming/user");
 						break;
 
 					case !!(variables = tootInfo.tootContent.match(/TPDランキング/)):
-							scrape.fetch("http://vinayaka.distsn.org/cgi-bin/vinayaka-user-speed-api.cgi", {
+						scrape.fetch("http://vinayaka.distsn.org/cgi-bin/vinayaka-user-speed-api.cgi", {
 							1000: ""
 						}, (err, $) => {
 							let list = JSON.parse($.text());
@@ -270,7 +271,7 @@ let stream = mstdn.stream("streaming/user");
 						break;
 
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) (計算|解いて|は|の答え)/)):
-							scrape.fetch('https://search.yahoo.co.jp/search', {
+						scrape.fetch('https://search.yahoo.co.jp/search', {
 							p: variables[1]
 						}, (err, $) => {
 							let ans = $('#mIn .ist').text();
@@ -293,31 +294,40 @@ let stream = mstdn.stream("streaming/user");
 
 						break;
 
-						case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(?:(.+) の)?ニュース/)):
-							scrape.set('headers',{'User-Agent':"Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1"});
-							if(variables[1]==undefined){
-								scrape.fetchSync('https://news.yahoo.co.jp/list/', (err, $) => {
-									news = [];
-									n_link = [];
-									$('#wrapper>article.listArea ul.topicsList dt').each(function () {
-										news.unshift(`${$(this).text()}`);
+					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(?:(.+) ?の)?ニュース/)):
+						const AMOUNT = 10;
+
+						scrape.set('headers', { 'User-Agent': "Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1" });
+
+						new Promise(resolve => {
+							const articles = [];
+							const links = [];
+
+							if (!variables[1]) {
+								scrape.fetch('https://news.yahoo.co.jp/list/').then(res => {
+									const { $ } = res;
+
+									$('#wrapper > article.listArea ul.topicsList dt').each((index, article) => articles.unshift($(article).text()));
+									$('#wrapper > article.listArea ul.topicsList a').each((index, article) => links.unshift($(article).attr('href')));
+	
+									articles[AMOUNT] = "";
+								}).then(() => resolve({ articles, links }));
+							} else {
+								variables[1] = variables[1].trimRight();
+
+								scrape.fetch('https://news.yahoo.co.jp/search/', { p: encodeURIComponent(variables[1]) }).then(res => {
+									const { $ } = res;
+
+									$('#NSm > div > h2 > a').each((index, article) => {
+										articles.unshift($(article).text());
+										links.unshift($(article).attr('href'));
 									});
-									$('#wrapper>article.listArea ul.topicsList a').each(function () {
-										n_link.unshift(`${$(this).attr('href')}`);
-									});
-								});
-								news[10] = "";
-							}else{
-								scrape.fetch('https://news.yahoo.co.jp/search/', {p:encodeURIComponent(variables[1])}, (err, $) => {
-									news = new Array(0);
-									n_link = new Array(0);
-									$('#NSm>div>h2>a').each(function () {
-										news.unshift(`${$(this).text()}`);
-										n_link.unshift(`${$(this).attr('href')}`);
-									});
-								});
-								news[10] = `search/?p=${encodeURIComponent(variables[1])}`;
+	
+									articles[AMOUNT] = `search/?p=${encodeURIComponent(variables[1])}`;
+								}).then(() => resolve({ articles, links }));
 							}
+						}).then(data => {
+							const { articles, links } = data;
 
 							mstdn.post("statuses", {
 								status: [
@@ -325,53 +335,46 @@ let stream = mstdn.stream("streaming/user");
 									Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
 									"こちらがニュースです。",
 									"",
-									`1.${news[0]}`,
-									`2.${news[1]}`,
-									`3.${news[2]}`,
-									`4.${news[3]}`,
-									`5.${news[4]}`,
-									`6.${news[5]}`,
-									`7.${news[6]}`,
-									`8.${news[7]}`,
-									`9.${news[8]}`,
-									`10.${news[9]}`,
+									(amount => {
+										let headings = [];
+										for (let i = 0; i < amount; i++) headings.push(`${i + 1}. ${articles[i]}`);
+	
+										return headings.join("\r\n");
+									})(AMOUNT),
 									"",
 									"各記事へのリンクの一覧が続きます。"
 								].join("\r\n"),
-
+	
 								visibility: tootVis,
 								in_reply_to_id: tootInfo.tootId
+							}).then(res => {
+								mstdn.post("statuses", {
+									status: [
+										`@${tootInfo.tooter}`,
+										Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
+										"こちらが記事へのリンクです。",
+										"",
+										(amount => {
+											let headings = [];
+											for (let i = 0; i < amount; i++) headings.push(`${i + 1}. ${links[i]}`);
+		
+											return headings.join("\r\n");
+										})(AMOUNT),
+										"",
+										`詳細はこちらのページをご覧下さい。`,
+										`https://news.yahoo.co.jp/${articles[AMOUNT]}`
+									].join("\r\n"),
+	
+									visibility: tootVis,
+									in_reply_to_id: res.data.id
+								});
 							});
-							mstdn.post("statuses", {
-								status: [
-									`@${tootInfo.tooter}`,
-									Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
-									"こちらが記事へのリンクです。",
-									"",
-									`1.${n_link[0]}`,
-									`2.${n_link[1]}`,
-									`3.${n_link[2]}`,
-									`4.${n_link[3]}`,
-									`5.${n_link[4]}`,
-									`6.${n_link[5]}`,
-									`7.${n_link[6]}`,
-									`8.${n_link[7]}`,
-									`9.${n_link[8]}`,
-									`10.${n_link[9]}`,
-									"",
-									`詳細はこちらのページをご覧下さい。`,
-									`https://news.yahoo.co.jp/${news[10]}`
-								].join("\r\n"),
-
-								visibility: tootVis,
-								in_reply_to_id: tootInfo.tootId
-							});
-							scrape.set('browser','chrome');
+						});
 
 						break;
 
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(今日|きょう)は(何|なん|なに)の(日|ひ)/)):
-							scrape.fetch('https://kids.yahoo.co.jp/today/', (err, $) => {
+						scrape.fetch('https://kids.yahoo.co.jp/today/', (err, $) => {
 							let ans = $('#dateDtl').text();
 
 							mstdn.post("statuses", {
@@ -393,7 +396,7 @@ let stream = mstdn.stream("streaming/user");
 						break;
 
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) の(サポート|対応)状況/)):
-							let coptions = {};
+						let coptions = {};
 
 						webshot(`https://caniuse.com/#search=${encodeURIComponent(variables[1])}`, `./view/${tootInfo.tootId}.png`, coptions, err => {
 							mstdn.post('media', {
@@ -420,7 +423,7 @@ let stream = mstdn.stream("streaming/user");
 						break;
 
 					case !!(variables = Formatter.mentionRemove(tootInfo.tootContent).match(/(.*) の(値段|価格|お値段|相場)/)):
-							let koptions = {
+						let koptions = {
 							cookies: "s_ptc=0.000%5E%5E0.000%5E%5E0.000%5E%5E0.000%5E%5E0.312%5E%5E0.153%5E%5E0.483%5E%5E0.036%5E%5E0.898; MalltagRoute=0ea60%2C%2C%2C%2C1519196823599; gpv_v59=%5Bksearch%5D%E3%82%B0%E3%83%AD%E3%83%BC%E3%83%90%E3%83%AB%E6%A4%9C%E7%B4%A2%E7%B5%90%E6%9E%9C; s_cc=true; s_fid=2894C5BE6B89CED2-0D17167F8D0F7C1A; s_nr=1519196823603-New; s_royal=kakaku%3A801-2538947%3A1; s_sq=%5B%5BB%5D%5D; ASPSESSIONIDQCCCCQAT=CJDJHJGCGKJPJJDCCHIOGIKG; ASPSESSIONIDSADBCQBT=NPNMPIPBBMDIOHIHACABBLGD; ASPSESSIONIDSCABBTBT=LJEJIJMBFBIMOIFLDEAOKHDD; OX_plg=pm; OX_sd=2; kakakuusr=ps77uu6IcBO_1519196819629; ASPSESSIONIDAQTCCTBT=MINPENGCPDPNBOCIKJNIOGIJ; ASPSESSIONIDSCADCRBS=DCJNEJHCKIAJDNCCOOCBIPJD; pcpriority=1; ASPSESSIONIDQASCBQAR=PJKOCPLBHMEFBLCCGHOLLIDC; attentionBadge=0; s_vi=[CS]v1|2D468D410503409B-6000118A20007205[CE]; __gads=ID=47aff5be95668efe:T=1519196803:S=ALNI_MbH7oGOmMntLAKxju6lFtQtW6dmrQ; bd=bd7da0ff463345e58af308f147e651f8e"
 						};
 
@@ -449,7 +452,7 @@ let stream = mstdn.stream("streaming/user");
 						break;
 
 					case !!(variables = tootInfo.tootContent.match(/debug (.*)/)):
-							let args = variables[1].split(" ");
+						let args = variables[1].split(" ");
 
 						switch (args[0]) {
 							case "toot":
@@ -494,7 +497,7 @@ let stream = mstdn.stream("streaming/user");
 						break;
 
 					case !!(variables = tootInfo.tootContent.match(/＠(.*)に(.*)(と|って)質問/)):
-							let rep_ans = tootInfo.tootId;
+						let rep_ans = tootInfo.tootId;
 
 						mstdn.post("statuses", {
 							status: [
@@ -531,12 +534,13 @@ let stream = mstdn.stream("streaming/user");
 							o_rep: tootInfo.tootId,
 							q: variables[2]
 						};
+
 						fs.writeFile(`./data/${rep_ans}.json`, JSON.stringify(qna, null, '\t'));
 
 						break;
 
 					case !!(variables = tootInfo.tootContent.match(/回答 (\d+) (.*)/)):
-							qna = JSON.parse(fs.readFileSync(`./data/${variables[1]}.json`, 'utf8'));
+						qna = JSON.parse(fs.readFileSync(`./data/${variables[1]}.json`, 'utf8'));
 
 						mstdn.post("statuses", {
 							status: [
