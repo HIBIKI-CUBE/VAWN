@@ -318,9 +318,11 @@ let stream = mstdn.stream("streaming/user");
 								scrape.fetch('https://news.yahoo.co.jp/search/', { p: encodeURIComponent(variables[1]) }).then(res => {
 									const { $ } = res;
 
-									$('#NSm > div > h2 > a').each((index, article) => {
+									$('#NSu > section.list > a > h2').each((index, article) => {
 										articles.unshift($(article).text());
-										links.unshift($(article).attr('href'));
+									});
+									$('#NSu > section.list > a').each((index, link) => {
+										links.unshift($(link).attr('href'));
 									});
 	
 									articles[AMOUNT] = `search/?p=${encodeURIComponent(variables[1])}`;
