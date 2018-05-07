@@ -48,8 +48,6 @@ let stream = mstdn.stream("streaming/user");
 							mstdn.post("statuses", {
 							status: [
 								`@${tootInfo.tooter}`,
-								Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
-
 								`${Math.floor(Math.random() * 5 + 1)}が出ました。`
 							].join("\r\n"),
 
@@ -91,7 +89,6 @@ let stream = mstdn.stream("streaming/user");
 						mstdn.post("statuses", {
 							status: [
 								`@${tootInfo.tooter}`,
-								Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
 								"",
 								`${vawnAct}！`,
 								`あなたは${playerAct}を出したので、`,
@@ -136,8 +133,6 @@ let stream = mstdn.stream("streaming/user");
 						mstdn.post("statuses", {
 							status: [
 								`@${tootInfo.tooter}`,
-								Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
-
 								content
 							].join("\r\n"),
 
@@ -161,8 +156,6 @@ let stream = mstdn.stream("streaming/user");
 													mstdn.post("statuses", {
 														status: [
 															`@${tootInfo.tooter}`,
-															Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
-
 															`${ans},${ans2},${ans3}`,
 															"",
 															`詳細はこちらのページをご覧下さい。`,
@@ -182,8 +175,6 @@ let stream = mstdn.stream("streaming/user");
 						mstdn.post("statuses", {
 							status: [
 								`@${tootInfo.tooter}`,
-								Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
-
 								"クイック検索は現在次期バージョンを開発しています。",
 								"リリースまで今しばらくお待ちください。",
 								"ご迷惑をおかけし、申し訳ありません。",
@@ -210,8 +201,6 @@ let stream = mstdn.stream("streaming/user");
 							mstdn.post("statuses", {
 								status: [
 									`@${tootInfo.tooter}`,
-									Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
-
 									`${ans}`,
 									"",
 									`詳細はこちらのページをご覧下さい。`,
@@ -243,8 +232,6 @@ let stream = mstdn.stream("streaming/user");
 								mstdn.post("statuses", {
 									status: [
 										`@${tootInfo.tooter}`,
-										Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
-
 										`あなたは${rank}位です。`
 									].join("\r\n"),
 
@@ -255,7 +242,6 @@ let stream = mstdn.stream("streaming/user");
 								mstdn.post("statuses", {
 									status: [
 										`@${tootInfo.tooter}`,
-										Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
 										"1000位以内に見つかりませんでした。"
 									].join("\r\n"),
 
@@ -276,8 +262,6 @@ let stream = mstdn.stream("streaming/user");
 							mstdn.post("statuses", {
 								status: [
 									`@${tootInfo.tooter}`,
-									Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
-
 									`${ans}`,
 									"",
 									`詳細はこちらのページをご覧下さい。`,
@@ -301,7 +285,6 @@ let stream = mstdn.stream("streaming/user");
 							mstdn.post("statuses", {
 								status: [
 									`@${tootInfo.tooter}`,
-									Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
 									"現在のトップニュースです。",
 									"",
 									`1.${news[0]}`,
@@ -334,8 +317,6 @@ let stream = mstdn.stream("streaming/user");
 							mstdn.post("statuses", {
 								status: [
 									`@${tootInfo.tooter}`,
-									Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
-
 									`${ans}`,
 									"",
 									`詳細はこちらのページをご覧下さい。`,
@@ -361,7 +342,6 @@ let stream = mstdn.stream("streaming/user");
 								mstdn.post("statuses", {
 									status: [
 										`@${tootInfo.tooter}`,
-										Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
 										"",
 										`詳細はこちらのページをご覧下さい。`,
 										`https://caniuse.com/#search=${encodeURIComponent(variables[1])}`
@@ -390,7 +370,6 @@ let stream = mstdn.stream("streaming/user");
 								mstdn.post("statuses", {
 									status: [
 										`@${tootInfo.tooter}`,
-										Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
 										"",
 										`詳細はこちらのページをご覧下さい。`,
 										`http://kakaku.com/search_results/${encodeURIComponent(variables[1])}/`
@@ -417,8 +396,6 @@ let stream = mstdn.stream("streaming/user");
 									mstdn.post("statuses", {
 										status: [
 											`@${tootInfo.tooter}`,
-											Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
-
 											text
 										].join("\r\n"),
 
@@ -436,8 +413,6 @@ let stream = mstdn.stream("streaming/user");
 								mstdn.post("statuses", {
 									status: [
 										`@${tootInfo.tooter}`,
-										Formatter.getIdsFromTootMentions(tootInfo.mentions, "\r\n"),
-
 										result
 									].join("\r\n"),
 
