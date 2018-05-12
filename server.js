@@ -44,6 +44,10 @@ let stream = mstdn.stream("streaming/user");
 				switch (true) {
 					default: talkFnc(mstdn, tootInfo, tootVis);
 					break;
+					
+					case !!(tootInfo.tootContent.toUpperCase().match(/@RISA/g)):
+						throw new EvalError(`◤◢◤◢WARNING!◤◢◤◢ @${tootInfo.tooter}'s command includes mention to @RISA!!`);
+					break;
 
 					case !!(tootInfo.tootContent.match(/サイコロ|さいころ|ダイス/)):
 						mstdn.post("statuses", {
