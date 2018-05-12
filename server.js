@@ -42,13 +42,14 @@ let stream = mstdn.stream("streaming/user");
 				scrape.set('debug', true);
 
 				switch (true) {
-					default: talkFnc(mstdn, tootInfo, tootVis);
-					break;
-					
+					default:
+						talkFnc(mstdn, tootInfo, tootVis);
+						break;
+						
 					case !!(tootInfo.tootContent.toUpperCase().match(/@RISA/g)):
 						throw new EvalError(`◤◢◤◢WARNING!◤◢◤◢ @${tootInfo.tooter}'s command includes mention to @RISA!!`);
-					break;
-
+						break;
+						
 					case !!(tootInfo.tootContent.match(/サイコロ|さいころ|ダイス/)):
 						mstdn.post("statuses", {
 							status: [
@@ -63,7 +64,7 @@ let stream = mstdn.stream("streaming/user");
 						break;
 
 					case !!(tootInfo.tootContent.match(/コイン/)):
-							let coin = "";
+						let coin = "";
 
 						if (Math.round(Math.random())) {
 							coin = "おもて";
@@ -173,7 +174,8 @@ let stream = mstdn.stream("streaming/user");
 								in_reply_to_id: tootInfo.tootId
 							});
 						});
-						scrape.set('browser','chrome');*/
+						scrape.set('browser','chrome');
+						*/
 
 						break;
 
