@@ -91,6 +91,23 @@
 		.z-depth-3{
 			box-shadow:5px 5px 3px rgba(255,255,255,0.14)
 		}
+		.stop{
+			position:relative;
+		}
+		.stop:before{
+			content:'この機能は現在諸事情により停止しています';
+			width:100%;
+			position:absolute;
+			height:100%;
+			top:0;
+			left:0;
+			background-color:rgba(0,0,0,0.5);
+			color:white;
+			z-index:1000;
+			text-align:center;
+			vertical-align:middle;
+			font-size:120%;
+		}
 		</style>
 	</head>
 	<body id="body">
@@ -178,7 +195,7 @@
 					</div>
 					<div class="col s12 m6 l4">
 						<div class="card z-depth-3 grey darken-3 white-text waves-effect waves-yellow">
-							<div class="card-content">
+							<div class="card-content stop">
 								<span class="card-title">独自の巻き込み機能</span>
 								<p>VAWNへのコマンドにほかの人のメンションを含めるとVAWNからのリプライにその人を巻き込むことができます。</p>
 							</div>
@@ -438,7 +455,7 @@
 				});
 			})();
 			
-			},80);//setTimeout closer
+			},500);//setTimeout closer
 		});//DOM onload closer
 
 		</script>
